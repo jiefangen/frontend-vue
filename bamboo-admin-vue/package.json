@@ -108,6 +108,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PanJiaChen/vue-element-admin.git"
+    "url": "git+https://github.com/jiefangen/frontend-vue.git"
   }
 }
