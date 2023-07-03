@@ -1,18 +1,18 @@
 {
-  "name": "bamboo-admin-vue",
+  "name": "bamboo-admin-v1",
   "version": "2.0.0",
   "description": "A magical vue admin. An out-of-box UI solution for enterprise applications. Newest development stack of vue. Lots of awesome features",
   "author": "JieFangen <jiefangen@gmail.com>",
   "scripts": {
-    "admin-dev": "vue-cli-service serve",
-    "admin-lint": "eslint --ext .js,.vue src",
-    "admin-build:prod": "vue-cli-service build",
-    "admin-build:stage": "vue-cli-service build --mode staging",
-    "admin-preview": "node build/index.js --preview",
-    "admin-new": "plop",
-    "admin-svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
-    "admin-test:unit": "jest --clearCache && vue-cli-service test:unit",
-    "admin-test:ci": "npm run lint && npm run test:unit"
+    "adminV1-dev": "vue-cli-service serve",
+    "adminV1-lint": "eslint --ext .js,.vue src",
+    "adminV1-build:prod": "vue-cli-service build",
+    "adminV1-build:stage": "vue-cli-service build --mode staging",
+    "adminV1-preview": "node build/index.js --preview",
+    "adminV1-new": "plop",
+    "adminV1-svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
+    "adminV1-test:unit": "jest --clearCache && vue-cli-service test:unit",
+    "adminV1-test:ci": "npm run lint && npm run test:unit"
   },
   "dependencies": {
     "axios": "0.18.1",

@@ -1,18 +1,18 @@
 {
-  "name": "ruoyi",
-  "version": "3.8.5",
-  "description": "若依管理系统",
-  "author": "若依",
+  "name": "bamboo",
+  "version": "2.0.0",
+  "description": "后台管理系统",
+  "author": "JieFangen",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
-    "build:prod": "vite build",
-    "build:stage": "vite build --mode staging",
-    "preview": "vite preview"
+    "admin-vite-dev": "vite",
+    "admin-vite-build:stage": "vite build --mode staging",
+    "admin-vite-build:prod": "vite build",
+    "admin-vite-preview": "vite preview"
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/y_project/RuoYi-Vue.git"
+    "url": "https://github.com/jiefangen/frontend-vue.git"
   },
   "dependencies": {
     "@element-plus/icons-vue": "2.0.10",

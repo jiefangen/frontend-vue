@@ -4,14 +4,14 @@
   "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
   "author": "Fangen <jiefangen@gmail.com>",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "build:prod": "vue-cli-service build",
-    "build:stage": "vue-cli-service build --mode staging",
-    "preview": "node build/index.js --preview",
-    "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
-    "lint": "eslint --ext .js,.vue src",
-    "test:unit": "jest --clearCache && vue-cli-service test:unit",
-    "test:ci": "npm run lint && npm run test:unit"
+    "admin-dev": "vue-cli-service serve",
+    "admin-build:prod": "vue-cli-service build",
+    "admin-build:stage": "vue-cli-service build --mode staging",
+    "admin-preview": "node build/index.js --preview",
+    "admin-svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
+    "admin-lint": "eslint --ext .js,.vue src",
+    "admin-test:unit": "jest --clearCache && vue-cli-service test:unit",
+    "admin-test:ci": "npm run lint && npm run test:unit"
   },
   "dependencies": {
     "axios": ">=0.21.2",

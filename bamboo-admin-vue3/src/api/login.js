@@ -9,12 +9,12 @@ export function login(username, password, code, uuid) {
     uuid
   }
   return request({
-    url: '/login',
+    url: '/login?username=' + data.username + "&password=" + data.password,
     headers: {
       isToken: false
     },
-    method: 'post',
-    data: data
+    method: 'post'
+    // data: data
   })
 }
 

@@ -139,10 +139,10 @@ Become a sponsor and get your logo on our README on GitHub with a link to your s
 
 ```bash
 # 克隆项目
-git clone -b i18n git@github.com:PanJiaChen/bamboo-admin-vue.git
+git clone -b i18n git@github.com:PanJiaChen/bamboo-admin-v1.git
 
 # 进入项目目录
-cd bamboo-admin-vue
+cd bamboo-admin-v1
 
 # 安装依赖
 npm install
