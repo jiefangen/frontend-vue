@@ -41,7 +41,7 @@ module.exports = {
         target: 'http://127.0.0.1:10002/biz-admin/v1',
         changeOrigin: true,
         pathRewrite: {
-          '^/dev-api': '' // 重写URL路径，去掉/dev-api前缀
+          '^/dev-api': ''
         }
       }
     }
