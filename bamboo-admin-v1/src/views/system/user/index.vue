@@ -216,10 +216,10 @@ export default {
       passData: [],
       statusOptions: [
         {
-          value: 1,
+          value: true,
           label: '启用'
         }, {
-          value: 0,
+          value: false,
           label: '禁用'
         }
       ],
