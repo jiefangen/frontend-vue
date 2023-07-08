@@ -21,7 +21,7 @@ export default {
     any: 'any'
   },
   system: {
-    // 用户管理页面
+    // User Management Page
     username: 'Username',
     userType: 'Type',
     userRank: 'Rank',
@@ -44,13 +44,24 @@ export default {
     deleteSucceed: 'Deletion successful',
     searchUserPlaceholder: 'Enter username or nickname to search',
     updateUserRoleMessage: 'User role updated successfully. Do you want to refresh immediately?',
-    handleDeleteMessage: 'This operation will permanently delete the data. Do you want to continue?'
-    // 角色管理页面
-    // 菜单管理页面
+    handleDeleteMessage: 'This operation will permanently delete the data. Do you want to continue?',
+    // Role Management Page
+    roleName: 'Role Name',
+    roleCode: 'Role Code',
+    roleDesc: 'Role Description',
+    menu: 'Menu',
+    editPermission: 'Edit Permissions',
+    addRole: 'Add Role',
+    roleDelStartMsg: 'Confirm deleting ',
+    roleDelEndMsg: ' role?',
+    confirmRoleMsg: 'Role permissions updated successfully. Do you want to refresh immediately?',
+    addRoleSucceed: 'Role added successfully'
+    // Menu Management Page
   },
 
   route: {
     dashboard: 'Dashboard',
+    guide: 'Guide',
     systemManage: 'System Management',
     userManage: 'User Management',
     roleManage: 'Role Management',

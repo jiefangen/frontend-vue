@@ -1,42 +1,42 @@
 <template>
   <div class="app-container">
-    <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleAddRole">添加</el-button>
+    <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleAddRole">{{ $t('common.add') }}</el-button>
 
     <el-table :data="rolesList" style="width:100%; margin-top:20px;" border stripe>
-      <el-table-column align="center" label="角色名称" width="220">
-        <template slot-scope="scope">
+      <el-table-column align="center" :label="String($t('system.roleName'))" width="220">
+        <template v-slot="scope">
           {{ scope.row.roleName }}
         </template>
       </el-table-column>
-      <el-table-column align="center" label="角色标识" width="220">
-        <template slot-scope="scope">
+      <el-table-column align="center" :label="String($t('system.roleCode'))" width="220">
+        <template v-slot="scope">
           {{ scope.row.roleCode }}
         </template>
       </el-table-column>
-      <el-table-column align="header-center" label="角色描述">
-        <template slot-scope="scope">
+      <el-table-column align="header-center" :label="String($t('system.roleDesc'))">
+        <template v-slot="scope">
           {{ scope.row.description }}
         </template>
       </el-table-column>
-      <el-table-column align="center" label="操作">
-        <template slot-scope="scope">
-          <el-button type="warning" size="small" @click="handleEdit(scope)">编辑权限</el-button>
-          <el-button type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
+      <el-table-column align="center" :label="String($t('common.operate'))">
+        <template v-slot="scope">
+          <el-button type="warning" size="small" @click="handleEdit(scope)">{{ $t('system.editPermission') }}</el-button>
+          <el-button type="danger" size="small" @click="handleDelete(scope)">{{ $t('common.delete') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑权限':'新增角色'">
+    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?String($t('system.editPermission')):$t('system.addRole')">
       <el-form ref="dataRoleForm" :rules="rules" :model="role" label-width="80px" label-position="left" style="width: 400px; margin-left:50px;">
-        <el-form-item label="角色名称" prop="roleName">
+        <el-form-item :label="String($t('system.roleName'))" prop="roleName">
           <el-input v-model="role.roleName" :disabled="dialogType==='edit'?true:false" placeholder="Role Name" />
         </el-form-item>
-        <el-form-item v-show="dialogType!=='edit'?true:false" label="角色标识">
+        <el-form-item v-show="dialogType!=='edit'?true:false" :label="String($t('system.roleCode'))">
           <el-select v-model="role.roleCode" class="filter-item">
             <el-option v-for="item in roleCodeOptions" :key="item" :label="item" :value="item" />
           </el-select>
         </el-form-item>
-        <el-form-item label="角色描述">
+        <el-form-item :label="String($t('system.roleDesc'))">
           <el-input
             v-model="role.description"
             :autosize="{ minRows: 2, maxRows: 4}"
@@ -45,7 +45,7 @@
             style="width:360px;"
           />
         </el-form-item>
-        <el-form-item v-show="dialogType==='edit'?true:false" label="菜单">
+        <el-form-item v-show="dialogType==='edit'?true:false" :label="String($t('system.menu'))">
           <el-tree
             ref="tree"
             :check-strictly="checkStrictly"
@@ -59,8 +59,8 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible=false">取消</el-button>
-        <el-button type="primary" @click="confirmRole">确认</el-button>
+        <el-button @click="dialogVisible=false">{{ $t('common.cancel') }}</el-button>
+        <el-button type="primary" @click="confirmRole">{{ $t('common.ok') }}</el-button>
       </div>
     </el-dialog>
   </div>
@@ -70,6 +70,7 @@
 import path from 'path'
 import { deepClone } from '@/utils'
 import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/system/role'
+import i18n from '@/lang'
 
 const defaultRole = {
   id: '',
@@ -112,13 +113,23 @@ export default {
     async getRoutes() {
       const res = await getRoutes()
       this.serviceRoutes = res.data
-      this.routes = this.generateRoutes(res.data)
+      const routes = this.generateRoutes(res.data)
+      this.routes = this.i18n(routes)
     },
     async getRoles() {
       const res = await getRoles()
       this.rolesList = res.data
     },
-
+    i18n(routes) {
+      const app = routes.map(route => {
+        route.title = i18n.t(`route.${route.title}`)
+        if (route.children) {
+          route.children = this.i18n(route.children)
+        }
+        return route
+      })
+      return app
+    },
     // Reshape the routes structure so that it looks the same as the sidebar
     generateRoutes(routes, basePath = '/') {
       const res = []
@@ -127,7 +138,6 @@ export default {
         if (route.hidden) { continue }
 
         const onlyOneShowingChild = this.onlyOneShowingChild(route.children, route)
-
         if (route.children && onlyOneShowingChild && !route.alwaysShow) {
           route = onlyOneShowingChild
         }
@@ -135,9 +145,7 @@ export default {
         const data = {
           path: path.resolve(basePath, route.path),
           title: route.meta && route.meta.title
-
         }
-
         // recursive child routes
         if (route.children) {
           data.children = this.generateRoutes(route.children, data.path)
@@ -184,30 +192,27 @@ export default {
       })
     },
     handleDelete({ $index, row }) {
-      this.$confirm('确认删除' + row.roleName + '角色吗？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(String(this.$t('system.roleDelStartMsg')) + row.roleName + String(this.$t('system.roleDelEndMsg')), String(this.$t('common.title')), {
+        confirmButtonText: this.$t('common.ok'),
+        cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(async() => {
         await deleteRole(row.id)
         this.rolesList.splice($index, 1)
         this.$message({
           type: 'success',
-          message: '删除成功!'
+          message: this.$t('system.deleteSucceed')
         })
       }).catch(err => { console.error(err) })
     },
     generateTree(routes, basePath = '/', checkedKeys) {
       const res = []
-
       for (const route of routes) {
         const routePath = path.resolve(basePath, route.path)
-
         // recursive child routes
         if (route.children) {
           route.children = this.generateTree(route.children, routePath, checkedKeys)
         }
-
         if (checkedKeys.includes(routePath) || (route.children && route.children.length >= 1)) {
           res.push(route)
         }
@@ -227,9 +232,9 @@ export default {
           }
         }
         this.dialogVisible = false
-        this.$confirm('角色权限更新成功，是否刷新即刻生效？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(String(this.$t('system.confirmRoleMsg')), String(this.$t('common.title')), {
+          confirmButtonText: this.$t('common.ok'),
+          cancelButtonText: this.$t('common.cancel'),
           type: 'warning'
         }).then(() => {
           location.reload()
@@ -241,8 +246,8 @@ export default {
               this.getRoles()
               this.dialogVisible = false
               this.$notify({
-                title: '成功',
-                message: '新增角色成功',
+                title: this.$t('common.success'),
+                message: String(this.$t('system.addRoleSucceed')),
                 type: 'success',
                 duration: 2000
               })
@@ -268,7 +273,6 @@ export default {
         onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return onlyOneChild
       }
-
       return false
     }
   }

@@ -44,8 +44,18 @@ export default {
     deleteSucceed: '删除成功',
     searchUserPlaceholder: '输入用户名或昵称搜索',
     updateUserRoleMessage: '用户角色更新成功，是否刷新即刻生效？',
-    handleDeleteMessage: '此操作将永久删除数据，是否继续？'
+    handleDeleteMessage: '此操作将永久删除数据，是否继续？',
     // 角色管理页面
+    roleName: '角色名称',
+    roleCode: '角色标识',
+    roleDesc: '角色描述',
+    menu: '菜单',
+    editPermission: '编辑权限',
+    addRole: '新增角色',
+    roleDelStartMsg: '确认删除',
+    roleDelEndMsg: '角色吗？',
+    confirmRoleMsg: '角色权限更新成功，是否刷新即刻生效？',
+    addRoleSucceed: '新增角色成功'
     // 菜单管理页面
   },
 
