@@ -46,7 +46,7 @@ export function getLanguage() {
 }
 const i18n = new VueI18n({
   // set locale
-  // options: en | zh | es
+  // options: en | zh | es ｜ ja
   locale: getLanguage(),
   // set locale messages
   messages

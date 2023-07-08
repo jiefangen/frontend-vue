@@ -1,8 +1,62 @@
 export default {
+  common: {
+    ok: '确认',
+    cancel: '取消',
+    search: '搜索',
+    title: '提示',
+    add: '添加',
+    delete: '删除',
+    edit: '编辑',
+    pChoose: '请选择',
+    enabled: '启用',
+    disabled: '禁用',
+    success: '成功',
+    operate: '操作'
+  },
+  login: {
+    title: '后台管理系统登录',
+    logIn: '登录',
+    username: '账号',
+    password: '密码',
+    any: '随便填'
+  },
+  system: {
+    // 用户管理页面
+    username: '用户名',
+    userType: '类型',
+    userRank: '级别',
+    password: '密码',
+    nickname: '昵称',
+    sex: '性别',
+    status: '状态',
+    phone: '手机号',
+    email: '邮件地址',
+    createTime: '创建时间',
+    modifyPass: '修改密码',
+    editRole: '编辑角色',
+    addUser: '新增用户',
+    oldPwd: '旧密码',
+    newPwd: '新密码',
+    roleScope: '角色范围',
+    addUserSucceed: '添加用户成功',
+    updateSucceed: '更新成功',
+    modifyPassSucceed: '修改密码成功',
+    deleteSucceed: '删除成功',
+    searchUserPlaceholder: '输入用户名或昵称搜索',
+    updateUserRoleMessage: '用户角色更新成功，是否刷新即刻生效？',
+    handleDeleteMessage: '此操作将永久删除数据，是否继续？'
+    // 角色管理页面
+    // 菜单管理页面
+  },
+
   route: {
     dashboard: '首页',
-    documentation: '文档',
     guide: '引导页',
+    systemManage: '系统管理',
+    userManage: '用户管理',
+    roleManage: '角色管理',
+    menuManage: '菜单管理',
+    documentation: '文档',
     permission: '权限测试页',
     rolePermission: '角色权限',
     pagePermission: '页面权限',
@@ -71,15 +125,6 @@ export default {
     profile: '个人中心',
     theme: '换肤',
     size: '布局大小'
-  },
-  login: {
-    title: '系统登录',
-    logIn: '登录',
-    username: '账号',
-    password: '密码',
-    any: '随便填',
-    thirdparty: '第三方登录',
-    thirdpartyTips: '本地不能模拟，请结合自己业务进行模拟！！！'
   },
   documentation: {
     documentation: '文档',

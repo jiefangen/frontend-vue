@@ -1,8 +1,61 @@
 export default {
+  common: {
+    ok: 'OK',
+    cancel: 'Cancel',
+    search: 'Search',
+    title: 'Prompt',
+    add: 'Add',
+    delete: 'Delete',
+    edit: 'Edit',
+    pChoose: 'Please choose',
+    enabled: 'Enabled',
+    disabled: 'Disabled',
+    success: 'Success',
+    operate: 'Operate'
+  },
+  login: {
+    title: 'Login Form',
+    logIn: 'Login',
+    username: 'Username',
+    password: 'Password',
+    any: 'any'
+  },
+  system: {
+    // 用户管理页面
+    username: 'Username',
+    userType: 'Type',
+    userRank: 'Rank',
+    password: 'Password',
+    nickname: 'Nickname',
+    sex: 'Gender',
+    status: 'Status',
+    phone: 'Phone',
+    email: 'Email',
+    createTime: 'CreateTime',
+    modifyPass: 'Modify Password',
+    editRole: 'Edit Role',
+    addUser: 'Add User',
+    oldPwd: 'Old Password',
+    newPwd: 'New Password',
+    roleScope: 'Role Scope',
+    addUserSucceed: 'User added successfully',
+    updateSucceed: 'Update successful',
+    modifyPassSucceed: 'Password modification successful',
+    deleteSucceed: 'Deletion successful',
+    searchUserPlaceholder: 'Enter username or nickname to search',
+    updateUserRoleMessage: 'User role updated successfully. Do you want to refresh immediately?',
+    handleDeleteMessage: 'This operation will permanently delete the data. Do you want to continue?'
+    // 角色管理页面
+    // 菜单管理页面
+  },
+
   route: {
     dashboard: 'Dashboard',
+    systemManage: 'System Management',
+    userManage: 'User Management',
+    roleManage: 'Role Management',
+    menuManage: 'Menu Management',
     documentation: 'Documentation',
-    guide: 'Guide',
     permission: 'Permission',
     pagePermission: 'Page Permission',
     rolePermission: 'Role Permission',
@@ -71,15 +124,6 @@ export default {
     profile: 'Profile',
     theme: 'Theme',
     size: 'Global Size'
-  },
-  login: {
-    title: 'Login Form',
-    logIn: 'Login',
-    username: 'Username',
-    password: 'Password',
-    any: 'any',
-    thirdparty: 'Or connect with',
-    thirdpartyTips: 'Can not be simulated on local, so please combine you own business simulation! ! !'
   },
   documentation: {
     documentation: 'Documentation',

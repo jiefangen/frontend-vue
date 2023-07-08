@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.keyword" placeholder="输入用户名或昵称搜索" style="width: 200px; margin-right: 10px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.keyword" :placeholder="$t('system.searchUserPlaceholder')" style="width: 216px; margin-right: 10px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        搜索
+        {{ $t('common.search') }}
       </el-button>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate">
-        添加
+        {{ $t('common.add') }}
       </el-button>
     </div>
 
@@ -20,57 +20,67 @@
       highlight-current-row
       style="width: 100%; margin-top:20px;"
     >
-      <el-table-column label="用户名" align="center">
+      <el-table-column :label="String($t('system.username'))" align="center">
         <template v-slot="{row}">
           <span>{{ row.username }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="昵称" class-name="status-col" align="center">
+      <el-table-column :label="String($t('system.userType'))" align="center">
+        <template v-slot="{row}">
+          <span>{{ row.userType }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="String($t('system.userRank'))" width="60" align="center">
+        <template v-slot="{row}">
+          <span>{{ row.userRank }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="String($t('system.nickname'))" class-name="status-col" align="center">
         <template v-slot="{row}">
           <span>{{ row.nickname }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="性别" class-name="status-col" width="80" align="center">
+      <el-table-column :label="String($t('system.sex'))" class-name="status-col" width="80" align="center">
         <template v-slot="{row}">
           <span>{{ row.sex }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="手机号" class-name="status-col" width="120" align="center">
+      <el-table-column :label="String($t('system.phone'))" class-name="status-col" width="120" align="center">
         <template v-slot="{row}">
           <span>{{ row.phone }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="邮件地址" class-name="status-col" width="160" align="center">
+      <el-table-column :label="String($t('system.email'))" class-name="status-col" width="160" align="center">
         <template v-slot="{row}">
           <span>{{ row.email }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" class-name="status-col" width="100" align="center">
+      <el-table-column :label="String($t('system.status'))" class-name="status-col" width="100" align="center">
         <template v-slot="{row}">
           <el-tag :type="row.enabled | statusFilter">
-            {{ row.enabled ?'启用':'禁用' }}
+            {{ row.enabled ? $t('common.enabled'):$t('common.disabled') }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" width="180" align="center">
+      <el-table-column :label="String($t('system.createTime'))" width="180" align="center">
         <template v-slot="{row}">
           <span>{{ row.createTime }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" align="center" width="361" class-name="small-padding fixed-width">
+      <el-table-column :label="String($t('common.operate'))" align="center" width="361" class-name="small-padding fixed-width">
         <template v-slot="{row,$index}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
-            编辑
+            {{ $t('common.edit') }}
           </el-button>
           <el-button type="warning" size="mini" @click="handleUseRole(row)">
-            编辑角色
+            {{ $t('system.editRole') }}
           </el-button>
           <el-button type="success" size="mini" @click="handleModifyPass(row)">
-            修改密码
+            {{ $t('system.modifyPass') }}
           </el-button>
           <el-button type="danger" size="mini" @click="handleDelete(row,$index)">
-            删除
+            {{ $t('common.delete') }}
           </el-button>
         </template>
       </el-table-column>
@@ -80,72 +90,72 @@
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="用户名" prop="username">
+        <el-form-item :label="String($t('system.username'))" prop="username">
           <el-input v-model="temp.username" :disabled="dialogStatus==='update'?true:false" />
         </el-form-item>
-        <el-form-item label="密码" prop="password" :hidden="dialogStatus==='update'?true:false">
+        <el-form-item :label="String($t('system.password'))" :prop="dialogStatus==='update'?'':'password'" :hidden="dialogStatus==='update'?true:false">
           <el-input v-model="temp.password" />
         </el-form-item>
-        <el-form-item label="性别">
+        <el-form-item :label="String($t('system.sex'))">
           <el-select v-model="temp.sex" class="filter-item">
             <el-option v-for="item in sexOptions" :key="item" :label="item" :value="item" />
           </el-select>
         </el-form-item>
-        <el-form-item label="状态" :hidden="dialogStatus==='create'?true:false">
+        <el-form-item :label="String($t('system.status'))" :hidden="dialogStatus==='create'?true:false">
           <el-select v-model="temp.enabled" class="filter-item">
             <el-option v-for="(item, index) in statusOptions" :key="index" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
-        <el-form-item label="昵称">
+        <el-form-item :label="String($t('system.nickname'))">
           <el-input v-model="temp.nickname" />
         </el-form-item>
-        <el-form-item label="手机号">
+        <el-form-item :label="String($t('system.phone'))">
           <el-input v-model="temp.phone" />
         </el-form-item>
-        <el-form-item label="邮件地址">
+        <el-form-item :label="String($t('system.email'))">
           <el-input v-model="temp.email" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
-          取消
+          {{ $t('common.cancel') }}
         </el-button>
-        <el-button type="primary" @click="dialogStatus==='create'?createData():updateData()">
-          确认
+        <el-button type="primary" @click="dialogStatus==='create'? createData():updateData()">
+          {{ $t('common.ok') }}
         </el-button>
       </div>
     </el-dialog>
 
-    <el-dialog :visible.sync="dialogPassVisible" title="修改密码">
+    <el-dialog :visible.sync="dialogPassVisible" :title="String($t('system.modifyPass'))">
       <el-form ref="dataPassForm" :rules="passRules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="用户名" prop="username" required>
-          <el-input v-model="temp.username" enabled />
+        <el-form-item :label="String($t('system.username'))" prop="username" required>
+          <el-input v-model="temp.username" disabled />
         </el-form-item>
-        <el-form-item label="旧密码" prop="oldPassword">
+        <el-form-item :label="String($t('system.oldPwd'))" prop="oldPassword">
           <el-input v-model="temp.oldPassword" />
         </el-form-item>
-        <el-form-item label="新密码" prop="newPassword">
+        <el-form-item :label="String($t('system.newPwd'))" prop="newPassword">
           <el-input v-model="temp.newPassword" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogPassVisible = false">
-          取消
+          {{ $t('common.cancel') }}
         </el-button>
         <el-button type="primary" @click="updatePass()">
-          确认
+          {{ $t('common.ok') }}
         </el-button>
       </div>
     </el-dialog>
 
-    <el-dialog :visible.sync="dialogRoleVisible" title="编辑角色">
+    <el-dialog :visible.sync="dialogRoleVisible" :title="String($t('system.editRole'))">
       <el-form ref="dataRoleForm" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="temp.username" :disabled="true" />
+        <el-form-item :label="String($t('system.username'))" prop="username">
+          <el-input v-model="temp.username" disabled />
         </el-form-item>
-        <el-form-item label="角色范围" prop="roleCodes">
-          <div class="components-container">
-            <el-drag-select v-model="temp.roleCodes" style="width:360px;" multiple placeholder="请选择">
+        <el-form-item :label="String($t('system.roleScope'))" prop="roleCodes">
+          <div class="components-container" style="margin: 0px;">
+            <el-drag-select v-model="temp.roleCodes" style="width:360px;" multiple :placeholder="$t('common.pChoose')">
               <el-option v-for="item in allRoles" :key="item.id" :label="item.roleName" :value="item.roleCode" />
             </el-drag-select>
             <div style="margin-top:20px; width:400px;">
@@ -158,10 +168,10 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogRoleVisible=false">
-          取消
+          {{ $t('common.cancel') }}
         </el-button>
         <el-button type="primary" @click="updateUserRole()">
-          确认
+          {{ $t('common.ok') }}
         </el-button>
       </div>
     </el-dialog>
@@ -209,18 +219,18 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       textMap: {
-        update: '编辑',
-        create: '新增用户'
+        update: this.$t('common.edit'),
+        create: this.$t('system.addUser')
       },
       dialogPassVisible: false,
       passData: [],
       statusOptions: [
         {
           value: true,
-          label: '启用'
+          label: this.$t('common.enabled')
         }, {
           value: false,
-          label: '禁用'
+          label: this.$t('common.disabled')
         }
       ],
       sexOptions: ['男', '女'],
@@ -266,6 +276,8 @@ export default {
       this.temp = {
         id: undefined,
         username: '',
+        userType: '',
+        userRank: '',
         password: '',
         phone: '',
         email: '',
@@ -293,8 +305,8 @@ export default {
             this.dialogFormVisible = false
             this.handleFilter()
             this.$notify({
-              title: '成功',
-              message: '添加用户成功',
+              title: this.$t('common.success'),
+              message: this.$t('system.addUserSucceed'),
               type: 'success',
               duration: 2000
             })
@@ -319,8 +331,8 @@ export default {
             this.list.splice(index, 1, this.temp)
             this.dialogFormVisible = false
             this.$notify({
-              title: '成功',
-              message: '更新成功',
+              title: this.$t('common.success'),
+              message: this.$t('system.updateSucceed'),
               type: 'success',
               duration: 2000
             })
@@ -352,8 +364,8 @@ export default {
             this.temp.oldPassword = ''
             this.temp.newPassword = ''
             this.$notify({
-              title: '成功',
-              message: '修改密码成功',
+              title: this.$t('common.success'),
+              message: this.$t('system.modifyPassSucceed'),
               type: 'success',
               duration: 2000
             })
@@ -378,9 +390,9 @@ export default {
           this.list.splice(index, 1, this.temp) // 数组替换
           // 是否立即生效
           this.dialogRoleVisible = false
-          this.$confirm('用户角色更新成功，是否刷新即刻生效？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
+          this.$confirm(String(this.$t('system.updateUserRoleMessage')), String(this.$t('common.title')), {
+            confirmButtonText: this.$t('common.ok'),
+            cancelButtonText: this.$t('common.cancel'),
             type: 'warning'
           }).then(() => {
             location.reload()
@@ -389,17 +401,17 @@ export default {
       })
     },
     handleDelete(row) {
-      this.$confirm('此操作将永久删除数据，是否继续？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(String(this.$t('system.handleDeleteMessage')), String(this.$t('common.title')), {
+        confirmButtonText: this.$t('common.ok'),
+        cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(() => {
         del(row.username).then(() => {
           this.dialogFormVisible = false
           this.handleFilter()
           this.$notify({
-            title: '成功',
-            message: '删除成功',
+            title: this.$t('common.success'),
+            message: this.$t('system.deleteSucceed'),
             type: 'success',
             duration: 2000
           })
