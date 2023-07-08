@@ -11,6 +11,7 @@ export default {
     enabled: '启用',
     disabled: '禁用',
     success: '成功',
+    sort: '排序',
     operate: '操作'
   },
   login: {
@@ -55,10 +56,33 @@ export default {
     roleDelStartMsg: '确认删除',
     roleDelEndMsg: '角色吗？',
     confirmRoleMsg: '角色权限更新成功，是否刷新即刻生效？',
-    addRoleSucceed: '新增角色成功'
+    addRoleSucceed: '新增角色成功',
     // 菜单管理页面
+    menuTitle: '菜单标题',
+    menuPath: '菜单路径',
+    menuRedirect: '菜单跳转',
+    component: '组件映射',
+    hidden: '隐藏',
+    menuLevel: '菜单层级',
+    childPosition: '子级位置',
+    menuIcon: '菜单图标',
+    menuHidden: '菜单隐藏',
+    menuSort: '菜单排序',
+    addMenu: '新增菜单',
+    topLevel: '顶级',
+    childLevel: '子级',
+    addMenuSucceed: '菜单新增成功，是否刷新即刻生效？',
+    updateMenuSucceed: '菜单更新成功，是否刷新即刻生效？',
+    deleteClickMsg: '此操作将删除该菜单, 是否继续?',
+    delChildNode: '请删除子节点',
+    editSucceed: '编辑成功',
+    enterMenuPath: '请输入菜单路径',
+    enterComponent: '请输入组件映射',
+    enterMenuTitle: '请输入菜单标题',
+    enterMenuIcon: '请输入菜单图标',
+    chooseLevel: '请选择层级',
+    chooseChildPosition: '请选择子级位置'
   },
-
   route: {
     dashboard: '首页',
     guide: '引导页',
@@ -66,6 +90,10 @@ export default {
     userManage: '用户管理',
     roleManage: '角色管理',
     menuManage: '菜单管理',
+    systemMonitor: '系统监控',
+    operationLog: '操作日志',
+    apiDoc: 'API文档',
+    DruidMonitor: 'Druid监控',
     documentation: '文档',
     permission: '权限测试页',
     rolePermission: '角色权限',
@@ -151,7 +179,7 @@ export default {
     cancel: '取消'
   },
   guide: {
-    description: '引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。本 Demo 是基于',
+    description: '引导页对于一些第一次进入项目的人很有用，你可以简单介绍下项目的功能。',
     button: '打开引导'
   },
   components: {

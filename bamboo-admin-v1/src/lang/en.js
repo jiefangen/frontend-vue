@@ -11,6 +11,7 @@ export default {
     enabled: 'Enabled',
     disabled: 'Disabled',
     success: 'Success',
+    sort: 'Sort',
     operate: 'Operate'
   },
   login: {
@@ -55,8 +56,32 @@ export default {
     roleDelStartMsg: 'Confirm deleting ',
     roleDelEndMsg: ' role?',
     confirmRoleMsg: 'Role permissions updated successfully. Do you want to refresh immediately?',
-    addRoleSucceed: 'Role added successfully'
+    addRoleSucceed: 'Role added successfully',
     // Menu Management Page
+    menuTitle: 'Menu Title',
+    menuPath: 'Menu Path',
+    menuRedirect: 'Redirect',
+    component: 'Component',
+    hidden: 'Hidden',
+    menuLevel: 'Menu Level',
+    childPosition: 'Child Position',
+    menuIcon: 'Menu Icon',
+    menuHidden: 'Menu Hidden',
+    menuSort: 'Menu Sort',
+    addMenu: 'Add Menu',
+    topLevel: 'Top Level',
+    childLevel: 'Child Level',
+    addMenuSucceed: 'Menu added successfully. Do you want to refresh immediately?',
+    updateMenuSucceed: 'Menu updated successfully. Do you want to refresh immediately?',
+    deleteClickMsg: 'This action will delete the menu. Do you want to continue?',
+    delChildNode: 'Please delete the child nodes',
+    editSucceed: 'Edit successful',
+    enterMenuPath: 'Please enter menu path',
+    enterComponent: 'Please enter component',
+    enterMenuTitle: 'Please enter menu title',
+    enterMenuIcon: 'Please enter menu icon',
+    chooseLevel: 'Please choose the level',
+    chooseChildPosition: 'Please choose the child position'
   },
 
   route: {
@@ -66,6 +91,10 @@ export default {
     userManage: 'User Management',
     roleManage: 'Role Management',
     menuManage: 'Menu Management',
+    systemMonitor: 'System Monitor',
+    operationLog: 'Operation Log',
+    apiDoc: 'API Document',
+    DruidMonitor: 'Druid Monitor',
     documentation: 'Documentation',
     permission: 'Permission',
     pagePermission: 'Page Permission',
@@ -151,7 +180,7 @@ export default {
     cancel: 'Cancel'
   },
   guide: {
-    description: 'The guide page is useful for some people who entered the project for the first time. You can briefly introduce the features of the project. Demo is based on ',
+    description: 'The guide page is useful for some people who entered the project for the first time. You can briefly introduce the features of the project. ',
     button: 'Show Guide'
   },
   components: {

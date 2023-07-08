@@ -32,7 +32,6 @@ import Layout from '@/layout'
  */
 export const asyncRouteMap = {
   layout: Layout,
-  dashboard: () => import('@/views/dashboard/index'),
   sys_user: () => import('@/views/system/user/index'),
   sys_role: () => import('@/views/system/role/index'),
   sys_menu: () => import('@/views/system/menu/index')
@@ -84,7 +83,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [
       {
-        path: 'dashboard',
+        path: '/dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
         meta: { title: 'dashboard', icon: 'dashboard', affix: true }

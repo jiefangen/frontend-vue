@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- 按钮尺寸：mini/small/medium -->
-    <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate">添加</el-button>
+    <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate">{{ $t('common.add') }}</el-button>
     <el-table
       :data="tableData"
       row-key="id"
@@ -11,8 +11,8 @@
       style="width: 100%; margin-top: 20px"
     >
       <!-- meta元素 -->
-      <el-table-column label="菜单标题">
-        <template slot-scope="{row}">
+      <el-table-column :label="String($t('system.menuTitle'))" align="center" width="208">
+        <template v-slot="{row}">
           <svg-icon :icon-class="row.icon" />
           <span style="margin-left: 16px">{{ row.title }}</span>
         </template>
@@ -20,28 +20,28 @@
 
       <!-- 菜单节点元素 -->
       <!-- <el-table-column prop="menuName" label="名称" /> -->
-      <el-table-column prop="menuPath" label="菜单路径" align="center" :show-overflow-tooltip="true" />
-      <el-table-column prop="redirect" label="菜单跳转" align="center" />
-      <el-table-column prop="component" label="组件映射" align="center" />
-      <el-table-column label="隐藏" align="center" width="120">
-        <template slot-scope="{row}">
-          <el-tag :type="row.isHidden | statusFilter">
-            {{ row.isHidden === '1' ?'YES':'NO' }}
+      <el-table-column prop="menuPath" :label="String($t('system.menuPath'))" align="center" :show-overflow-tooltip="true" />
+      <el-table-column prop="redirect" :label="String($t('system.menuRedirect'))" align="center" />
+      <el-table-column prop="component" :label="String($t('system.component'))" align="center" />
+      <el-table-column :label="String($t('system.hidden'))" align="center" width="120">
+        <template v-slot="{row}">
+          <el-tag :type="row.hidden | statusFilter">
+            {{ row.hidden? 'YES':'NO' }}
           </el-tag>
         </template>
       </el-table-column>
 
       <!-- 菜单列表排序 -->
-      <el-table-column prop="sort" label="排序" align="center" width="100" />
+      <el-table-column prop="sort" :label="String($t('common.sort'))" align="center" width="100" />
 
       <!-- 树节点操作 -->
-      <el-table-column label="操作" :align="alignDir" width="220">
-        <template slot-scope="scope">
+      <el-table-column :label="String($t('common.operate'))" :align="alignDir" width="220">
+        <template v-slot="scope">
           <el-button type="primary" size="small" @click="handleUpdate(scope.row)">
-            <i class="el-icon-edit" /> 编辑
+            <i class="el-icon-edit" /> {{ $t('common.edit') }}
           </el-button>
           <el-button type="danger" size="small" @click="deleteClick(scope.row)">
-            <i class="el-icon-delete" /> 删除
+            <i class="el-icon-delete" /> {{ $t('common.delete') }}
           </el-button>
         </template>
       </el-table-column>
@@ -49,16 +49,16 @@
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="100px" style="width: 400px; margin-left: 50px">
-        <el-form-item v-if="dialogStatus !== 'update'" label="菜单层级" prop="location">
-          <el-select v-model="temp.location" placeholder="请选择层级" size="small" @change="locationChange">
+        <el-form-item v-if="dialogStatus !== 'update'" :label="String($t('system.menuLevel'))" prop="location">
+          <el-select v-model="temp.location" :placeholder="String($t('system.chooseLevel'))" size="small" @change="locationChange">
             <el-option v-for="item in locationData" :key="item.id" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
-        <el-form-item v-if="sonStatus && dialogStatus !== 'update'" label="子级位置" prop="children">
+        <el-form-item v-if="sonStatus && dialogStatus !== 'update'" :label="String($t('system.childPosition'))" prop="children">
           <el-cascader
             :key="isResouceShow"
             v-model="temp.children"
-            placeholder="请选择子级位置"
+            :placeholder="String($t('system.chooseChildPosition'))"
             :options="tableData"
             :props="{ checkStrictly: true, label: 'title', value: 'id', children: 'children' }"
             size="small"
@@ -66,41 +66,40 @@
             @change="getCasVal"
           />
         </el-form-item>
-        <el-form-item label="菜单标题" prop="title">
-          <el-input v-model="temp.title" size="small" autocomplete="off" placeholder="请输入菜单标题" />
+        <el-form-item :label="String($t('system.menuTitle'))" prop="title">
+          <el-input v-model="temp.title" :disabled="dialogStatus==='update'?true:false" size="small" autocomplete="off" :placeholder="$t('system.enterMenuTitle')" />
         </el-form-item>
-        <el-form-item label="菜单路径" prop="menuPath">
-          <el-input v-model="temp.menuPath" size="small" autocomplete="off" placeholder="请输入菜单路径" />
+        <el-form-item :label="String($t('system.menuPath'))" prop="menuPath">
+          <el-input v-model="temp.menuPath" size="small" autocomplete="off" :placeholder="$t('system.enterMenuPath')" />
         </el-form-item>
-        <el-form-item label="组件映射" prop="component">
-          <el-input v-model="temp.component" size="small" autocomplete="off" placeholder="请输入组件映射" />
+        <el-form-item v-if="sonStatus" :label="String($t('system.component'))" prop="component">
+          <el-input v-model="temp.component" size="small" autocomplete="off" :placeholder="$t('system.enterComponent')" />
         </el-form-item>
 
-        <el-form-item label="菜单图标" prop="icon">
-          <el-input v-model="temp.icon" size="small" autocomplete="off" placeholder="请输入菜单图标" />
+        <el-form-item :label="String($t('system.menuIcon'))" prop="icon">
+          <el-input v-model="temp.icon" size="small" autocomplete="off" :placeholder="$t('system.enterMenuIcon')" />
         </el-form-item>
-        <el-form-item v-if="!sonStatus" label="菜单跳转" prop="redirect">
-          <el-input v-model="temp.redirect" size="small" autocomplete="off" placeholder="顶级菜单需要" />
+        <el-form-item v-if="!sonStatus" :label="String($t('system.menuRedirect'))" prop="redirect">
+          <el-input v-model="temp.redirect" size="small" autocomplete="off" />
         </el-form-item>
 
         <!-- 编辑面板专用 -->
-        <el-form-item v-if="dialogStatus === 'update'" label="菜单隐藏">
-          <el-select v-model="temp.isHidden" size="small" class="filter-item">
+        <el-form-item v-if="dialogStatus === 'update'" :label="String($t('system.menuHidden'))">
+          <el-select v-model="temp.hidden" size="small" class="filter-item">
             <el-option v-for="(item, index) in statusOptions" :key="index" :label="item.label" :value="item.value" />
           </el-select>
-          <!-- <el-input v-model="temp.isHidden" size="small" autocomplete="off" placeholder="请输入菜单隐藏" /> -->
         </el-form-item>
-        <el-form-item v-if="dialogStatus === 'update'" label="菜单排序" prop="sort">
+        <el-form-item v-if="dialogStatus === 'update'" :label="String($t('system.menuSort'))" prop="sort">
           <el-input v-model="temp.sort" size="small" autocomplete="off" placeholder="请输入菜单排序" />
         </el-form-item>
       </el-form>
 
       <div slot="footer" class="dialog-footer" size="small">
         <el-button @click="dialogFormVisible = false">
-          取消
+          {{ $t('common.cancel') }}
         </el-button>
         <el-button type="primary" @click="dialogStatus === 'create' ? createData() : updateData()">
-          确认
+          {{ $t('common.ok') }}
         </el-button>
       </div>
     </el-dialog>
@@ -109,7 +108,7 @@
 
 <script>
 import { getMenus, getChildKeys, addMenu, deleteMenu, updateMenu } from '@/api/system/menu'
-import { getCustomUuid } from '@/utils/uuid'
+import i18n from '@/lang'
 
 export default {
   filters: {
@@ -118,8 +117,8 @@ export default {
         return 'success'
       } else {
         const statusMap = {
-          0: 'success',
-          1: 'info'
+          false: 'success',
+          true: 'info'
         }
         return statusMap[status]
       }
@@ -134,15 +133,15 @@ export default {
       },
       alignDir: 'center',
       textMap: {
-        update: '编辑',
-        create: '新增菜单'
+        update: this.$t('common.edit'),
+        create: this.$t('system.addMenu')
       },
       statusOptions: [
         {
-          value: '0',
+          value: false,
           label: 'NO'
         }, {
-          value: '1',
+          value: true,
           label: 'YES'
         }
       ],
@@ -154,16 +153,16 @@ export default {
       casArr: [],
       idx: '',
       rules: {
-        location: [{ required: true, message: '请选择层级', trigger: 'blur' }],
-        children: [{ required: true, message: '请选择子级位置', trigger: 'blur' }],
-        menuPath: [{ required: true, message: '请输入菜单路径', trigger: 'blur' }],
-        component: [{ required: true, message: '请输入组件映射', trigger: 'blur' }],
-        title: [{ required: true, message: '请输入菜单标题', trigger: 'blur' }],
-        icon: [{ required: true, message: '请输入菜单图标', trigger: 'blur' }]
+        location: [{ required: true, message: this.$t('system.chooseLevel'), trigger: 'blur' }],
+        children: [{ required: true, message: this.$t('system.chooseChildPosition'), trigger: 'blur' }],
+        menuPath: [{ required: true, message: this.$t('system.enterMenuPath'), trigger: 'blur' }],
+        component: [{ required: true, message: this.$t('system.enterComponent'), trigger: 'blur' }],
+        title: [{ required: true, message: this.$t('system.enterMenuTitle'), trigger: 'blur' }],
+        icon: [{ required: true, message: this.$t('system.enterMenuIcon'), trigger: 'blur' }]
       },
       locationData: [
-        { id: '1', name: '顶级' },
-        { id: '2', name: '子级' }
+        { id: '1', name: this.$t('system.topLevel') },
+        { id: '2', name: this.$t('system.childLevel') }
       ]
     }
   },
@@ -176,7 +175,17 @@ export default {
     // 获取菜单tree数据源
     async getMenus() {
       const res = await getMenus()
-      this.tableData = res.data
+      this.tableData = this.i18n(res.data)
+    },
+    i18n(routes) {
+      const app = routes.map(route => {
+        route.title = i18n.t(`route.${route.title}`)
+        if (route.children) {
+          route.children = this.i18n(route.children)
+        }
+        return route
+      })
+      return app
     },
     // 是否显示子级位置(初始化添加面板)
     locationChange(v) {
@@ -225,9 +234,6 @@ export default {
           delete this.temp.children
           const obj = Object.assign({}, this.temp)
           obj.children = []
-          // 添加树时需要，此处使用时间戳来确保树节点唯一
-          // obj.id = new Date().getTime()
-          obj.id = getCustomUuid(6, 10)
           if (this.sonStatus === false) { // 顶级菜单
             // 新增节点自动排在末尾
             obj.parentId = 0
@@ -240,11 +246,11 @@ export default {
           }
           // 新增菜单
           addMenu(obj).then(response => {
-            if (response.code === 20000) {
+            if (response.code === 2000) {
               this.dialogFormVisible = false
-              this.$confirm('菜单新增成功，是否刷新即刻生效？', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
+              this.$confirm(String(this.$t('system.addMenuSucceed')), String(this.$t('common.title')), {
+                confirmButtonText: this.$t('common.ok'),
+                cancelButtonText: this.$t('common.cancel'),
                 type: 'warning'
               }).then(() => {
                 location.reload()
@@ -285,14 +291,14 @@ export default {
     },
     // 删除节点
     deleteClick(item) {
-      this.$confirm(`此操作将删除该菜单, 是否继续?`, '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(String(this.$t('system.deleteClickMsg')), String(this.$t('common.title')), {
+        confirmButtonText: this.$t('common.ok'),
+        cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
       }).then(() => {
         if (item.children.length !== 0) {
           this.$message.warning({
-            message: '请删除子节点',
+            message: this.$t('system.delChildNode'),
             duration: 1000
           })
         } else {
@@ -315,7 +321,7 @@ export default {
         }
         this.$message({
           type: 'success',
-          message: '删除成功!'
+          message: this.$t('system.deleteSucceed')
         })
       }
     },
@@ -364,7 +370,7 @@ export default {
     },
     async toUpdate(temp) {
       const res = await updateMenu(temp)
-      if (res && res.code === 20000) {
+      if (res && res.code === 2000) {
         if (temp.parentId === 0) { // 根节点
           this.tableData.splice(this.idx, 1, temp)
         } else {
@@ -374,12 +380,14 @@ export default {
           childKeys.push(temp.id)
           this.findSd(this.tableData, 0, childKeys)
         }
-        this.$message({
-          type: 'success',
-          message: '编辑成功',
-          duration: 2000
-        })
         this.dialogFormVisible = false
+        this.$confirm(String(this.$t('system.updateMenuSucceed')), String(this.$t('common.title')), {
+          confirmButtonText: this.$t('common.ok'),
+          cancelButtonText: this.$t('common.cancel'),
+          type: 'warning'
+        }).then(() => {
+          location.reload()
+        })
       }
     }
   }
