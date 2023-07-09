@@ -51,8 +51,9 @@
             :check-strictly="checkStrictly"
             :data="routesData"
             :props="defaultProps"
+            :default-checked-keys="defaultCheckedKeys"
             show-checkbox
-            node-key="path"
+            node-key="id"
             default-expand-all
             class="permission-tree"
           />
@@ -93,6 +94,7 @@ export default {
         children: 'children',
         label: 'title'
       },
+      defaultCheckedKeys: [],
       roleCodeOptions: ['GENERAL', 'CUSTOMER'],
       rules: {
         roleName: [{ required: true, message: 'rolename is required', trigger: 'change' }]
@@ -143,6 +145,7 @@ export default {
         }
 
         const data = {
+          id: route.id,
           path: path.resolve(basePath, route.path),
           title: route.meta && route.meta.title
         }
@@ -167,6 +170,19 @@ export default {
       })
       return data
     },
+    generateCheckedKeys(routes) {
+      let checkedKeys = []
+      routes.forEach(route => {
+        checkedKeys.push(route.id)
+        if (route.children) {
+          const temp = this.generateCheckedKeys(route.children)
+          if (temp.length > 0) {
+            checkedKeys = [...checkedKeys, ...temp]
+          }
+        }
+      })
+      return checkedKeys
+    },
     handleAddRole() {
       this.role = Object.assign({}, defaultRole)
       if (this.$refs.tree) {
@@ -185,7 +201,9 @@ export default {
       this.role = deepClone(scope.row)
       this.$nextTick(() => {
         const routes = this.generateRoutes(this.role.routes)
-        this.$refs.tree.setCheckedNodes(this.generateArr(routes))
+        // this.$refs.tree.setCheckedNodes(this.generateArr(routes))
+        const checkedKeys = this.generateCheckedKeys(routes)
+        this.$refs.tree.setCheckedKeys(checkedKeys)
         // set checked state of a node not affects its father and child nodes
         this.checkStrictly = false
         this.$refs['dataRoleForm'].clearValidate()
@@ -208,12 +226,13 @@ export default {
     generateTree(routes, basePath = '/', checkedKeys) {
       const res = []
       for (const route of routes) {
-        const routePath = path.resolve(basePath, route.path)
+        // const routePath = path.resolve(basePath, route.path)
+        const routeId = route.id
         // recursive child routes
         if (route.children) {
-          route.children = this.generateTree(route.children, routePath, checkedKeys)
+          route.children = this.generateTree(route.children, routeId, checkedKeys)
         }
-        if (checkedKeys.includes(routePath) || (route.children && route.children.length >= 1)) {
+        if (checkedKeys.includes(routeId) || (route.children && route.children.length >= 1)) {
           res.push(route)
         }
       }
