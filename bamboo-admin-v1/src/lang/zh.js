@@ -51,7 +51,7 @@ export default {
     roleCode: '角色标识',
     roleDesc: '角色描述',
     menu: '菜单',
-    editPermission: '编辑权限',
+    editMenu: '编辑菜单',
     addRole: '新增角色',
     roleDelStartMsg: '确认删除',
     roleDelEndMsg: '角色吗？',

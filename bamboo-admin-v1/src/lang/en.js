@@ -51,7 +51,7 @@ export default {
     roleCode: 'Role Code',
     roleDesc: 'Role Description',
     menu: 'Menu',
-    editPermission: 'Edit Permissions',
+    editMenu: 'Edit Menu',
     addRole: 'Add Role',
     roleDelStartMsg: 'Confirm deleting ',
     roleDelEndMsg: ' role?',

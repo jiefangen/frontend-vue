@@ -20,13 +20,13 @@
       </el-table-column>
       <el-table-column align="center" :label="String($t('common.operate'))">
         <template v-slot="scope">
-          <el-button type="warning" size="small" @click="handleEdit(scope)">{{ $t('system.editPermission') }}</el-button>
+          <el-button type="warning" size="small" @click="handleEdit(scope)">{{ $t('system.editMenu') }}</el-button>
           <el-button type="danger" size="small" @click="handleDelete(scope)">{{ $t('common.delete') }}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?String($t('system.editPermission')):$t('system.addRole')">
+    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?String($t('system.editMenu')):$t('system.addRole')">
       <el-form ref="dataRoleForm" :rules="rules" :model="role" label-width="80px" label-position="left" style="width: 400px; margin-left:50px;">
         <el-form-item :label="String($t('system.roleName'))" prop="roleName">
           <el-input v-model="role.roleName" :disabled="dialogType==='edit'?true:false" placeholder="Role Name" />
