@@ -19,7 +19,7 @@
       </el-table-column>
 
       <!-- 菜单节点元素 -->
-      <!-- <el-table-column prop="menuName" label="名称" /> -->
+      <el-table-column prop="menuName" :label="String($t('system.menuName'))" align="center" />
       <el-table-column prop="menuPath" :label="String($t('system.menuPath'))" align="center" :show-overflow-tooltip="true" />
       <el-table-column prop="redirect" :label="String($t('system.menuRedirect'))" align="center" />
       <el-table-column prop="component" :label="String($t('system.component'))" align="center" />
@@ -69,18 +69,17 @@
         <el-form-item :label="String($t('system.menuTitle'))" prop="title">
           <el-input v-model="temp.title" :disabled="dialogStatus==='update'?true:false" size="small" autocomplete="off" :placeholder="$t('system.enterMenuTitle')" />
         </el-form-item>
+        <el-form-item :label="String($t('system.menuIcon'))" prop="icon">
+          <el-input v-model="temp.icon" size="small" autocomplete="off" :placeholder="$t('system.enterMenuIcon')" />
+        </el-form-item>
         <el-form-item :label="String($t('system.menuPath'))" prop="menuPath">
           <el-input v-model="temp.menuPath" size="small" autocomplete="off" :placeholder="$t('system.enterMenuPath')" />
         </el-form-item>
         <el-form-item v-if="sonStatus" :label="String($t('system.component'))" prop="component">
           <el-input v-model="temp.component" size="small" autocomplete="off" :placeholder="$t('system.enterComponent')" />
         </el-form-item>
-
-        <el-form-item :label="String($t('system.menuIcon'))" prop="icon">
-          <el-input v-model="temp.icon" size="small" autocomplete="off" :placeholder="$t('system.enterMenuIcon')" />
-        </el-form-item>
-        <el-form-item v-if="!sonStatus" :label="String($t('system.menuRedirect'))" prop="redirect">
-          <el-input v-model="temp.redirect" size="small" autocomplete="off" />
+        <el-form-item :label="String($t('system.menuRedirect'))" prop="redirect">
+          <el-input v-model="temp.redirect" size="small" autocomplete="off" placeholder="节点为菜单目录时需要" />
         </el-form-item>
 
         <!-- 编辑面板专用 -->

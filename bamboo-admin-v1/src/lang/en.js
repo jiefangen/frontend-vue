@@ -59,6 +59,7 @@ export default {
     addRoleSucceed: 'Role added successfully',
     // Menu Management Page
     menuTitle: 'Menu Title',
+    menuName: 'Menu Name',
     menuPath: 'Menu Path',
     menuRedirect: 'Redirect',
     component: 'Component',
@@ -83,7 +84,6 @@ export default {
     chooseLevel: 'Please choose the level',
     chooseChildPosition: 'Please choose the child position'
   },
-
   route: {
     dashboard: 'Dashboard',
     guide: 'Guide',
@@ -94,7 +94,7 @@ export default {
     systemMonitor: 'System Monitor',
     operationLog: 'Operation Log',
     apiDoc: 'API Document',
-    DruidMonitor: 'Druid Monitor',
+    druidMonitor: 'Druid Monitor',
     documentation: 'Documentation',
     permission: 'Permission',
     pagePermission: 'Page Permission',

@@ -32,12 +32,18 @@ import Layout from '@/layout'
  */
 export const asyncRouteMap = {
   layout: Layout,
-  sys_user: () => import('@/views/system/user/index'),
-  sys_role: () => import('@/views/system/role/index'),
-  sys_menu: () => import('@/views/system/menu/index')
+  system_user: () => import('@/views/system/user/index'),
+  system_role: () => import('@/views/system/role/index'),
+  system_menu: () => import('@/views/system/menu/index'),
   // monitor_log: () => import('@/views/monitor/log/index'),
   // monitor_api: () => import('@/views/monitor/api/index'),
   // monitor_druid: () => import('@/views/monitor/druid/index')
+  // 测试路由映射
+  nested_menu1: () => import('@/views/nested/menu1/index'),
+  nested_menu1_menu1_2: () => import('@/views/nested/menu1/menu1-2'),
+  nested_menu1_menu1_3: () => import('@/views/nested/menu1/menu1-3'),
+  menu1_menu1_2_menu1_2_1: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+  menu1_menu1_2_menu1_2_2: () => import('@/views/nested/menu1/menu1-2/menu1-2-2')
 }
 
 /**
