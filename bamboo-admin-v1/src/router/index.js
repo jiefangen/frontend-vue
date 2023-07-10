@@ -17,7 +17,7 @@ import Layout from '@/layout'
  * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
  * name:'router-name'             the name is used by <keep-alive> (must set!!!)
  * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    roles: ['admin','general']    control the page roles (you can set multiple roles)
     title: 'title'               the name show in sidebar and breadcrumb (recommend set)
     icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
     noCache: true                if set true, the page will no be cached(default is false)
@@ -32,12 +32,14 @@ import Layout from '@/layout'
  */
 export const asyncRouteMap = {
   layout: Layout,
+  // 系统管理路由组件映射
   system_user: () => import('@/views/system/user/index'),
   system_role: () => import('@/views/system/role/index'),
   system_menu: () => import('@/views/system/menu/index'),
-  // monitor_log: () => import('@/views/monitor/log/index'),
-  // monitor_api: () => import('@/views/monitor/api/index'),
-  // monitor_druid: () => import('@/views/monitor/druid/index')
+  // 系统监控路由组件映射
+  monitor_log: () => import('@/views/monitor/log/index'),
+  monitor_api: () => import('@/views/monitor/api/index'),
+  monitor_druid: () => import('@/views/monitor/druid/index'),
   // 测试路由映射
   nested_menu1: () => import('@/views/nested/menu1/index'),
   nested_menu1_menu1_2: () => import('@/views/nested/menu1/menu1-2'),

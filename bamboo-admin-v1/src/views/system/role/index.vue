@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleAddRole">{{ $t('common.add') }}</el-button>
 
-    <el-table :data="rolesList" style="width:100%; margin-top:20px;" border stripe>
+    <el-table :data="rolesList" :header-cell-style="{background:'#eef1f6',color:'#606266'}" style="width:100%; margin-top:20px;" border stripe>
       <el-table-column align="center" :label="String($t('system.roleName'))" width="220">
         <template v-slot="scope">
           {{ scope.row.roleName }}

@@ -61,7 +61,7 @@ const actions = {
 
         commit('SET_ROLES', roleCodes)
         commit('SET_NAME', data.username)
-        // commit('SET_AVATAR', avatar)
+        commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
         commit('SET_INTRODUCTION', data.nickname)
         resolve(data)
       }).catch(error => {

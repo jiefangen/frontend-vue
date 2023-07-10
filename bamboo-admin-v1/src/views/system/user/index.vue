@@ -18,6 +18,7 @@
       stripe
       fit
       highlight-current-row
+      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       style="width: 100%; margin-top:20px;"
     >
       <el-table-column :label="String($t('system.username'))" align="center">

@@ -81,6 +81,7 @@ export default {
     enterComponent: 'Please enter component',
     enterMenuTitle: 'Please enter menu title',
     enterMenuIcon: 'Please enter menu icon',
+    enterMenuRedirect: 'Required when the node is a menu directory',
     chooseLevel: 'Please choose the level',
     chooseChildPosition: 'Please choose the child position'
   },

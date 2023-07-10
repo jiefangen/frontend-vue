@@ -24,7 +24,7 @@ export function addRole(data) {
 
 export function updateRole(roleId, data) {
   return request({
-    url: `/system/role/update/${roleId}`,
+    url: `/system/role/updateRoleMenu/${roleId}`,
     method: 'put',
     data
   })

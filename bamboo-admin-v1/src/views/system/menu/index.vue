@@ -8,6 +8,7 @@
       :tree-props="defaultProps"
       border
       class="menu-tree"
+      :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       style="width: 100%; margin-top: 20px"
     >
       <!-- meta元素 -->
@@ -79,7 +80,7 @@
           <el-input v-model="temp.component" size="small" autocomplete="off" :placeholder="$t('system.enterComponent')" />
         </el-form-item>
         <el-form-item :label="String($t('system.menuRedirect'))" prop="redirect">
-          <el-input v-model="temp.redirect" size="small" autocomplete="off" placeholder="节点为菜单目录时需要" />
+          <el-input v-model="temp.redirect" size="small" autocomplete="off" :placeholder="$t('system.enterMenuRedirect')" />
         </el-form-item>
 
         <!-- 编辑面板专用 -->

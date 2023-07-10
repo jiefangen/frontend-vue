@@ -150,7 +150,7 @@ const asyncRoutes = [
       },
       {
         path: 'json-editor',
-        component: 'views/components-demo/json-editor',
+        component: 'views/components-demo/json-general',
         name: 'JsonEditorDemo',
         meta: { title: 'jsonEditor' }
       },

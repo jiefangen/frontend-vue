@@ -3,10 +3,10 @@
 </template>
 
 <script>
-// deps for editor
+// deps for general
 import 'codemirror/lib/codemirror.css' // codemirror
-import 'tui-editor/dist/tui-editor.css' // editor ui
-import 'tui-editor/dist/tui-editor-contents.css' // editor content
+import 'tui-editor/dist/tui-editor.css' // general ui
+import 'tui-editor/dist/tui-editor-contents.css' // general content
 
 import Editor from 'tui-editor'
 import defaultOptions from './default-options'
@@ -22,7 +22,7 @@ export default {
       type: String,
       required: false,
       default() {
-        return 'markdown-editor-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
+        return 'markdown-general-' + +new Date() + ((Math.random() * 1000).toFixed(0) + '')
       }
     },
     options: {

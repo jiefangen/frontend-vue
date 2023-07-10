@@ -81,6 +81,7 @@ export default {
     enterComponent: '请输入组件映射',
     enterMenuTitle: '请输入菜单标题',
     enterMenuIcon: '请输入菜单图标',
+    enterMenuRedirect: '节点为菜单目录时需要',
     chooseLevel: '请选择层级',
     chooseChildPosition: '请选择子级位置'
   },
