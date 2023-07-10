@@ -1,6 +1,6 @@
 <template>
   <div class="iframe-container">
-    <iframe :src="iframeUrl" class="frame" />
+    <iframe :src="iframeUrl" class="iframe" />
   </div>
 </template>
 
@@ -16,10 +16,10 @@ export default {
 </script>
 
 <style scoped>
-.frame {
-  overflow-y: scroll;
-  border: none;
-  width: 100%;
-  height: 912px;
-}
+  .iframe {
+    overflow-y: scroll;
+    border: none;
+    width: 100%;
+    height: 912px;
+  }
 </style>
