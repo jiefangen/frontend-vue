@@ -384,13 +384,13 @@ const asyncRoutes = [
   },
 
   {
-    path: '/error-log',
+    path: '/error-permission',
     component: 'layout/Layout',
     redirect: 'noRedirect',
     children: [
       {
         path: 'log',
-        component: 'views/error-log/index',
+        component: 'views/error-permission/index',
         name: 'ErrorLog',
         meta: { title: 'errorLog', icon: 'bug' }
       }

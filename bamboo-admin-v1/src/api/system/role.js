@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getRoutes() {
   return request({
-    url: '/system/role/getRoutes',
+    url: '/system/menu/getRoutes',
     method: 'get'
   })
 }

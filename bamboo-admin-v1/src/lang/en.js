@@ -11,7 +11,9 @@ export default {
     enabled: 'Enabled',
     disabled: 'Disabled',
     success: 'Success',
+    empty: 'Empty',
     sort: 'Sort',
+    close: 'Close',
     operate: 'Operate'
   },
   login: {
@@ -51,6 +53,7 @@ export default {
     roleCode: 'Role Code',
     roleDesc: 'Role Description',
     menu: 'Menu',
+    viewPermission: 'View Permission',
     editMenu: 'Edit Menu',
     addRole: 'Add Role',
     roleDelStartMsg: 'Confirm deleting ',
@@ -83,7 +86,32 @@ export default {
     enterMenuIcon: 'Please enter menu icon',
     enterMenuRedirect: 'Required when the node is a menu directory',
     chooseLevel: 'Please choose the level',
-    chooseChildPosition: 'Please choose the child position'
+    chooseChildPosition: 'Please choose the child position',
+    // Permission Management Page
+    permissionNum: 'ID',
+    permissionName: 'Permission Name',
+    permissionCode: 'Permission Code',
+    description: 'Description',
+    resourcesId: 'Resource ID',
+    resourcesType: 'Resource Type',
+    source: 'Permission Source',
+    operationScope: 'Operation Scope',
+    permissionPlaceholder: 'Enter permission name or operation scope to search'
+  },
+  monitor: {
+    // Log Page
+    logNum: 'ID',
+    identity: 'Operator',
+    remoteAddress: 'Address',
+    actionType: 'Action Type',
+    statusCode: 'Status',
+    operatingTime: 'Operation Time',
+    elapsedTime: 'Elapsed Time',
+    content: 'Operation Content',
+    exceptionInfo: 'Exception Information',
+    handleClearMsg: 'This operation will permanently clear log data. Do you want to continue?',
+    emptySucceed: 'Successfully cleared',
+    searchLogPlaceholder: 'Enter log or ip to search'
   },
   route: {
     dashboard: 'Dashboard',
@@ -92,6 +120,7 @@ export default {
     userManage: 'User Management',
     roleManage: 'Role Management',
     menuManage: 'Menu Management',
+    permissionManage: 'Directive Permission',
     systemMonitor: 'System Monitor',
     operationLog: 'Operation Log',
     apiDoc: 'API Document',

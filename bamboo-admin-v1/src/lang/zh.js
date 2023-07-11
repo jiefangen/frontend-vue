@@ -1,3 +1,5 @@
+import {empty} from "@/api/monitor/log";
+
 export default {
   common: {
     ok: '确认',
@@ -11,7 +13,9 @@ export default {
     enabled: '启用',
     disabled: '禁用',
     success: '成功',
+    empty: '清空',
     sort: '排序',
+    close: '关闭',
     operate: '操作'
   },
   login: {
@@ -51,6 +55,7 @@ export default {
     roleCode: '角色标识',
     roleDesc: '角色描述',
     menu: '菜单',
+    viewPermission: '指令权限',
     editMenu: '编辑菜单',
     addRole: '新增角色',
     roleDelStartMsg: '确认删除',
@@ -83,7 +88,32 @@ export default {
     enterMenuIcon: '请输入菜单图标',
     enterMenuRedirect: '节点为菜单目录时需要',
     chooseLevel: '请选择层级',
-    chooseChildPosition: '请选择子级位置'
+    chooseChildPosition: '请选择子级位置',
+    // 权限管理页面
+    permissionNum: '权限ID',
+    permissionName: '权限名称',
+    permissionCode: '权限编码',
+    description: '权限描述',
+    resourcesId: '资源绑定ID',
+    resourcesType: '资源类型',
+    source: '权限来源',
+    operationScope: '操作范围',
+    permissionPlaceholder: '输入权限名或操作范围搜索'
+  },
+  monitor: {
+    // 日志页面
+    logNum: '日志编号',
+    identity: '操作人员',
+    remoteAddress: '操作地址',
+    actionType: '操作类型',
+    statusCode: '操作状态',
+    operatingTime: '操作时间',
+    elapsedTime: '耗时（毫秒）',
+    content: '操作内容',
+    exceptionInfo: '异常信息',
+    handleClearMsg: '此操作将永久清空日志数据，是否继续？',
+    emptySucceed: '清空成功',
+    searchLogPlaceholder: '输入身份标识或IP搜索'
   },
   route: {
     dashboard: '首页',
@@ -92,6 +122,7 @@ export default {
     userManage: '用户管理',
     roleManage: '角色管理',
     menuManage: '菜单管理',
+    permissionManage: '权限管理',
     systemMonitor: '系统监控',
     operationLog: '操作日志',
     apiDoc: 'API文档',

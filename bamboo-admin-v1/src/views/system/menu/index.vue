@@ -9,7 +9,7 @@
       border
       class="menu-tree"
       :header-cell-style="{background:'#eef1f6',color:'#606266'}"
-      style="width: 100%; margin-top: 20px"
+      style="width: 100%; margin-top:20px"
     >
       <!-- meta元素 -->
       <el-table-column :label="String($t('system.menuTitle'))" align="center" width="208">

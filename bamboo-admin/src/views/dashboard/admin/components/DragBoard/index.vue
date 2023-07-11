@@ -156,8 +156,8 @@ export default {
     },
     // move回调方法
     onMove({ draggedContext, relatedContext }, originalEvent) {
-      // console.log(e.draggedContext.element)
-      // console.log(e.relatedContext.element)
+      // console.permission(e.draggedContext.element)
+      // console.permission(e.relatedContext.element)
     },
     addTodo(e) {
       const text = e.target.value

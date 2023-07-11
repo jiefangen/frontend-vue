@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.keyword" placeholder="输入身份标识或IP搜索" size="medium" style="width: 200px; margin-right: 10px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.keyword" :placeholder="$t('monitor.searchLogPlaceholder')" size="medium" style="width: 200px; margin-right: 10px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button class="filter-item" type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
-        搜索
+        {{ $t('common.search') }}
       </el-button>
       <el-button class="filter-item" style="margin-left: 14px;" type="primary" size="medium" icon="el-icon-refresh" @click="handleClear">
-        清空
+        {{ $t('common.empty') }}
       </el-button>
     </div>
 
@@ -21,15 +21,15 @@
       :row-class-name="tableRowClassName"
       style="width: 100%; margin-top:20px;"
     >
-      <el-table-column prop="id" label="日志编号" align="center" />
-      <el-table-column prop="identity" label="操作人员" align="center" />
-      <el-table-column prop="remoteAddress" label="操作地址" align="center" />
-      <el-table-column prop="actionType" label="操作类型" align="center" />
-      <el-table-column prop="statusCode" label="操作状态" align="center" />
-      <el-table-column prop="operatingTime" label="操作时间" align="center" width="160" />
-      <el-table-column prop="elapsedTime" label="耗时（毫秒）" align="center" width="106" />
-      <el-table-column prop="content" label="操作内容" width="160" :show-overflow-tooltip="true" />
-      <el-table-column prop="exceptionInfo" label="异常信息" width="240" :show-overflow-tooltip="true" />
+      <el-table-column prop="id" :label="String($t('monitor.logNum'))" align="center" />
+      <el-table-column prop="identity" :label="String($t('monitor.identity'))" align="center" />
+      <el-table-column prop="remoteAddress" :label="String($t('monitor.remoteAddress'))" align="center" />
+      <el-table-column prop="actionType" :label="String($t('monitor.actionType'))" align="center" />
+      <el-table-column prop="statusCode" :label="String($t('monitor.statusCode'))" align="center" />
+      <el-table-column prop="operatingTime" :label="String($t('monitor.operatingTime'))" align="center" width="160" />
+      <el-table-column prop="elapsedTime" :label="String($t('monitor.elapsedTime'))" align="center" width="112" />
+      <el-table-column prop="content" :label="String($t('monitor.content'))" width="160" :show-overflow-tooltip="true" />
+      <el-table-column prop="exceptionInfo" :label="String($t('monitor.exceptionInfo'))" width="240" :show-overflow-tooltip="true" />
     </el-table>
     <!--分页组件-->
     <pagination v-show="total" :total="total" :page.sync="listQuery.pageNo" :limit.sync="listQuery.pageSize" @pagination="getList" />
@@ -95,16 +95,16 @@ export default {
       this.getList()
     },
     handleClear() {
-      this.$confirm('此操作将永久清空日志数据，是否继续？', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(String(this.$t('monitor.handleClearMsg')), String(this.$t('common.title')), {
+        confirmButtonText: String(this.$t('common.ok')),
+        cancelButtonText: String(this.$t('common.cancel')),
         type: 'warning'
       }).then(() => {
         empty().then(() => {
           this.handleFilter()
           this.$notify({
-            title: '成功',
-            message: '清空成功',
+            title: this.$t('common.success'),
+            message: this.$t('monitor.emptySucceed'),
             type: 'success',
             duration: 2000
           })
@@ -114,4 +114,3 @@ export default {
   }
 }
 </script>
-

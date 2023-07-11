@@ -21,6 +21,7 @@
       <el-table-column align="center" :label="String($t('common.operate'))">
         <template v-slot="scope">
           <el-button type="warning" size="small" @click="handleEdit(scope)">{{ $t('system.editMenu') }}</el-button>
+          <el-button type="success" size="small" @click="handleViewPermission(scope.row)">{{ $t('system.viewPermission') }}</el-button>
           <el-button type="danger" size="small" @click="handleDelete(scope)">{{ $t('common.delete') }}</el-button>
         </template>
       </el-table-column>
@@ -64,6 +65,15 @@
         <el-button type="primary" @click="confirmRole">{{ $t('common.ok') }}</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog :visible.sync="viewPermissionDialog" :title="String($t('system.viewPermission'))">
+      <el-tag v-for="item in rolePermissions" :key="item.id" type="success" style="margin-left: 10px; margin-bottom: 10px">
+        {{ item.permissionCode }}
+      </el-tag>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="viewPermissionDialog=false">{{ $t('common.close') }}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -71,6 +81,7 @@
 import path from 'path'
 import { deepClone } from '@/utils'
 import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/system/role'
+import { getPermission } from '@/api/system/permission'
 import i18n from '@/lang'
 
 const defaultRole = {
@@ -90,6 +101,8 @@ export default {
       dialogVisible: false,
       dialogType: 'new',
       checkStrictly: false,
+      viewPermissionDialog: false,
+      rolePermissions: [],
       defaultProps: {
         children: 'children',
         label: 'title'
@@ -207,6 +220,13 @@ export default {
         // set checked state of a node not affects its father and child nodes
         this.checkStrictly = false
         this.$refs['dataRoleForm'].clearValidate()
+      })
+    },
+    handleViewPermission(row) {
+      this.viewPermissionDialog = true
+      this.$nextTick(async() => {
+        const response = await getPermission(row.id)
+        this.rolePermissions = response.data
       })
     },
     handleDelete({ $index, row }) {
