@@ -40,13 +40,7 @@ export const asyncRouteMap = {
   // 系统监控路由组件映射
   monitor_log: () => import('@/views/monitor/log/index'),
   monitor_api: () => import('@/views/monitor/api/index'),
-  monitor_druid: () => import('@/views/monitor/druid/index'),
-  // 测试路由映射
-  nested_menu1: () => import('@/views/nested/menu1/index'),
-  nested_menu1_menu1_2: () => import('@/views/nested/menu1/menu1-2'),
-  nested_menu1_menu1_3: () => import('@/views/nested/menu1/menu1-3'),
-  menu1_menu1_2_menu1_2_1: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-  menu1_menu1_2_menu1_2_2: () => import('@/views/nested/menu1/menu1-2/menu1-2-2')
+  monitor_druid: () => import('@/views/monitor/druid/index')
 }
 
 /**
@@ -96,19 +90,6 @@ export const constantRoutes = [
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
         meta: { title: 'dashboard', icon: 'dashboard', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/guide',
-    component: Layout,
-    redirect: '/guide/index',
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/guide/index'),
-        name: 'Guide',
-        meta: { title: 'guide', icon: 'guide', noCache: true }
       }
     ]
   },

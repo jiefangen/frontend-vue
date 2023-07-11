@@ -31,11 +31,9 @@
               {{ $t('navbar.profile') }}
             </el-dropdown-item>
           </router-link>
-          <router-link to="/">
-            <el-dropdown-item>
-              {{ $t('navbar.dashboard') }}
-            </el-dropdown-item>
-          </router-link>
+          <el-dropdown-item command="setLayout">
+            <span>布局设置</span>
+          </el-dropdown-item>
           <a target="_blank" href="https://github.com/jiefangen/frontend-vue">
             <el-dropdown-item>
               {{ $t('navbar.github') }}
