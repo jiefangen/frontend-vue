@@ -21,13 +21,14 @@
 import { mapGetters } from 'vuex'
 import PanThumb from '@/components/PanThumb'
 import GithubCorner from '@/components/GithubCorner'
+import emptyGif from '@/assets/images/gif/empty.gif'
 
 export default {
   name: 'DashboardGeneral',
   components: { PanThumb, GithubCorner },
   data() {
     return {
-      emptyGif: 'https://wpimg.wallstcn.com/0e03b7da-db9e-4819-ba10-9016ddfdaed3'
+      emptyGif: emptyGif
     }
   },
   computed: {

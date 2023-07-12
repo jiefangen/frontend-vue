@@ -19,12 +19,12 @@
       style="width: 100%; margin-top:20px;"
     >
       <el-table-column prop="id" :label="String($t('system.permissionNum'))" align="center" width="80" />
-      <el-table-column prop="permissionName" :label="String($t('system.permissionName'))" align="center" />
-      <el-table-column prop="permissionCode" :label="String($t('system.permissionCode'))" align="center" :show-overflow-tooltip="true" />
+      <el-table-column prop="permissionName" :label="String($t('system.permissionName'))" :show-overflow-tooltip="true" />
+      <el-table-column prop="permissionCode" :label="String($t('system.permissionCode'))" :show-overflow-tooltip="true" />
       <el-table-column prop="resourcesType" :label="String($t('system.resourcesType'))" align="center" width="100" />
       <el-table-column prop="resourcesId" :label="String($t('system.resourcesId'))" align="center" />
       <el-table-column prop="source" :label="String($t('system.source'))" align="center" />
-      <el-table-column prop="description" :label="String($t('system.description'))" align="center" width="220" :show-overflow-tooltip="true" />
+      <el-table-column prop="description" :label="String($t('system.description'))" :show-overflow-tooltip="true" />
       <el-table-column prop="operationScope" :label="String($t('system.operationScope'))" :show-overflow-tooltip="true" />
     </el-table>
     <!--分页组件-->

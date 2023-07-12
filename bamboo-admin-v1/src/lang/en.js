@@ -1,4 +1,43 @@
 export default {
+  route: {
+    dashboard: 'Dashboard',
+    systemManage: 'System Management',
+    userManage: 'User Management',
+    roleManage: 'Role Management',
+    menuManage: 'Menu Management',
+    permissionManage: 'Directive Permission',
+    systemMonitor: 'System Monitor',
+    operationLog: 'Operation Log',
+    apiDoc: 'API Document',
+    druidMonitor: 'Druid Monitor',
+    errorPages: 'Error Pages',
+    page401: '401',
+    page404: '404',
+    i18n: 'I18n',
+    externalLink: 'External Link',
+    profile: 'Profile'
+  },
+  navbar: {
+    dashboard: 'Dashboard',
+    github: 'Github',
+    logOut: 'Log Out',
+    profile: 'Profile',
+    theme: 'Theme',
+    size: 'Global Size'
+  },
+  tagsView: {
+    refresh: 'Refresh',
+    close: 'Close',
+    closeOthers: 'Close Others',
+    closeAll: 'Close All'
+  },
+  settings: {
+    title: 'Page style setting',
+    theme: 'Theme Color',
+    tagsView: 'Open Tags-View',
+    fixedHeader: 'Fixed Header',
+    sidebarLogo: 'Sidebar Logo'
+  },
   common: {
     ok: 'OK',
     cancel: 'Cancel',
@@ -112,50 +151,5 @@ export default {
     handleClearMsg: 'This operation will permanently clear log data. Do you want to continue?',
     emptySucceed: 'Successfully cleared',
     searchLogPlaceholder: 'Enter log or ip to search'
-  },
-  route: {
-    dashboard: 'Dashboard',
-    systemManage: 'System Management',
-    userManage: 'User Management',
-    roleManage: 'Role Management',
-    menuManage: 'Menu Management',
-    permissionManage: 'Directive Permission',
-    systemMonitor: 'System Monitor',
-    operationLog: 'Operation Log',
-    apiDoc: 'API Document',
-    druidMonitor: 'Druid Monitor',
-    errorPages: 'Error Pages',
-    page401: '401',
-    page404: '404',
-    errorLog: 'Error Log',
-    i18n: 'I18n',
-    externalLink: 'External Link',
-    profile: 'Profile'
-  },
-  navbar: {
-    dashboard: 'Dashboard',
-    github: 'Github',
-    logOut: 'Log Out',
-    profile: 'Profile',
-    theme: 'Theme',
-    size: 'Global Size'
-  },
-  errorLog: {
-    tips: 'Please click the bug icon in the upper right corner',
-    description: 'Now the management system are basically the form of the spa, it enhances the user experience, but it also increases the possibility of page problems, a small negligence may lead to the entire page deadlock. Fortunately Vue provides a way to catch handling exceptions, where you can handle errors or report exceptions.',
-    documentation: 'Document introduction'
-  },
-  tagsView: {
-    refresh: 'Refresh',
-    close: 'Close',
-    closeOthers: 'Close Others',
-    closeAll: 'Close All'
-  },
-  settings: {
-    title: 'Page style setting',
-    theme: 'Theme Color',
-    tagsView: 'Open Tags-View',
-    fixedHeader: 'Fixed Header',
-    sidebarLogo: 'Sidebar Logo'
   }
 }

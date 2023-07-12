@@ -1,4 +1,43 @@
 export default {
+  route: {
+    dashboard: '首页',
+    systemManage: '系统管理',
+    userManage: '用户管理',
+    roleManage: '角色管理',
+    menuManage: '菜单管理',
+    permissionManage: '权限管理',
+    systemMonitor: '系统监控',
+    operationLog: '操作日志',
+    apiDoc: 'API文档',
+    druidMonitor: 'Druid监控',
+    errorPages: '错误页面',
+    page401: '401',
+    page404: '404',
+    i18n: '国际化',
+    externalLink: '外链',
+    profile: '个人中心'
+  },
+  navbar: {
+    dashboard: '首页',
+    github: '项目地址',
+    logOut: '退出登录',
+    profile: '个人中心',
+    theme: '换肤',
+    size: '布局大小'
+  },
+  tagsView: {
+    refresh: '刷新',
+    close: '关闭',
+    closeOthers: '关闭其它',
+    closeAll: '关闭所有'
+  },
+  settings: {
+    title: '系统布局配置',
+    theme: '主题色',
+    tagsView: '开启 Tags-View',
+    fixedHeader: '固定 Header',
+    sidebarLogo: '侧边栏 Logo'
+  },
   common: {
     ok: '确认',
     cancel: '取消',
@@ -112,50 +151,5 @@ export default {
     handleClearMsg: '此操作将永久清空日志数据，是否继续？',
     emptySucceed: '清空成功',
     searchLogPlaceholder: '输入身份标识或IP搜索'
-  },
-  route: {
-    dashboard: '首页',
-    systemManage: '系统管理',
-    userManage: '用户管理',
-    roleManage: '角色管理',
-    menuManage: '菜单管理',
-    permissionManage: '权限管理',
-    systemMonitor: '系统监控',
-    operationLog: '操作日志',
-    apiDoc: 'API文档',
-    druidMonitor: 'Druid监控',
-    errorPages: '错误页面',
-    page401: '401',
-    page404: '404',
-    errorLog: '错误日志',
-    i18n: '国际化',
-    externalLink: '外链',
-    profile: '个人中心'
-  },
-  navbar: {
-    dashboard: '首页',
-    github: '项目地址',
-    logOut: '退出登录',
-    profile: '个人中心',
-    theme: '换肤',
-    size: '布局大小'
-  },
-  errorLog: {
-    tips: '请点击右上角bug小图标',
-    description: '现在的管理后台基本都是spa的形式了，它增强了用户体验，但同时也会增加页面出问题的可能性，可能一个小小的疏忽就导致整个页面的死锁。好在 Vue 官网提供了一个方法来捕获处理异常，你可以在其中进行错误处理或者异常上报。',
-    documentation: '文档介绍'
-  },
-  tagsView: {
-    refresh: '刷新',
-    close: '关闭',
-    closeOthers: '关闭其它',
-    closeAll: '关闭所有'
-  },
-  settings: {
-    title: '系统布局配置',
-    theme: '主题色',
-    tagsView: '开启 Tags-View',
-    fixedHeader: '固定 Header',
-    sidebarLogo: '侧边栏 Logo'
   }
 }

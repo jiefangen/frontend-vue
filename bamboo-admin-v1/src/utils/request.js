@@ -72,6 +72,12 @@ service.interceptors.response.use(
     }
   },
   error => {
+    const response = error.response
+    const status = response.status
+    // 401：未认证；403：未授权；404：未找到
+    if (status === 401 || status === 403 || status === 404) {
+      // 特定返回状态码处理
+    }
     console.log('err' + error) // for debug
     Message({
       message: error.message,
