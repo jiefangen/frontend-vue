@@ -1,51 +1,58 @@
 <template>
-  <el-card style="margin-bottom:20px;">
+  <el-card style="margin-bottom:20px">
     <div slot="header" class="clearfix">
-      <span>About me</span>
+      <span>{{ $t('profile.personalInfo') }}</span>
     </div>
 
     <div class="user-profile">
       <div class="box-center">
-        <pan-thumb :image="user.avatar" :height="'100px'" :width="'100px'" :hoverable="false">
-          <div>Hello</div>
-          {{ user.role }}
-        </pan-thumb>
+        <pan-thumb :image="user.avatar" :height="'100px'" :width="'100px'" :hoverable="false" />
       </div>
       <div class="box-center">
-        <div class="user-name text-center">{{ user.name }}</div>
-        <div class="user-role text-center text-muted">{{ user.role | uppercaseFirst }}</div>
+        <div class="user-name text-center">{{ user.username }}</div>
       </div>
     </div>
 
     <div class="user-bio">
-      <div class="user-education user-bio-section">
-        <div class="user-bio-section-header"><svg-icon icon-class="education" /><span>Education</span></div>
-        <div class="user-bio-section-body">
-          <div class="text-muted">
-            JS in Computer Science from the University of Technology
-          </div>
+      <div class="user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="user" />
+          <span>{{ $t('profile.nickname') }}</span>
+          <div class="pull-right">{{ user.nickname }}</div>
         </div>
       </div>
-
-      <div class="user-skills user-bio-section">
-        <div class="user-bio-section-header"><svg-icon icon-class="skill" /><span>Skills</span></div>
-        <div class="user-bio-section-body">
-          <div class="progress-item">
-            <span>Vue</span>
-            <el-progress :percentage="70" />
-          </div>
-          <div class="progress-item">
-            <span>JavaScript</span>
-            <el-progress :percentage="18" />
-          </div>
-          <div class="progress-item">
-            <span>Css</span>
-            <el-progress :percentage="12" />
-          </div>
-          <div class="progress-item">
-            <span>ESLint</span>
-            <el-progress :percentage="100" status="success" />
-          </div>
+      <div class="user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="userType" />
+          <span>{{ $t('profile.userType') }}</span>
+          <div class="pull-right">{{ user.userType }}</div>
+        </div>
+      </div>
+      <div class="user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="phone" />
+          <span>{{ $t('profile.phone') }}</span>
+          <div class="pull-right">{{ user.phone }}</div>
+        </div>
+      </div>
+      <div class="user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="email" />
+          <span>{{ $t('profile.email') }}</span>
+          <div class="pull-right">{{ user.email }}</div>
+        </div>
+      </div>
+      <div class="user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="peoples" />
+          <span>{{ $t('profile.roles') }}</span>
+          <div class="pull-right">{{ user.roles }}</div>
+        </div>
+      </div>
+      <div class="user-bio-section">
+        <div class="user-bio-section-header"><svg-icon icon-class="date" />
+          <span>{{ $t('profile.createTime') }}</span>
+          <div class="pull-right">{{ user.createTime }}</div>
+        </div>
+      </div>
+      <div class="user-bio-section-body">
+        <div class="text-muted">
+          {{ user.introduction }}
         </div>
       </div>
     </div>
@@ -126,7 +133,7 @@ export default {
     .user-bio-section-header {
       border-bottom: 1px solid #dfe6ec;
       padding-bottom: 10px;
-      margin-bottom: 10px;
+      margin-bottom: 0px;
       font-weight: bold;
     }
   }

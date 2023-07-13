@@ -62,6 +62,15 @@ export default {
     password: 'Password',
     any: 'any'
   },
+  profile: {
+    personalInfo: 'Information',
+    nickname: 'Nickname',
+    userType: 'UserType',
+    phone: 'Phone',
+    email: 'Email',
+    roles: 'Roles',
+    createTime: 'CreateTime'
+  },
   system: {
     // User Management Page
     username: 'Username',

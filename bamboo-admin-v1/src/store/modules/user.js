@@ -6,6 +6,7 @@ const state = {
   token: getToken(),
   name: '',
   avatar: '',
+  nickname: '',
   introduction: '',
   roles: []
 }
@@ -19,6 +20,9 @@ const mutations = {
   },
   SET_NAME: (state, name) => {
     state.name = name
+  },
+  SET_NICKNAME: (state, nickname) => {
+    state.nickname = nickname
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
@@ -62,7 +66,8 @@ const actions = {
         commit('SET_ROLES', roleCodes)
         commit('SET_NAME', data.username)
         commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
-        commit('SET_INTRODUCTION', data.nickname)
+        commit('SET_NICKNAME', data.nickname)
+        commit('SET_INTRODUCTION', 'Talk is cheap, show me the code')
         resolve(data)
       }).catch(error => {
         reject(error)

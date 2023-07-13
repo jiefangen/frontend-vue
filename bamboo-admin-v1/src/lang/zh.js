@@ -62,6 +62,15 @@ export default {
     password: '密码',
     any: '随便填'
   },
+  profile: {
+    personalInfo: '个人信息',
+    nickname: '用户昵称',
+    userType: '用户类型',
+    phone: '手机号码',
+    email: '用户邮箱',
+    roles: '所属角色',
+    createTime: '创建日期'
+  },
   system: {
     // 用户管理页面
     username: '用户名',
