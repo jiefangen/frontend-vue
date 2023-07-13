@@ -69,7 +69,15 @@ router.beforeEach(async(to, from, next) => {
   }
 })
 
-router.afterEach(() => {
+router.afterEach((to, next) => {
+  const meta = to.meta
+  if (meta.roles && meta.roles.length > 0) {
+    const roles = store.getters.roles
+    const hasPower = roles.some(role => meta.roles.includes(role))
+    if (!hasPower) {
+      router.replace('/401')
+    }
+  }
   // finish progress bar
   NProgress.done()
 })

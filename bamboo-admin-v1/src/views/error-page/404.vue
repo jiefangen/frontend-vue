@@ -8,7 +8,7 @@
         <img class="pic-404__child right" src="@/assets/images/png/404_cloud.png" alt="404">
       </div>
       <div class="bullshit">
-        <div class="bullshit__oops">OOPS!</div>
+        <div class="bullshit__oops">Oops!</div>
         <div class="bullshit__info">All rights reserved
           <a style="color:#20a0ff" href="https://github.com/jiefangen" target="_blank">homepage</a>
         </div>
