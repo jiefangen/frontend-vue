@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import bambooLogo from '@/assets/images/svg/bamboo.svg'
+
 export default {
   name: 'SidebarLogo',
   props: {
@@ -25,7 +27,7 @@ export default {
   data() {
     return {
       title: 'Bamboo Admin',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      logo: bambooLogo
     }
   }
 }
