@@ -52,6 +52,7 @@ export default {
     success: '成功',
     empty: '清空',
     sort: '排序',
+    save: '保存',
     close: '关闭',
     operate: '操作'
   },
@@ -63,13 +64,17 @@ export default {
     any: '随便填'
   },
   profile: {
+    account: '账户资料',
     personalInfo: '个人信息',
     nickname: '用户昵称',
     userType: '用户类型',
     phone: '手机号码',
     email: '用户邮箱',
     roles: '所属角色',
-    createTime: '创建日期'
+    createTime: '创建日期',
+    phoneRuleMsg: '请输入正确的手机号码',
+    emailRuleMsg: '请输入正确的邮箱地址',
+    accountSaveSucceed: '账户信息保存成功'
   },
   system: {
     // 用户管理页面
@@ -79,6 +84,8 @@ export default {
     password: '密码',
     nickname: '昵称',
     sex: '性别',
+    man: '男',
+    woman: '女',
     status: '状态',
     phone: '手机号',
     email: '邮件地址',

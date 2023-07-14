@@ -99,7 +99,7 @@
         </el-form-item>
         <el-form-item :label="String($t('system.sex'))">
           <el-select v-model="temp.sex" class="filter-item">
-            <el-option v-for="item in sexOptions" :key="item" :label="item" :value="item" />
+            <el-option v-for="(item, index) in sexOptions" :key="index" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
         <el-form-item :label="String($t('system.status'))" :hidden="dialogStatus==='create'?true:false">
@@ -234,10 +234,18 @@ export default {
           label: this.$t('common.disabled')
         }
       ],
-      sexOptions: ['男', '女'],
+      sexOptions: [
+        {
+          value: '0',
+          label: this.$t('system.man')
+        }, {
+          value: '1',
+          label: this.$t('system.woman')
+        }
+      ],
       rules: {
-        username: [{ required: true, message: 'username is required', trigger: 'change' }],
-        password: [{ required: true, message: 'password is required', trigger: 'change' }]
+        username: [{ required: true, trigger: 'change' }],
+        password: [{ required: true, trigger: 'change' }]
       },
       passRules: {
         oldPassword: [{ required: true, message: 'oldPassword is required', trigger: 'change' }],

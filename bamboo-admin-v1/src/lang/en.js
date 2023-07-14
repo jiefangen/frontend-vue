@@ -52,6 +52,7 @@ export default {
     success: 'Success',
     empty: 'Empty',
     sort: 'Sort',
+    save: 'Save',
     close: 'Close',
     operate: 'Operate'
   },
@@ -63,13 +64,17 @@ export default {
     any: 'any'
   },
   profile: {
+    account: 'Account',
     personalInfo: 'Information',
     nickname: 'Nickname',
     userType: 'UserType',
     phone: 'Phone',
     email: 'Email',
     roles: 'Roles',
-    createTime: 'CreateTime'
+    createTime: 'CreateTime',
+    phoneRuleMsg: 'Please enter the correct phone number',
+    emailRuleMsg: 'Please input the correct email address',
+    accountSaveSucceed: 'Account information saved successfully'
   },
   system: {
     // User Management Page
@@ -79,6 +84,8 @@ export default {
     password: 'Password',
     nickname: 'Nickname',
     sex: 'Gender',
+    man: 'Man',
+    woman: 'Woman',
     status: 'Status',
     phone: 'Phone',
     email: 'Email',
