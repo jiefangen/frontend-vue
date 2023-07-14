@@ -64,17 +64,22 @@ export default {
     any: '随便填'
   },
   profile: {
-    account: '账户资料',
     personalInfo: '个人信息',
+    account: '账户信息',
+    modifyPass: '修改密码',
     nickname: '用户昵称',
     userType: '用户类型',
     phone: '手机号码',
     email: '用户邮箱',
     roles: '所属角色',
     createTime: '创建日期',
+    confirmPwd: '确认密码',
     phoneRuleMsg: '请输入正确的手机号码',
     emailRuleMsg: '请输入正确的邮箱地址',
-    accountSaveSucceed: '账户信息保存成功'
+    accountSaveSucceed: '账户信息保存成功',
+    passwordSaveSucceed: '修改密码保存成功',
+    equalToPassMsg: '两次输入的密码不一致',
+    passLimitMsg: '建议密码长度在6到20个字符'
   },
   system: {
     // 用户管理页面

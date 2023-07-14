@@ -8,15 +8,17 @@
 
         <el-col :span="18" :xs="24">
           <el-card>
+            <template v-slot:header>
+              <div class="clearfix">
+                <span>{{ $t('profile.account') }}</span>
+              </div>
+            </template>
             <el-tabs v-model="activeTab">
               <el-tab-pane :label="String($t('profile.account'))" name="account">
                 <account :user="user" />
               </el-tab-pane>
-              <el-tab-pane label="Activity" name="activity">
-                <activity />
-              </el-tab-pane>
-              <el-tab-pane label="Timeline" name="timeline">
-                <timeline />
+              <el-tab-pane :label="String($t('profile.modifyPass'))" name="password">
+                <password :user="user" />
               </el-tab-pane>
             </el-tabs>
           </el-card>
@@ -30,13 +32,12 @@
 import { mapGetters } from 'vuex'
 import UserCard from './components/UserCard'
 import Account from './components/Account'
-import Activity from './components/Activity'
-import Timeline from './components/Timeline'
+import Password from './components/Password'
 import { getInfo } from '@/api/login'
 
 export default {
   name: 'Profile',
-  components: { UserCard, Account, Activity, Timeline },
+  components: { UserCard, Account, Password },
   data() {
     return {
       user: {

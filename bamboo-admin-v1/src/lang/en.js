@@ -64,17 +64,22 @@ export default {
     any: 'any'
   },
   profile: {
-    account: 'Account',
     personalInfo: 'Information',
+    account: 'Account',
+    modifyPass: 'Password',
     nickname: 'Nickname',
     userType: 'UserType',
     phone: 'Phone',
     email: 'Email',
     roles: 'Roles',
     createTime: 'CreateTime',
+    confirmPwd: 'Confirm Password',
     phoneRuleMsg: 'Please enter the correct phone number',
     emailRuleMsg: 'Please input the correct email address',
-    accountSaveSucceed: 'Account information saved successfully'
+    accountSaveSucceed: 'Account information saved successfully',
+    passwordSaveSucceed: 'Change password saved successfully',
+    equalToPassMsg: 'The two entered passwords do not match',
+    passLimitMsg: 'The recommended password length is 6 to 20 characters'
   },
   system: {
     // User Management Page

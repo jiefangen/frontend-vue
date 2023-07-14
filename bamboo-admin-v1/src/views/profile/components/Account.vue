@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     submit() {
-      debugger
       this.$refs['accountForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.user)
@@ -62,6 +61,11 @@ export default {
       })
     },
     close() {
+      if (this.$route.query.noGoBack) {
+        this.$router.push({ path: '/dashboard' })
+      } else {
+        this.$router.go(-1)
+      }
     }
   }
 }
