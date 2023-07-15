@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { edit } from '@/api/system/user'
+import { updateAccount } from '@/api/system/user'
 
 export default {
   name: 'Account',
@@ -48,8 +48,14 @@ export default {
     submit() {
       this.$refs['accountForm'].validate((valid) => {
         if (valid) {
-          const tempData = Object.assign({}, this.user)
-          edit(tempData).then(() => {
+          const tempData = {
+            id: this.user.id,
+            nickname: this.user.nickname,
+            phone: this.user.phone,
+            email: this.user.email,
+            sex: this.user.sex
+          }
+          updateAccount(tempData).then(() => {
             this.$notify({
               title: this.$t('common.success'),
               message: this.$t('profile.accountSaveSucceed'),

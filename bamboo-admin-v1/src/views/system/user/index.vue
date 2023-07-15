@@ -95,7 +95,7 @@
           <el-input v-model="temp.username" :disabled="dialogStatus==='update'?true:false" />
         </el-form-item>
         <el-form-item :label="String($t('system.password'))" :prop="dialogStatus==='update'?'':'password'" :hidden="dialogStatus==='update'?true:false">
-          <el-input v-model="temp.password" />
+          <el-input v-model="temp.password" type="password" />
         </el-form-item>
         <el-form-item :label="String($t('system.sex'))">
           <el-select v-model="temp.sex" class="filter-item">
@@ -241,8 +241,8 @@ export default {
         }
       ],
       rules: {
-        username: [{ required: true, trigger: 'change' }],
-        password: [{ required: true, trigger: 'change' }]
+        username: [{ required: true, trigger: 'blur' }],
+        password: [{ required: true, trigger: 'blur' }, { min: 6, max: 20, message: String(this.$t('profile.passLimitMsg')), trigger: 'blur' }]
       },
       passRules: {
         newPassword: [{ min: 6, max: 20, message: String(this.$t('profile.passLimitMsg')), trigger: 'blur' }]
@@ -357,7 +357,7 @@ export default {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
           const data = {
-            userId: tempData.id,
+            id: tempData.id,
             username: tempData.username,
             newPassword: tempData.newPassword
           }

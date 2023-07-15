@@ -23,6 +23,14 @@ export function edit(data) {
   })
 }
 
+export function updateAccount(data) {
+  return request({
+    url: '/system/user/updateAccount',
+    method: 'put',
+    data
+  })
+}
+
 export function updatePass(data) {
   return request({
     url: '/system/user/updatePassword',
@@ -55,4 +63,4 @@ export function getList(data) {
   })
 }
 
-export default { add, edit, updatePass, resetPassword, del, getList }
+export default { add, edit, updateAccount, updatePass, resetPassword, del, getList }
