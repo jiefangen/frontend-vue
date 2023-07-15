@@ -77,8 +77,8 @@
           <el-button type="warning" size="mini" @click="handleUseRole(row)">
             {{ $t('system.editRole') }}
           </el-button>
-          <el-button type="success" size="mini" @click="handleModifyPass(row)">
-            {{ $t('system.modifyPass') }}
+          <el-button type="success" size="mini" @click="handleResetPass(row)">
+            {{ $t('system.resetPass') }}
           </el-button>
           <el-button type="danger" size="mini" @click="handleDelete(row,$index)">
             {{ $t('common.delete') }}
@@ -127,23 +127,20 @@
       </div>
     </el-dialog>
 
-    <el-dialog :visible.sync="dialogPassVisible" :title="String($t('system.modifyPass'))">
+    <el-dialog :visible.sync="dialogPassVisible" :title="String($t('system.resetPass'))">
       <el-form ref="dataPassForm" :rules="passRules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
-        <el-form-item :label="String($t('system.username'))" prop="username" required>
+        <el-form-item :label="String($t('system.username'))" prop="username">
           <el-input v-model="temp.username" disabled />
         </el-form-item>
-        <el-form-item :label="String($t('system.oldPwd'))" prop="oldPassword">
-          <el-input v-model="temp.oldPassword" />
-        </el-form-item>
         <el-form-item :label="String($t('system.newPwd'))" prop="newPassword">
-          <el-input v-model="temp.newPassword" />
+          <el-input v-model="temp.newPassword" type="password" :placeholder="$t('system.resetPassMsg')" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogPassVisible = false">
           {{ $t('common.cancel') }}
         </el-button>
-        <el-button type="primary" @click="updatePass()">
+        <el-button type="primary" @click="resetPassword()">
           {{ $t('common.ok') }}
         </el-button>
       </div>
@@ -180,7 +177,7 @@
 </template>
 
 <script>
-import { add, del, edit, getList, updatePass, updateUserRole } from '@/api/system/user'
+import { add, del, edit, getList, resetPassword, updateUserRole } from '@/api/system/user'
 import { getRoles } from '@/api/system/role'
 import Pagination from '@/components/Pagination'
 import ElDragSelect from '@/components/DragSelect' // base on element-ui
@@ -248,8 +245,7 @@ export default {
         password: [{ required: true, trigger: 'change' }]
       },
       passRules: {
-        oldPassword: [{ required: true, message: 'oldPassword is required', trigger: 'change' }],
-        newPassword: [{ required: true, message: 'newPassword is required', trigger: 'change' }]
+        newPassword: [{ min: 6, max: 20, message: String(this.$t('profile.passLimitMsg')), trigger: 'blur' }]
       },
       allRoles: [],
       dialogRoleVisible: false,
@@ -349,32 +345,30 @@ export default {
         }
       })
     },
-    handleModifyPass(row) {
+    handleResetPass(row) {
       this.temp = Object.assign({}, row) // copy obj
       this.dialogPassVisible = true
       this.$nextTick(() => {
         this.$refs['dataPassForm'].clearValidate()
       })
     },
-    updatePass() {
+    resetPassword() {
       this.$refs['dataPassForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
           const data = {
             userId: tempData.id,
             username: tempData.username,
-            oldPassword: tempData.oldPassword,
             newPassword: tempData.newPassword
           }
-          updatePass(data).then(() => {
+          resetPassword(data).then(() => {
             const index = this.list.findIndex(v => v.id === this.temp.id)
             this.list.splice(index, 1, this.temp)
             this.dialogPassVisible = false
-            this.temp.oldPassword = ''
             this.temp.newPassword = ''
             this.$notify({
               title: this.$t('common.success'),
-              message: this.$t('system.modifyPassSucceed'),
+              message: this.$t('system.resetPassSucceed'),
               type: 'success',
               duration: 2000
             })

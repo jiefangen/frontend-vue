@@ -31,6 +31,14 @@ export function updatePass(data) {
   })
 }
 
+export function resetPassword(data) {
+  return request({
+    url: '/system/user/resetPassword',
+    method: 'post',
+    data
+  })
+}
+
 export function updateUserRole(data) {
   return request({
     url: '/system/user/updateUserRole',
@@ -47,4 +55,4 @@ export function getList(data) {
   })
 }
 
-export default { add, edit, del, getList }
+export default { add, edit, updatePass, resetPassword, del, getList }
