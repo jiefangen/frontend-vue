@@ -3,13 +3,15 @@ import defaultSettings from '@/settings'
 
 const { showSettings, layoutSettings, tagsView, fixedHeader, sidebarLogo, supportPinyinSearch } = defaultSettings
 
+const storageSetting = JSON.parse(localStorage.getItem('layout-setting')) || ''
+
 const state = {
-  theme: variables.theme,
+  theme: storageSetting.theme || variables.theme,
+  tagsView: storageSetting.tagsView === undefined ? tagsView : storageSetting.tagsView,
+  fixedHeader: storageSetting.fixedHeader === undefined ? fixedHeader : storageSetting.fixedHeader,
+  sidebarLogo: storageSetting.sidebarLogo === undefined ? sidebarLogo : storageSetting.sidebarLogo,
   showSettings,
   layoutSettings,
-  tagsView,
-  fixedHeader,
-  sidebarLogo,
   supportPinyinSearch
 }
 

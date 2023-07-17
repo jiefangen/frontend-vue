@@ -34,10 +34,15 @@ export default {
   },
   settings: {
     title: '系统布局配置',
-    theme: '主题色',
+    styleTitle: '主题风格设置',
+    theme: '主题颜色',
     tagsView: '开启 Tags-View',
     fixedHeader: '固定 Header',
-    sidebarLogo: '侧边栏 Logo'
+    sidebarLogo: '侧边栏 Logo',
+    saveSetting: '保存配置',
+    resetSetting: '重置配置',
+    saveLoading: '正在保存到本地缓存，请稍候...',
+    resetLoading: '正在清除设置缓存并刷新，请稍候...'
   },
   common: {
     ok: '确认',

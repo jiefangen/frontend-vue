@@ -34,10 +34,15 @@ export default {
   },
   settings: {
     title: 'Page style setting',
+    styleTitle: 'Theme style setting',
     theme: 'Theme Color',
     tagsView: 'Open Tags-View',
     fixedHeader: 'Fixed Header',
-    sidebarLogo: 'Sidebar Logo'
+    sidebarLogo: 'Sidebar Logo',
+    saveSetting: 'Save',
+    resetSetting: 'Reset',
+    saveLoading: 'Saving to local cache, please wait...',
+    resetLoading: 'Please wait, clearing settings cache and refreshing...'
   },
   common: {
     ok: 'OK',
