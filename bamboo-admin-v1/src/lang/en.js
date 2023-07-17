@@ -22,6 +22,7 @@ export default {
     github: 'Github',
     logOut: 'Log Out',
     profile: 'Profile',
+    layout: 'Layout',
     theme: 'Theme',
     size: 'Global Size'
   },

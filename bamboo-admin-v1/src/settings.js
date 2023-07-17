@@ -6,6 +6,11 @@ module.exports = {
    * @description Whether show the settings right-panel
    */
   showSettings: true,
+  /**
+   * @type {boolean} true | false
+   * @description Toggle the layout settings right-panel
+   */
+  layoutSettings: false,
 
   /**
    * @type {boolean} true | false

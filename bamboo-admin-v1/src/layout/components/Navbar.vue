@@ -20,7 +20,7 @@
 
       </template>
 
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click" @command="handleCommand">
         <div class="avatar-wrapper">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
@@ -32,7 +32,7 @@
             </el-dropdown-item>
           </router-link>
           <el-dropdown-item command="setLayout">
-            <span>布局设置</span>
+            <span>{{ $t('navbar.layout') }}</span>
           </el-dropdown-item>
           <a target="_blank" href="https://github.com/jiefangen/frontend-vue">
             <el-dropdown-item>
@@ -79,12 +79,21 @@ export default {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
+    toggleSettings() {
+      this.$store.dispatch('settings/toggleSettings')
+    },
+    handleCommand(command) {
+      if (command === 'setLayout') {
+        this.toggleSettings()
+      }
+    },
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>

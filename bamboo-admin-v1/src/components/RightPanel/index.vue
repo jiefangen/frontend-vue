@@ -1,10 +1,7 @@
 <template>
-  <div ref="rightPanel" :class="{show:show}" class="rightPanel-container">
+  <div ref="rightPanel" :class="{show:layoutSettings}" class="rightPanel-container" @click="show=!show">
     <div class="rightPanel-background" />
     <div class="rightPanel">
-      <div class="handle-button" :style="{'top':buttonTop+'px','background-color':theme}" @click="show=!show">
-        <i :class="show?'el-icon-close':'el-icon-setting'" />
-      </div>
       <div class="rightPanel-items">
         <slot />
       </div>
@@ -35,6 +32,9 @@ export default {
   computed: {
     theme() {
       return this.$store.state.settings.theme
+    },
+    layoutSettings() {
+      return this.$store.state.settings.layoutSettings
     }
   },
   watch: {
@@ -63,7 +63,7 @@ export default {
     closeSidebar(evt) {
       const parent = evt.target.closest('.rightPanel')
       if (!parent) {
-        this.show = false
+        this.show = this.toggleSettings()
         window.removeEventListener('click', this.closeSidebar)
       }
     },
@@ -71,6 +71,9 @@ export default {
       const elx = this.$refs.rightPanel
       const body = document.querySelector('body')
       body.insertBefore(elx, body.firstChild)
+    },
+    toggleSettings() {
+      this.$store.dispatch('settings/toggleSettings')
     }
   }
 }
