@@ -114,7 +114,6 @@ export default {
         'sidebarLogo': this.$store.state.settings.sidebarLogo,
         'theme': this.$store.state.settings.theme
       }
-      debugger
       localStorage.setItem('layout-setting', JSON.stringify(layoutSetting))
       setTimeout(() => {
         saveLoading.close()

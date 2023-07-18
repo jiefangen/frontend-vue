@@ -1,7 +1,7 @@
 <template>
   <el-color-picker
     v-model="theme"
-    :predefine="['#409EFF', '#1890ff', '#304156','#212121','#11a983', '#13c2c2', '#6959CD', '#f5222d', ]"
+    :predefine="predefineColors"
     class="theme-picker"
     popper-class="theme-picker-dropdown"
   />
@@ -15,7 +15,9 @@ export default {
   data() {
     return {
       chalk: '', // content of theme-chalk css
-      theme: ''
+      theme: '',
+      predefineColors: ['#409EFF', '#1890ff', '#304156', '#212121', '#11a983', '#13c2c2', '#6959CD', '#f5222d'],
+      themeChalkUrl: `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
     }
   },
   computed: {
@@ -31,11 +33,20 @@ export default {
       immediate: true
     },
     async theme(val) {
+      await this.themeRender(val)
+    }
+  },
+  async created() {
+    await this.getCSSString(this.themeChalkUrl, 'chalk')
+    await this.themeRender(this.theme)
+  },
+  methods: {
+    async themeRender(val) {
       const oldVal = this.chalk ? this.theme : ORIGINAL_THEME
       if (typeof val !== 'string') return
       const themeCluster = this.getThemeCluster(val.replace('#', ''))
       const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
-      console.log(themeCluster, originalCluster)
+      // console.log(themeCluster, originalCluster)
 
       const $message = this.$message({
         message: '  Compiling the theme',
@@ -61,8 +72,7 @@ export default {
       }
 
       if (!this.chalk) {
-        const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-        await this.getCSSString(url, 'chalk')
+        await this.getCSSString(this.themeChalkUrl, 'chalk')
       }
 
       const chalkHandler = getHandler('chalk', 'chalk-style')
@@ -83,10 +93,8 @@ export default {
       this.$emit('change', val)
 
       $message.close()
-    }
-  },
+    },
 
-  methods: {
     updateStyle(style, oldCluster, newCluster) {
       let newStyle = style
       oldCluster.forEach((color, index) => {
