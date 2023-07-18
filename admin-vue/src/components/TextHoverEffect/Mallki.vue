@@ -15,7 +15,7 @@ export default {
     },
     text: {
       type: String,
-      default: 'bamboo-admin-v1'
+      default: 'admin-vue'
     }
   }
 }

@@ -26,7 +26,7 @@
 
     <el-divider />
 
-    <el-button type="primary" plain icon="el-icon-set-up" size="small" @click="saveSetting" >
+    <el-button type="primary" plain icon="el-icon-set-up" size="small" @click="saveSetting">
       {{ $t('settings.saveSetting') }}
     </el-button>
     <el-button plain icon="el-icon-refresh" size="small" @click="resetSetting">{{ $t('settings.resetSetting') }}</el-button>

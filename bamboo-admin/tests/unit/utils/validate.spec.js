@@ -9,7 +9,7 @@ describe('Utils:validate', () => {
   it('isExternal', () => {
     expect(isExternal('https://github.com/PanJiaChen/vue-element-admin')).toBe(true)
     expect(isExternal('http://github.com/PanJiaChen/vue-element-admin')).toBe(true)
-    expect(isExternal('github.com/PanJiaChen/bamboo-admin-v1')).toBe(false)
+    expect(isExternal('github.com/PanJiaChen/admin-vue')).toBe(false)
     expect(isExternal('/dashboard')).toBe(false)
     expect(isExternal('./dashboard')).toBe(false)
     expect(isExternal('dashboard')).toBe(false)
