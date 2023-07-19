@@ -38,7 +38,7 @@ module.exports = {
     },
     proxy: {
       '/dev-api': {
-        target: 'http://127.0.0.1:10002/biz-admin/v1',
+        target: 'http://127.0.0.1:10002/biz-admin',
         changeOrigin: true,
         pathRewrite: {
           '^/dev-api': ''
