@@ -1,5 +1,5 @@
 import { login, logout, getInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, setRememberInfo, removeRememberInfo } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
 const state = {
@@ -35,7 +35,12 @@ const mutations = {
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { username, password, rememberMe } = userInfo
+    if (rememberMe) {
+      setRememberInfo(userInfo)
+    } else {
+      removeRememberInfo()
+    }
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
@@ -83,7 +88,6 @@ const actions = {
         commit('SET_ROLES', [])
         removeToken()
         resetRouter()
-
         // reset visited views and cached views
         // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
         dispatch('tagsView/delAllViews', null, { root: true })
@@ -101,6 +105,7 @@ const actions = {
       commit('SET_TOKEN', '')
       commit('SET_ROLES', [])
       removeToken()
+      removeRememberInfo()
       resolve()
     })
   },

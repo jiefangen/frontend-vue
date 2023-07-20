@@ -38,10 +38,10 @@ module.exports = {
     },
     proxy: {
       '/dev-api': {
-        target: 'http://127.0.0.1:10002/biz-admin',
+        target: 'http://127.0.0.1:10002',
         changeOrigin: true,
         pathRewrite: {
-          '^/dev-api': ''
+          '^/dev-api': '/biz-admin'
         }
       }
     }

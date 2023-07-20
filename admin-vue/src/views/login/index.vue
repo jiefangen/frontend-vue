@@ -6,7 +6,6 @@
         <h3 class="title">
           {{ $t('login.title') }}
         </h3>
-        <lang-select class="set-language" />
       </div>
 
       <el-form-item prop="username">
@@ -48,6 +47,11 @@
         </el-form-item>
       </el-tooltip>
 
+      <div class="title-container">
+        <lang-select class="set-language" />
+        <el-checkbox v-model="loginForm.rememberMe" class="remember-me">记住密码</el-checkbox>
+      </div>
+
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
         {{ $t('login.logIn') }}
       </el-button>
@@ -57,6 +61,7 @@
 
 <script>
 import LangSelect from '@/components/LangSelect'
+import { getRememberInfo } from '@/utils/auth'
 
 export default {
   name: 'Login',
@@ -71,12 +76,13 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '123456'
+        username: '',
+        password: '',
+        rememberMe: false
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        username: [{ required: true, trigger: 'change' }],
+        password: [{ required: true, trigger: 'change', validator: validatePassword }]
       },
       passwordType: 'password',
       capsTooltip: false,
@@ -99,6 +105,10 @@ export default {
     }
   },
   created() {
+    const rememberInfo = getRememberInfo()
+    if (rememberInfo !== undefined) {
+      this.loginForm = rememberInfo
+    }
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
@@ -130,6 +140,7 @@ export default {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
+          this.loginForm.username =
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
               this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
@@ -255,12 +266,19 @@ $light_gray:#eee;
     }
 
     .set-language {
-      color: #fff;
+      color: #e3e3e3;
       position: absolute;
       top: 3px;
+      left: 4px;
       font-size: 18px;
-      right: 0px;
+      //right: 0px;
       cursor: pointer;
+    }
+
+    .remember-me {
+      color: #e3e3e3;
+      margin:0px 0px 25px 0px;
+      float: right
     }
   }
 
