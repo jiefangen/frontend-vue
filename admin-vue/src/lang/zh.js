@@ -67,6 +67,7 @@ export default {
     logIn: '登录',
     username: '账号',
     password: '密码',
+    rememberMe: '记住密码',
     any: '随便填'
   },
   profile: {

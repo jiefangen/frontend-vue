@@ -67,6 +67,7 @@ export default {
     logIn: 'Login',
     username: 'Username',
     password: 'Password',
+    rememberMe: 'Remember Me',
     any: 'any'
   },
   profile: {

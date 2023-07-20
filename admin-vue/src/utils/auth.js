@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
+import { encryptAES, decryptAES } from '@/utils/encryptor'
 
 const TokenKey = 'Admin-Token'
-
 const RememberInfo = 'Remember-Info'
 
 export function getToken() {
@@ -19,12 +19,14 @@ export function removeToken() {
 export function getRememberInfo() {
   const rememberInfo = Cookies.get(RememberInfo)
   if (rememberInfo !== undefined) {
-    return JSON.parse(rememberInfo)
+    const rawtext = decryptAES(rememberInfo)
+    return JSON.parse(rawtext)
   }
 }
 
 export function setRememberInfo(rememberInfo) {
-  return Cookies.set(RememberInfo, JSON.stringify(rememberInfo), { expires: 7 })
+  const ciphertext = encryptAES(JSON.stringify(rememberInfo))
+  return Cookies.set(RememberInfo, ciphertext, { expires: 7 })
 }
 
 export function removeRememberInfo() {

@@ -49,7 +49,7 @@
 
       <div class="title-container">
         <lang-select class="set-language" />
-        <el-checkbox v-model="loginForm.rememberMe" class="remember-me">记住密码</el-checkbox>
+        <el-checkbox v-model="loginForm.rememberMe" class="remember-me">{{ $t('login.rememberMe') }}</el-checkbox>
       </div>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
