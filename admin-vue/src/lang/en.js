@@ -7,6 +7,7 @@ export default {
     menuManage: 'Menu Management',
     permissionManage: 'Directive Permission',
     systemMonitor: 'System Monitor',
+    onlineUser: 'Online User',
     operationLog: 'Operation Log',
     apiDoc: 'API Document',
     druidMonitor: 'Druid Monitor',
@@ -57,10 +58,12 @@ export default {
     disabled: 'Disabled',
     success: 'Success',
     empty: 'Empty',
+    reset: 'Reset',
     sort: 'Sort',
     save: 'Save',
     close: 'Close',
-    operate: 'Operate'
+    operate: 'Operate',
+    operationSucceed: 'Successful operation'
   },
   login: {
     title: 'Login Form',
@@ -170,7 +173,8 @@ export default {
     // Log Page
     logNum: 'ID',
     identity: 'Operator',
-    remoteAddress: 'Address',
+    host: 'Host',
+    ipAddress: 'IP Address',
     actionType: 'Action Type',
     statusCode: 'Status',
     operatingTime: 'Operation Time',
@@ -179,6 +183,17 @@ export default {
     exceptionInfo: 'Exception Information',
     handleClearMsg: 'This operation will permanently clear log data. Do you want to continue?',
     emptySucceed: 'Successfully cleared',
-    searchLogPlaceholder: 'Enter log or ip to search'
+    searchLogPlaceholder: 'Enter log or ip to search',
+    // Online User Page
+    token: 'Token',
+    onlineIdentity: 'Login User',
+    loginAddress: 'Login Address',
+    terminalDevice: 'Address Device',
+    terminalOs: 'OS',
+    loginTime: 'Login Time',
+    expirationTime: 'Expiration Time',
+    forceQuit: 'Force Quit',
+    quitClickMsg: 'This operation will forcibly log out the user named "{identity}", continue?',
+    searchOnlinePlaceholder: 'Enter onlineUser to search'
   }
 }

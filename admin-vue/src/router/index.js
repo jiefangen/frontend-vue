@@ -38,6 +38,7 @@ export const asyncRouteMap = {
   system_menu: () => import('@/views/system/menu/index'),
   system_permission: () => import('@/views/system/permission/index'),
   // 系统监控路由组件映射
+  monitor_online: () => import('@/views/monitor/online/index'),
   monitor_log: () => import('@/views/monitor/log/index'),
   monitor_api: () => import('@/views/monitor/api/index'),
   monitor_druid: () => import('@/views/monitor/druid/index')

@@ -7,6 +7,7 @@ export default {
     menuManage: '菜单管理',
     permissionManage: '权限管理',
     systemMonitor: '系统监控',
+    onlineUser: '在线用户',
     operationLog: '操作日志',
     apiDoc: 'API文档',
     druidMonitor: 'Druid监控',
@@ -57,10 +58,12 @@ export default {
     disabled: '禁用',
     success: '成功',
     empty: '清空',
+    reset: '重置',
     sort: '排序',
     save: '保存',
     close: '关闭',
-    operate: '操作'
+    operate: '操作',
+    operationSucceed: '操作成功'
   },
   login: {
     title: '后台管理系统登录',
@@ -170,7 +173,8 @@ export default {
     // 日志页面
     logNum: '日志编号',
     identity: '操作人员',
-    remoteAddress: '操作地址',
+    host: '主机',
+    ipAddress: '操作地址',
     actionType: '操作类型',
     statusCode: '操作状态',
     operatingTime: '操作时间',
@@ -179,6 +183,17 @@ export default {
     exceptionInfo: '异常信息',
     handleClearMsg: '此操作将永久清空日志数据，是否继续？',
     emptySucceed: '清空成功',
-    searchLogPlaceholder: '输入身份标识或IP搜索'
+    searchLogPlaceholder: '输入身份标识或IP搜索',
+    // 在线用户页面
+    token: '交互凭证',
+    onlineIdentity: '登录用户',
+    loginAddress: '登录地址',
+    terminalDevice: '登录设备',
+    terminalOs: '操作系统',
+    loginTime: '登录时间',
+    expirationTime: '失效时间',
+    forceQuit: '强制退出',
+    quitClickMsg: '此操作将强退名称为"{identity}"的用户, 是否继续?',
+    searchOnlinePlaceholder: '输入登录用户搜索'
   }
 }

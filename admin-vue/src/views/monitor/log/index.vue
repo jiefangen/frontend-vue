@@ -23,7 +23,8 @@
     >
       <el-table-column prop="id" :label="String($t('monitor.logNum'))" align="center" />
       <el-table-column prop="identity" :label="String($t('monitor.identity'))" align="center" />
-      <el-table-column prop="remoteAddress" :label="String($t('monitor.remoteAddress'))" align="center" />
+      <el-table-column prop="host" :label="String($t('monitor.host'))" align="center" />
+      <el-table-column prop="ipAddress" :label="String($t('monitor.ipAddress'))" align="center" />
       <el-table-column prop="actionType" :label="String($t('monitor.actionType'))" align="center" />
       <el-table-column prop="statusCode" :label="String($t('monitor.statusCode'))" align="center" />
       <el-table-column prop="operatingTime" :label="String($t('monitor.operatingTime'))" align="center" width="160" />
@@ -39,6 +40,7 @@
 <script>
 import Pagination from '@/components/Pagination'
 import { getList, empty } from '@/api/monitor/log'
+
 export default {
   name: 'ActionLog',
   components: { Pagination },

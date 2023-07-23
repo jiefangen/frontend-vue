@@ -15,4 +15,19 @@ export function empty() {
   })
 }
 
-export default { getList, empty }
+export function getOnlineUser(data) {
+  return request({
+    url: '/monitor/log/online',
+    method: 'post',
+    data
+  })
+}
+
+export function onlineQuit(tokenId) {
+  return request({
+    url: `/monitor/log/onlineQuit/${tokenId}`,
+    method: 'put'
+  })
+}
+
+export default { getList, empty, getOnlineUser, onlineQuit }

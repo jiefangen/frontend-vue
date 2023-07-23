@@ -82,7 +82,7 @@ export default {
       },
       loginRules: {
         username: [{ required: true, trigger: 'change' }],
-        password: [{ required: true, trigger: 'change', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       passwordType: 'password',
       capsTooltip: false,
