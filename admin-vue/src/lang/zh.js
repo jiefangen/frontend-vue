@@ -185,7 +185,7 @@ export default {
     emptySucceed: '清空成功',
     searchLogPlaceholder: '输入身份标识或IP搜索',
     // 在线用户页面
-    token: '交互凭证',
+    token: 'Token凭证',
     onlineIdentity: '登录用户',
     loginAddress: '登录地址',
     terminalDevice: '登录设备',
