@@ -92,9 +92,9 @@
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
         <el-form-item :label="String($t('system.username'))" prop="username">
-          <el-input v-model="temp.username" :disabled="dialogStatus==='update'?true:false" />
+          <el-input v-model="temp.username" :disabled="dialogStatus==='update'" />
         </el-form-item>
-        <el-form-item :label="String($t('system.password'))" :prop="dialogStatus==='update'?'':'password'" :hidden="dialogStatus==='update'?true:false">
+        <el-form-item :label="String($t('system.password'))" :prop="dialogStatus==='update'?'':'password'" :hidden="dialogStatus==='update'">
           <el-input v-model="temp.password" type="password" />
         </el-form-item>
         <el-form-item :label="String($t('system.sex'))">
@@ -102,7 +102,7 @@
             <el-option v-for="(item, index) in sexOptions" :key="index" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="String($t('system.status'))" :hidden="dialogStatus==='create'?true:false">
+        <el-form-item :label="String($t('system.status'))" :hidden="dialogStatus==='create'">
           <el-select v-model="temp.enabled" class="filter-item">
             <el-option v-for="(item, index) in statusOptions" :key="index" :label="item.label" :value="item.value" />
           </el-select>

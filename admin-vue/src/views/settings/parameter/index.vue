@@ -1,24 +1,24 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :model="listQuery" ref="queryRef" :inline="true">
-        <el-form-item label="参数名称" prop="parameterName">
-          <el-input v-model="listQuery.parameterName" placeholder="请输入参数名称" clearable style="width: 240px" @keyup.enter.native="handleFilter" />
+      <el-form :ref="queryRef" :model="listQuery" :inline="true">
+        <el-form-item :label="String($t('config.paramName'))" prop="parameterName">
+          <el-input v-model="listQuery.parameterName" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramName') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
         </el-form-item>
-        <el-form-item label="参数键名" prop="parameterKey">
-          <el-input v-model="listQuery.parameterKey" placeholder="请输入参数键名" clearable style="width: 240px" @keyup.enter.native="handleFilter" />
+        <el-form-item :label="String($t('config.paramKey'))" prop="parameterKey">
+          <el-input v-model="listQuery.parameterKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramKey') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
         </el-form-item>
-        <el-form-item label="创建时间" prop="dateRange">
+        <el-form-item :label="String($t('config.createTime'))" prop="dateRange">
           <el-date-picker
             v-model="dateRange"
             type="daterange"
             format="yyyy-MM-dd"
             value-format="yyyy-MM-dd"
             range-separator="-"
-            start-placeholder="开始日期"
-            end-placeholder="结束日期"
+            :start-placeholder="$t('common.startDate')"
+            :end-placeholder="$t('common.endDate')"
             @change="dateFormat"
-          ></el-date-picker>
+          />
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
@@ -33,8 +33,8 @@
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate">
         {{ $t('common.add') }}
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="warning" icon="el-icon-download" @click="handleCreate">
-        导出
+      <el-button class="filter-item" style="margin-left: 10px;" type="warning" icon="el-icon-download" @click="dataExport">
+        {{ $t('common.export') }}
       </el-button>
     </div>
 
@@ -51,70 +51,99 @@
     >
       <el-table-column prop="parameterName" :label="String($t('config.paramName'))" :show-overflow-tooltip="true" />
       <el-table-column prop="parameterKey" :label="String($t('config.paramKey'))" :show-overflow-tooltip="true" />
-      <el-table-column prop="parameterValue" :label="String($t('config.paramValue'))" :show-overflow-tooltip="true"/>
-      <el-table-column prop="parameterType" :label="String($t('config.paramType'))" align="center" width="100" />
-      <el-table-column prop="status" :label="String($t('config.status'))" align="center" width="80" />
+      <el-table-column prop="parameterValue" :label="String($t('config.paramValue'))" :show-overflow-tooltip="true" />
+      <el-table-column prop="parameterType" :label="String($t('config.paramType'))" align="center" width="100">
+        <template v-slot="scope">
+          <el-tag type="info">
+            {{ scope.row.parameterType == 'internal' ? $t('config.internal'):$t('config.external') }}
+          </el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="status" :label="String($t('config.status'))" align="center" width="80">
+        <template v-slot="scope">
+          <el-tag :type="scope.row.status | statusRenderFilter">
+            {{ scope.row.status == 1 ? $t('common.turnOn'):$t('common.close') }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="appRange" :label="String($t('config.appRange'))" align="center" width="100" show-overflow-tooltip="true" />
       <el-table-column prop="remark" :label="String($t('config.remark'))" align="center" show-overflow-tooltip="true" />
       <el-table-column prop="creator" :label="String($t('config.creator'))" align="center" width="100" />
       <el-table-column prop="createTime" :label="String($t('config.createTime'))" align="center" width="160" />
 
       <el-table-column :label="String($t('common.operate'))" align="center" width="200" class-name="small-padding fixed-width">
-        <template v-slot="{row, $index}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
+        <template v-slot="scope">
+          <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">
             <i class="el-icon-edit" /> {{ $t('common.edit') }}
           </el-button>
-          <el-button type="danger" size="mini" @click="handleDelete(row, $index)">
+          <el-button type="danger" size="mini" @click="handleDelete(scope.row)">
             <i class="el-icon-delete" />  {{ $t('common.delete') }}
           </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <!--分页组件-->
+    <!-- 分页组件 -->
     <pagination v-show="total" :total="total" :page.sync="listQuery.pageNo" :limit.sync="listQuery.pageSize" @pagination="getList" />
 
-    <!-- 添加或修改参数配置对话框 -->
-<!--    <el-dialog :title="title" v-model="open" width="500px" append-to-body>-->
-<!--      <el-form ref="configRef" :model="form" :rules="rules" label-width="80px">-->
-<!--        <el-form-item label="参数名称" prop="configName">-->
-<!--          <el-input v-model="form.configName" placeholder="请输入参数名称" />-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="参数键名" prop="configKey">-->
-<!--          <el-input v-model="form.configKey" placeholder="请输入参数键名" />-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="参数键值" prop="configValue">-->
-<!--          <el-input v-model="form.configValue" placeholder="请输入参数键值" />-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="系统内置" prop="configType">-->
-<!--          <el-radio-group v-model="form.configType">-->
-<!--            <el-radio-->
-<!--              v-for="dict in sys_yes_no"-->
-<!--              :key="dict.value"-->
-<!--              :label="dict.value"-->
-<!--            >{{ dict.label }}</el-radio>-->
-<!--          </el-radio-group>-->
-<!--        </el-form-item>-->
-<!--        <el-form-item label="备注" prop="remark">-->
-<!--          <el-input v-model="form.remark" type="textarea" placeholder="请输入内容" />-->
-<!--        </el-form-item>-->
-<!--      </el-form>-->
-<!--      <template #footer>-->
-<!--        <div class="dialog-footer">-->
-<!--          <el-button type="primary" @click="submitForm">确 定</el-button>-->
-<!--          <el-button @click="cancel">取 消</el-button>-->
-<!--        </div>-->
-<!--      </template>-->
-<!--    </el-dialog>-->
+    <!-- 添加或修改参数配置弹窗 -->
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+      <el-form ref="paramRef" :model="tempParam" :rules="rules" label-position="left" label-width="100px" style="width: 400px; margin-left: 50px">
+        <el-form-item :label="String($t('config.paramName'))" prop="parameterName">
+          <el-input v-model="tempParam.parameterName" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramName') })" />
+        </el-form-item>
+        <el-form-item :label="String($t('config.paramKey'))" prop="parameterKey">
+          <el-input v-model="tempParam.parameterKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramKey') })" :disabled="dialogStatus==='update'" />
+        </el-form-item>
+        <el-form-item :label="String($t('config.paramValue'))" prop="parameterValue">
+          <el-input v-model="tempParam.parameterValue" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramValue') })" />
+        </el-form-item>
+        <el-form-item :label="String($t('config.paramType'))" prop="parameterType" :hidden="dialogStatus==='update'">
+          <el-radio-group v-model="tempParam.parameterType">
+            <el-radio label="internal" value="internal"> {{ $t('config.internal') }} </el-radio>
+            <el-radio label="external" value="external"> {{ $t('config.external') }} </el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item :label="String($t('system.status'))" prop="status">
+          <el-select v-model="tempParam.status" class="filter-item">
+            <el-option v-for="item in paramStatusOptions" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="String($t('config.appRange'))" prop="appRange">
+          <el-input v-model="tempParam.appRange" :placeholder="$t('common.pleaseEnter', { text: $t('config.appRange') })" />
+        </el-form-item>
+        <el-form-item :label="String($t('config.remark'))" prop="remark">
+          <el-input v-model="tempParam.remark" type="textarea" />
+        </el-form-item>
+      </el-form>
+
+      <div slot="footer" class="dialog-footer" size="small">
+        <el-button @click="dialogFormVisible = false">
+          {{ $t('common.cancel') }}
+        </el-button>
+        <el-button type="primary" @click="dialogStatus === 'create' ? createData() : updateData()">
+          {{ $t('common.ok') }}
+        </el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import Pagination from '@/components/Pagination'
-import { getList } from '@/api/settings/parameter'
+import { getList, add, del, edit } from '@/api/settings/parameter'
 
 export default {
-  name: 'ActionLog',
+  name: 'Parameter',
   components: { Pagination },
+  filters: {
+    statusRenderFilter(status) {
+      const statusMap = {
+        1: 'success',
+        0: 'info'
+      }
+      return statusMap[status]
+    }
+  },
   data() {
     return {
       tableKey: 0,
@@ -139,9 +168,40 @@ export default {
         parameterType: '',
         status: '',
         appRange: '',
+        remark: '',
         creator: '',
         updater: '',
         createTime: ''
+      },
+      typeOptions: [
+        {
+          value: 'internal',
+          label: this.$t('config.internal')
+        }, {
+          value: 'external',
+          label: this.$t('config.external')
+        }
+      ],
+      paramStatusOptions: [
+        {
+          value: 1,
+          label: this.$t('common.turnOn')
+        }, {
+          value: 0,
+          label: this.$t('common.close')
+        }
+      ],
+      tempParam: {},
+      textMap: {
+        update: this.$t('common.edit'),
+        create: this.$t('config.addParam')
+      },
+      dialogFormVisible: false,
+      dialogStatus: '',
+      rules: {
+        parameterName: [{ required: true, trigger: 'blur' }],
+        parameterKey: [{ required: true, trigger: 'blur' }],
+        parameterValue: [{ required: true, trigger: 'blur' }]
       }
     }
   },
@@ -189,6 +249,82 @@ export default {
       this.listQuery.parameterName = ''
       this.listQuery.parameterKey = ''
       this.handleFilter()
+    },
+    // 临时容器置空
+    resetTemp() {
+      this.tempParam = {}
+    },
+    // 打开添加
+    handleCreate() {
+      this.resetTemp()
+      this.dialogFormVisible = true
+      this.dialogStatus = 'create'
+      this.$nextTick(() => {
+        this.$refs['paramRef'].clearValidate()
+      })
+    },
+    createData() {
+      this.$refs['paramRef'].validate((valid) => {
+        if (valid) {
+          add(this.tempParam).then(() => {
+            this.list.unshift(this.tempParam)
+            this.dialogFormVisible = false
+            this.handleFilter()
+            this.$notify({
+              title: this.$t('common.success'),
+              message: this.$t('config.addParamSucceed'),
+              type: 'success',
+              duration: 2000
+            })
+          })
+        }
+      })
+    },
+    // 打开更新
+    handleUpdate(row) {
+      this.tempParam = Object.assign({}, row) // copy obj
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['paramRef'].clearValidate()
+      })
+    },
+    updateData() {
+      this.$refs['paramRef'].validate((valid) => {
+        if (valid) {
+          const tempData = Object.assign({}, this.tempParam)
+          edit(tempData).then(() => {
+            const index = this.list.findIndex(v => v.id === this.tempParam.id)
+            this.list.splice(index, 1, this.tempParam)
+            this.dialogFormVisible = false
+            this.$notify({
+              title: this.$t('common.success'),
+              message: this.$t('common.updateSucceed'),
+              type: 'success',
+              duration: 2000
+            })
+          })
+        }
+      })
+    },
+    // 数据删除
+    handleDelete(item) {
+      // 此操作将删除参数键为"{}"的数据项, 是否继续?
+      this.$confirm(String(this.$t('config.delParamClickMsg', { parameterKey: item.parameterKey })), String(this.$t('common.title')), {
+        confirmButtonText: this.$t('common.ok'),
+        cancelButtonText: this.$t('common.cancel'),
+        type: 'warning'
+      }).then(() => {
+        del(item.id).then(() => {
+          this.$notify({
+            title: this.$t('common.success'),
+            message: this.$t('common.operationSucceed'),
+            type: 'success',
+            duration: 2000
+          })
+          this.resetQuery()
+        })
+      }).catch((err) => { console.log(err) })
     }
   }
 }

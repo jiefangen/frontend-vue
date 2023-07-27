@@ -62,11 +62,17 @@ export default {
     success: 'Success',
     empty: 'Empty',
     reset: 'Reset',
+    import: 'Import',
+    export: 'Export',
     sort: 'Sort',
     save: 'Save',
     close: 'Close',
+    startDate: 'Start Date',
+    endDate: 'End Date',
     operate: 'Operate',
-    operationSucceed: 'Successful operation'
+    operationSucceed: 'Successful operation',
+    updateSucceed: 'Update Completed',
+    pleaseEnter: 'Please Enter {text}'
   },
   login: {
     title: 'Login Form',

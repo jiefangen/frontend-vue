@@ -62,11 +62,18 @@ export default {
     success: '成功',
     empty: '清空',
     reset: '重置',
+    import: '导入',
+    export: '导出',
     sort: '排序',
     save: '保存',
     close: '关闭',
+    turnOn: '开启',
+    startDate: '开始日期',
+    endDate: '结束日期',
     operate: '操作',
-    operationSucceed: '操作成功'
+    operationSucceed: '操作成功',
+    updateSucceed: '更新成功',
+    pleaseEnter: '请输入{text}'
   },
   login: {
     title: '后台管理系统登录',
@@ -207,8 +214,13 @@ export default {
     status: '状态',
     appRange: '应用范围',
     remark: '备注',
+    internal: '内置',
+    external: '外置',
     creator: '创建者',
     updater: '更新者',
-    createTime: '创建时间'
+    createTime: '创建时间',
+    addParam: '新增参数',
+    addParamSucceed: '新增参数成功',
+    delParamClickMsg: '此操作将删除参数键为"{parameterKey}"的数据项, 是否继续?'
   }
 }
