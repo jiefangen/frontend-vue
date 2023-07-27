@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :ref="queryRef" :model="listQuery" :inline="true">
+      <el-form :model="listQuery" :inline="true">
         <el-form-item :label="String($t('config.paramName'))" prop="parameterName">
           <el-input v-model="listQuery.parameterName" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramName') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
         </el-form-item>
@@ -33,7 +33,7 @@
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-circle-plus-outline" @click="handleCreate">
         {{ $t('common.add') }}
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="warning" icon="el-icon-download" @click="dataExport">
+      <el-button class="filter-item" :loading="downloadLoading" style="margin-left: 10px;" type="warning" icon="el-icon-download" @click="handleDownload">
         {{ $t('common.export') }}
       </el-button>
     </div>
@@ -48,10 +48,12 @@
       :header-cell-style="{background:'#eef1f6',color:'#606266'}"
       :row-class-name="tableRowClassName"
       style="width: 100%;"
+      @selection-change="handleSelectionChange"
     >
-      <el-table-column prop="parameterName" :label="String($t('config.paramName'))" :show-overflow-tooltip="true" />
-      <el-table-column prop="parameterKey" :label="String($t('config.paramKey'))" :show-overflow-tooltip="true" />
-      <el-table-column prop="parameterValue" :label="String($t('config.paramValue'))" :show-overflow-tooltip="true" />
+      <el-table-column type="selection" width="55" align="center" />
+      <el-table-column prop="parameterName" :label="String($t('config.paramName'))" show-overflow-tooltip />
+      <el-table-column prop="parameterKey" :label="String($t('config.paramKey'))" show-overflow-tooltip />
+      <el-table-column prop="parameterValue" :label="String($t('config.paramValue'))" show-overflow-tooltip />
       <el-table-column prop="parameterType" :label="String($t('config.paramType'))" align="center" width="100">
         <template v-slot="scope">
           <el-tag type="info">
@@ -66,8 +68,8 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="appRange" :label="String($t('config.appRange'))" align="center" width="100" show-overflow-tooltip="true" />
-      <el-table-column prop="remark" :label="String($t('config.remark'))" align="center" show-overflow-tooltip="true" />
+      <el-table-column prop="appRange" :label="String($t('config.appRange'))" align="center" width="100" show-overflow-tooltip />
+      <el-table-column prop="remark" :label="String($t('config.remark'))" align="center" show-overflow-tooltip />
       <el-table-column prop="creator" :label="String($t('config.creator'))" align="center" width="100" />
       <el-table-column prop="createTime" :label="String($t('config.createTime'))" align="center" width="160" />
 
@@ -120,7 +122,7 @@
         <el-button @click="dialogFormVisible = false">
           {{ $t('common.cancel') }}
         </el-button>
-        <el-button type="primary" @click="dialogStatus === 'create' ? createData() : updateData()">
+        <el-button type="primary" @click="dialogStatus==='create'? createData():updateData()">
           {{ $t('common.ok') }}
         </el-button>
       </div>
@@ -150,6 +152,7 @@ export default {
       list: [],
       total: 0,
       listLoading: true,
+      downloadLoading: false,
       dateRange: [],
       listQuery: {
         pageNo: 1,
@@ -192,6 +195,7 @@ export default {
         }
       ],
       tempParam: {},
+      selectionData: {},
       textMap: {
         update: this.$t('common.edit'),
         create: this.$t('config.addParam')
@@ -202,7 +206,10 @@ export default {
         parameterName: [{ required: true, trigger: 'blur' }],
         parameterKey: [{ required: true, trigger: 'blur' }],
         parameterValue: [{ required: true, trigger: 'blur' }]
-      }
+      },
+      filename: 'excel-list',
+      autoWidth: true,
+      bookType: 'xlsx'
     }
   },
   created() {
@@ -325,6 +332,36 @@ export default {
           this.resetQuery()
         })
       }).catch((err) => { console.log(err) })
+    },
+    handleDownload() {
+      this.downloadLoading = true
+      import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = [this.$t('config.paramName'), this.$t('config.paramKey'), this.$t('config.paramValue'),
+          this.$t('config.appRange'), this.$t('config.remark'), this.$t('config.creator'), this.$t('config.createTime')]
+        const filterVal = ['parameterName', 'parameterKey', 'parameterValue', 'appRange', 'remark', 'creator', 'createTime']
+        let list = this.list
+        if (Object.keys(this.selectionData).length !== 0) { // 有元素被选中
+          list = this.selectionData
+        }
+        const data = this.filterJson(filterVal, list)
+        excel.export_json_to_excel({
+          header: tHeader, // Header Required
+          data, // Specific data Required
+          filename: this.filename, // Optional
+          autoWidth: this.autoWidth, // Optional
+          bookType: this.bookType // Optional
+        })
+        this.downloadLoading = false
+      })
+    },
+    filterJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => {
+        return v[j]
+      }))
+    },
+    // 多选框选中数据
+    handleSelectionChange(selection) {
+      this.selectionData = selection
     }
   }
 }
