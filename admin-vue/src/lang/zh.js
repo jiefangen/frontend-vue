@@ -1,5 +1,11 @@
 export default {
   route: {
+    errorPages: '错误页面',
+    page401: '401',
+    page404: '404',
+    i18n: '国际化',
+    externalLink: '外链',
+    profile: '个人中心',
     dashboard: '首页',
     systemManage: '系统管理',
     userManage: '用户管理',
@@ -11,12 +17,9 @@ export default {
     operationLog: '操作日志',
     apiDoc: 'API文档',
     druidMonitor: 'Druid监控',
-    errorPages: '错误页面',
-    page401: '401',
-    page404: '404',
-    i18n: '国际化',
-    externalLink: '外链',
-    profile: '个人中心'
+    systemSettings: '系统配置',
+    paramSettings: '参数设置',
+    dictSettings: '字典管理'
   },
   navbar: {
     dashboard: '首页',
@@ -195,5 +198,17 @@ export default {
     forceQuit: '强制退出',
     quitClickMsg: '此操作将强退名称为"{identity}"的用户, 是否继续?',
     searchOnlinePlaceholder: '输入登录用户搜索'
+  },
+  config: {
+    paramName: '参数名称',
+    paramKey: '参数键名',
+    paramValue: '参数键值',
+    paramType: '参数类型',
+    status: '状态',
+    appRange: '应用范围',
+    remark: '备注',
+    creator: '创建者',
+    updater: '更新者',
+    createTime: '创建时间'
   }
 }

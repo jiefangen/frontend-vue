@@ -1,5 +1,11 @@
 export default {
   route: {
+    errorPages: 'Error Pages',
+    page401: '401',
+    page404: '404',
+    i18n: 'I18n',
+    externalLink: 'External Link',
+    profile: 'Profile',
     dashboard: 'Dashboard',
     systemManage: 'System Management',
     userManage: 'User Management',
@@ -11,12 +17,9 @@ export default {
     operationLog: 'Operation Log',
     apiDoc: 'API Document',
     druidMonitor: 'Druid Monitor',
-    errorPages: 'Error Pages',
-    page401: '401',
-    page404: '404',
-    i18n: 'I18n',
-    externalLink: 'External Link',
-    profile: 'Profile'
+    systemSettings: 'System Settings',
+    paramSettings: 'Parameter',
+    dictSettings: 'Dictionary'
   },
   navbar: {
     dashboard: 'Dashboard',

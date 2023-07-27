@@ -115,7 +115,8 @@ export default {
       this.getOnlineUser()
     },
     resetQuery() {
-      this.getOnlineUser()
+      this.listQuery.keyword = ''
+      this.handleFilter()
     },
     // 强制退出
     quitClick(item) {
