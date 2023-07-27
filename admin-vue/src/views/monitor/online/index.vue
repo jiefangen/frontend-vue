@@ -56,7 +56,7 @@
 
 <script>
 import Pagination from '@/components/Pagination'
-import { getOnlineUser, onlineQuit } from '@/api/monitor/log'
+import { getOnlineUser, onlineQuit } from '@/api/monitor/online'
 
 export default {
   name: 'OnlineUser',

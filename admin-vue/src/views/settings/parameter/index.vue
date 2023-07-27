@@ -17,6 +17,7 @@
             range-separator="-"
             :start-placeholder="$t('common.startDate')"
             :end-placeholder="$t('common.endDate')"
+            style="width: 280px"
             @change="dateFormat"
           />
         </el-form-item>
@@ -56,7 +57,7 @@
       <el-table-column prop="parameterValue" :label="String($t('config.paramValue'))" show-overflow-tooltip />
       <el-table-column prop="parameterType" :label="String($t('config.paramType'))" align="center" width="100">
         <template v-slot="scope">
-          <el-tag type="info">
+          <el-tag type="primary">
             {{ scope.row.parameterType == 'internal' ? $t('config.internal'):$t('config.external') }}
           </el-tag>
         </template>
