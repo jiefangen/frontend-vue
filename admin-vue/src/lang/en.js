@@ -204,5 +204,22 @@ export default {
     forceQuit: 'Force Quit',
     quitClickMsg: 'This operation will forcibly log out the user named "{identity}", continue?',
     searchOnlinePlaceholder: 'Enter onlineUser to search'
+  },
+  config: {
+    paramName: 'ParamName',
+    paramKey: 'ParamKey',
+    paramValue: 'ParamValue',
+    paramType: 'ParamType',
+    status: 'Status',
+    appRange: 'App Range',
+    remark: 'Remark',
+    internal: 'Internal',
+    external: 'External',
+    creator: 'Creator',
+    updater: 'Updater',
+    createTime: 'CreateTime',
+    addParam: 'AddParam',
+    addParamSucceed: 'Successfully added parameters',
+    delParamClickMsg: 'This operation will delete the data item whose parameter key is "{parameterKey}", continue?'
   }
 }
