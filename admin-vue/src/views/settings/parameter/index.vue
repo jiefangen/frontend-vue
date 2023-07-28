@@ -2,11 +2,11 @@
   <div class="app-container">
     <div class="filter-container">
       <el-form :model="listQuery" :inline="true">
-        <el-form-item :label="String($t('config.paramName'))" prop="parameterName">
-          <el-input v-model="listQuery.parameterName" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramName') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
+        <el-form-item :label="String($t('config.paramName'))" prop="paramName">
+          <el-input v-model="listQuery.paramName" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramName') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
         </el-form-item>
-        <el-form-item :label="String($t('config.paramKey'))" prop="parameterKey">
-          <el-input v-model="listQuery.parameterKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramKey') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
+        <el-form-item :label="String($t('config.paramKey'))" prop="paramKey">
+          <el-input v-model="listQuery.paramKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramKey') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
         </el-form-item>
         <el-form-item :label="String($t('config.createTime'))" prop="dateRange">
           <el-date-picker
@@ -52,13 +52,13 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column prop="parameterName" :label="String($t('config.paramName'))" show-overflow-tooltip />
-      <el-table-column prop="parameterKey" :label="String($t('config.paramKey'))" show-overflow-tooltip />
-      <el-table-column prop="parameterValue" :label="String($t('config.paramValue'))" show-overflow-tooltip />
-      <el-table-column prop="parameterType" :label="String($t('config.paramType'))" align="center" width="100">
+      <el-table-column prop="paramName" :label="String($t('config.paramName'))" show-overflow-tooltip />
+      <el-table-column prop="paramKey" :label="String($t('config.paramKey'))" show-overflow-tooltip />
+      <el-table-column prop="paramValue" :label="String($t('config.paramValue'))" show-overflow-tooltip />
+      <el-table-column prop="paramType" :label="String($t('config.paramType'))" align="center" width="100">
         <template v-slot="scope">
           <el-tag type="primary">
-            {{ scope.row.parameterType == 'internal' ? $t('config.internal'):$t('config.external') }}
+            {{ scope.row.paramType == 'internal' ? $t('config.internal'):$t('config.external') }}
           </el-tag>
         </template>
       </el-table-column>
@@ -91,17 +91,17 @@
     <!-- 添加或修改参数配置弹窗 -->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="paramRef" :model="tempParam" :rules="rules" label-position="left" label-width="100px" style="width: 400px; margin-left: 50px">
-        <el-form-item :label="String($t('config.paramName'))" prop="parameterName">
-          <el-input v-model="tempParam.parameterName" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramName') })" />
+        <el-form-item :label="String($t('config.paramName'))" prop="paramName">
+          <el-input v-model="tempParam.paramName" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramName') })" />
         </el-form-item>
-        <el-form-item :label="String($t('config.paramKey'))" prop="parameterKey">
-          <el-input v-model="tempParam.parameterKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramKey') })" :disabled="dialogStatus==='update'" />
+        <el-form-item :label="String($t('config.paramKey'))" prop="paramKey">
+          <el-input v-model="tempParam.paramKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramKey') })" :disabled="dialogStatus==='update'" />
         </el-form-item>
-        <el-form-item :label="String($t('config.paramValue'))" prop="parameterValue">
-          <el-input v-model="tempParam.parameterValue" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramValue') })" />
+        <el-form-item :label="String($t('config.paramValue'))" prop="paramValue">
+          <el-input v-model="tempParam.paramValue" :placeholder="$t('common.pleaseEnter', { text: $t('config.paramValue') })" />
         </el-form-item>
-        <el-form-item :label="String($t('config.paramType'))" prop="parameterType" :hidden="dialogStatus==='update'">
-          <el-radio-group v-model="tempParam.parameterType">
+        <el-form-item :label="String($t('config.paramType'))" prop="paramType" :hidden="dialogStatus==='update'">
+          <el-radio-group v-model="tempParam.paramType">
             <el-radio label="internal" value="internal"> {{ $t('config.internal') }} </el-radio>
             <el-radio label="external" value="external"> {{ $t('config.external') }} </el-radio>
           </el-radio-group>
@@ -158,18 +158,18 @@ export default {
       listQuery: {
         pageNo: 1,
         pageSize: 10,
-        parameterName: '',
-        parameterKey: '',
+        paramName: '',
+        paramKey: '',
         startDate: '',
         endDate: ''
       },
       paged: {},
       row: {
         id: undefined,
-        parameterName: '',
-        parameterKey: '',
-        parameterValue: '',
-        parameterType: '',
+        paramName: '',
+        paramKey: '',
+        paramValue: '',
+        paramType: '',
         status: '',
         appRange: '',
         remark: '',
@@ -204,9 +204,9 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       rules: {
-        parameterName: [{ required: true, trigger: 'blur' }],
-        parameterKey: [{ required: true, trigger: 'blur' }],
-        parameterValue: [{ required: true, trigger: 'blur' }]
+        paramName: [{ required: true, trigger: 'blur' }],
+        paramKey: [{ required: true, trigger: 'blur' }],
+        paramValue: [{ required: true, trigger: 'blur' }]
       },
       filename: 'excel-list',
       autoWidth: true,
@@ -254,8 +254,8 @@ export default {
       this.dateRange = []
       this.listQuery.startDate = ''
       this.listQuery.endDate = ''
-      this.listQuery.parameterName = ''
-      this.listQuery.parameterKey = ''
+      this.listQuery.paramName = ''
+      this.listQuery.paramKey = ''
       this.handleFilter()
     },
     // 临时容器置空
@@ -318,7 +318,7 @@ export default {
     // 数据删除
     handleDelete(item) {
       // 此操作将删除参数键为"{}"的数据项, 是否继续?
-      this.$confirm(String(this.$t('config.delParamClickMsg', { parameterKey: item.parameterKey })), String(this.$t('common.title')), {
+      this.$confirm(String(this.$t('config.delParamClickMsg', { parameterKey: item.paramKey })), String(this.$t('common.title')), {
         confirmButtonText: this.$t('common.ok'),
         cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
@@ -339,7 +339,7 @@ export default {
       import('@/vendor/Export2Excel').then(excel => {
         const tHeader = [this.$t('config.paramName'), this.$t('config.paramKey'), this.$t('config.paramValue'),
           this.$t('config.appRange'), this.$t('config.remark'), this.$t('config.creator'), this.$t('config.createTime')]
-        const filterVal = ['parameterName', 'parameterKey', 'parameterValue', 'appRange', 'remark', 'creator', 'createTime']
+        const filterVal = ['paramName', 'paramKey', 'paramValue', 'appRange', 'remark', 'creator', 'createTime']
         let list = this.list
         if (Object.keys(this.selectionData).length !== 0) { // 有元素被选中
           list = this.selectionData
