@@ -66,8 +66,10 @@ export default {
     export: '导出',
     sort: '排序',
     save: '保存',
-    close: '关闭',
     turnOn: '开启',
+    close: '关闭',
+    normal: '正常',
+    disable: '停用',
     startDate: '开始日期',
     endDate: '结束日期',
     operate: '操作',
@@ -221,6 +223,12 @@ export default {
     createTime: '创建时间',
     addParam: '新增参数',
     addParamSucceed: '新增参数成功',
-    delParamClickMsg: '此操作将删除参数键为"{parameterKey}"的数据项, 是否继续?'
+    delParamClickMsg: '此操作将删除参数键为"{parameterKey}"的数据项, 是否继续?',
+    dictName: '字典名称',
+    dictKey: '字典键名',
+    dictType: '字典类型',
+    addDict: '新增字典',
+    addDictSucceed: '新增字典成功',
+    delDictClickMsg: '此操作将删除字典键为"{dictKey}"的数据项, 是否继续?'
   }
 }

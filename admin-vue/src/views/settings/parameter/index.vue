@@ -106,7 +106,7 @@
             <el-radio label="external" value="external"> {{ $t('config.external') }} </el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item :label="String($t('system.status'))" prop="status">
+        <el-form-item :label="String($t('config.status'))" prop="status">
           <el-select v-model="tempParam.status" class="filter-item">
             <el-option v-for="item in paramStatusOptions" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
