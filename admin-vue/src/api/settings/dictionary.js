@@ -31,4 +31,12 @@ export function edit(data) {
   })
 }
 
-export default { getList, add, del, edit }
+// 获取所有字典选择
+export function getAllDictOption() {
+  return request({
+    url: '/settings/dictionary/getAllDict',
+    method: 'get'
+  })
+}
+
+export default { getList, add, del, edit, getAllDictOption }

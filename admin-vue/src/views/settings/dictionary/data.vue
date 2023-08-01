@@ -1,25 +1,24 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :model="listQuery" :inline="true">
-        <el-form-item :label="String($t('config.dictName'))" prop="dictName">
-          <el-input v-model="listQuery.dictName" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictName') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
+      <el-form :model="listQuery" ref="queryRef" :inline="true">
+        <el-form-item :label="String($t('config.dictName'))" prop="dictKey">
+          <el-select v-model="listQuery.dictKey">
+            <el-option
+              v-for="item in dictOptions"
+              :key="item.dictId"
+              :label="item.dictName"
+              :value="item.dictKey"
+            />
+          </el-select>
         </el-form-item>
-        <el-form-item :label="String($t('config.dictKey'))" prop="dictKey">
-          <el-input v-model="listQuery.dictKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictKey') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
+        <el-form-item :label="String($t('config.dictLabel'))" prop="dictLabel">
+          <el-input v-model="listQuery.dictLabel" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictLabel') })" clearable style="width: 200px" @keyup.enter.native="handleFilter" />
         </el-form-item>
-        <el-form-item :label="String($t('config.createTime'))" prop="dateRange">
-          <el-date-picker
-            v-model="dateRange"
-            type="daterange"
-            format="yyyy-MM-dd"
-            value-format="yyyy-MM-dd"
-            range-separator="-"
-            :start-placeholder="$t('common.startDate')"
-            :end-placeholder="$t('common.endDate')"
-            style="width: 280px"
-            @change="dateFormat"
-          />
+        <el-form-item :label="String($t('config.dictStatus'))" prop="status">
+          <el-select v-model="listQuery.status" class="filter-item">
+            <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value" clearable />
+          </el-select>
         </el-form-item>
         <el-form-item>
           <el-button class="filter-item" type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
@@ -37,6 +36,9 @@
       <el-button class="filter-item" :loading="downloadLoading" style="margin-left: 10px;" type="warning" icon="el-icon-download" @click="handleDownload">
         {{ $t('common.export') }}
       </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="warning" icon="el-icon-close" @click="handleClose">
+        {{ $t('common.close') }}
+      </el-button>
     </div>
 
     <el-table
@@ -52,23 +54,17 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column prop="dictName" :label="String($t('config.dictName'))" align="center" show-overflow-tooltip />
-      <el-table-column prop="dictKey" :label="String($t('config.dictKey'))" align="center" show-overflow-tooltip>
-        <template #default="scope">
-          <router-link :to="'/settings/dictionary/data/index/' + scope.row.dictKey" class="link-type">
-            <span> {{ scope.row.dictKey }} </span>
-          </router-link>
-        </template>
-      </el-table-column>
-      <el-table-column prop="dictType" :label="String($t('config.dictType'))" align="center" show-overflow-tooltip />
-      <el-table-column prop="status" :label="String($t('config.status'))" align="center" width="80">
+      <el-table-column prop="dictLabel" :label="String($t('config.dictLabel'))" align="center" show-overflow-tooltip />
+      <el-table-column prop="dictValue" :label="String($t('config.dictValue'))" align="center" show-overflow-tooltip />
+      <el-table-column prop="status" :label="String($t('config.dictStatus'))" align="center" width="100">
         <template v-slot="scope">
           <el-tag :type="scope.row.status | statusRenderFilter">
             {{ scope.row.status == 1 ? $t('common.normal'):$t('common.disable') }}
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="appRange" :label="String($t('config.appRange'))" align="center" width="100" show-overflow-tooltip />
+      <el-table-column prop="sort" :label="String($t('config.dictSort'))" align="center" width="80" />
+      <el-table-column prop="isDefault" :label="String($t('config.isDefault'))" align="center" width="80" />
       <el-table-column prop="remark" :label="String($t('config.remark'))" align="center" show-overflow-tooltip />
       <el-table-column prop="creator" :label="String($t('config.creator'))" align="center" width="100" />
       <el-table-column prop="createTime" :label="String($t('config.createTime'))" align="center" width="160" />
@@ -89,23 +85,29 @@
 
     <!-- 添加或修改字典配置弹窗 -->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form ref="dictRef" :model="temp" :rules="rules" label-position="left" label-width="100px" style="width: 400px; margin-left: 50px">
-        <el-form-item :label="String($t('config.dictName'))" prop="dictName">
-          <el-input v-model="temp.dictName" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictName') })" />
-        </el-form-item>
+      <el-form ref="dictDataRef" :model="temp" :rules="rules" label-position="left" label-width="100px" style="width: 400px; margin-left: 50px">
         <el-form-item :label="String($t('config.dictKey'))" prop="dictKey">
-          <el-input v-model="temp.dictKey" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictKey') })" :disabled="dialogStatus==='update'" />
+          <el-input v-model="temp.dictKey" disabled />
         </el-form-item>
-        <el-form-item :label="String($t('config.dictType'))" prop="dictType">
-          <el-input v-model="temp.dictType" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictType') })" />
+        <el-form-item :label="String($t('config.dictLabel'))" prop="dictLabel">
+          <el-input v-model="temp.dictLabel" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictLabel') })" />
         </el-form-item>
-        <el-form-item :label="String($t('config.status'))" prop="status">
+        <el-form-item :label="String($t('config.dictValue'))" prop="dictValue">
+          <el-input v-model="temp.dictValue" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictValue') })" />
+        </el-form-item>
+        <el-form-item :label="String($t('config.echoClass'))" prop="echoClass">
+          <el-input v-model="temp.echoClass" :placeholder="$t('common.pleaseEnter', { text: $t('config.echoClass') })" />
+        </el-form-item>
+        <el-form-item :label="String($t('config.dictStatus'))" prop="status">
           <el-select v-model="temp.status" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
-        <el-form-item :label="String($t('config.appRange'))" prop="appRange">
-          <el-input v-model="temp.appRange" :placeholder="$t('common.pleaseEnter', { text: $t('config.appRange') })" />
+        <el-form-item :label="String($t('config.styleAttribute'))" prop="styleAttribute">
+          <el-input v-model="temp.styleAttribute" :placeholder="$t('common.pleaseEnter', { text: $t('config.styleAttribute') })" />
+        </el-form-item>
+        <el-form-item label="排序" prop="sort" :hidden="dialogStatus==='create'">
+          <el-input-number v-model="temp.sort" controls-position="right" :min="0" />
         </el-form-item>
         <el-form-item :label="String($t('config.remark'))" prop="remark">
           <el-input v-model="temp.remark" type="textarea" />
@@ -126,10 +128,11 @@
 
 <script>
 import Pagination from '@/components/Pagination'
-import { getList, add, del, edit } from '@/api/settings/dictionary'
+import { getAllDictOption } from '@/api/settings/dictionary'
+import { getList, add, del, edit } from '@/api/settings/dictData'
 
 export default {
-  name: 'Dictionary',
+  name: 'DictData',
   components: { Pagination },
   filters: {
     statusRenderFilter(status) {
@@ -147,27 +150,27 @@ export default {
       total: 0,
       listLoading: true,
       downloadLoading: false,
-      dateRange: [],
       listQuery: {
         pageNo: 1,
         pageSize: 10,
-        dictName: '',
-        dictKey: '',
-        status: null,
-        startDate: '',
-        endDate: ''
+        dictId: undefined,
+        dictKey: this.$route.params && this.$route.params.dictKey,
+        dictLabel: undefined,
+        status: undefined
       },
       paged: {},
       row: {
         id: undefined,
-        dictName: '',
-        dictKey: '',
-        dictType: '',
+        dictKey: undefined,
+        dictLabel: '',
+        dictValue: '',
         status: '',
-        appRange: '',
+        isDefault: '',
         remark: '',
+        sort: undefined,
+        echoClass: '',
+        styleAttribute: '',
         creator: '',
-        updater: '',
         createTime: ''
       },
       statusOptions: [
@@ -180,6 +183,7 @@ export default {
         }
       ],
       temp: {},
+      tempDictKey: undefined,
       selectionData: {},
       textMap: {
         update: this.$t('common.edit'),
@@ -188,19 +192,24 @@ export default {
       dialogFormVisible: false,
       dialogStatus: '',
       rules: {
-        dictName: [{ required: true, trigger: 'blur' }],
-        dictKey: [{ required: true, trigger: 'blur' }]
+        dictKey: [{ required: true, trigger: 'blur' }],
+        dictLabel: [{ required: true, trigger: 'blur' }],
+        dictValue: [{ required: true, trigger: 'blur' }]
       },
+      dictOptions: [],
       filename: 'excel-list',
       autoWidth: true,
       bookType: 'xlsx'
     }
   },
   created() {
+    getAllDictOption().then(response => {
+      this.dictOptions = response.data
+    })
     this.getList()
   },
   methods: {
-    tableRowClassName({ row, rowIndex }) {
+    tableRowClassName({ row }) {
       if (row.statusCode === 5000) {
         return 'danger-row'
       } else if (row.statusCode === 2000) {
@@ -208,17 +217,9 @@ export default {
       }
       return 'warning-row'
     },
-    dateFormat(picker) {
-      if (picker != null) {
-        this.listQuery.startDate = picker[0]
-        this.listQuery.endDate = picker[1]
-      } else {
-        this.listQuery.startDate = ''
-        this.listQuery.endDate = ''
-      }
-    },
     getList() {
       this.listLoading = true
+      this.tempDictKey = this.listQuery.dictKey
       getList(this.listQuery).then(response => {
         const data = response.data
         const paged = data.paged
@@ -234,11 +235,7 @@ export default {
       this.getList()
     },
     resetQuery() {
-      this.dateRange = []
-      this.listQuery.startDate = ''
-      this.listQuery.endDate = ''
-      this.listQuery.dictName = ''
-      this.listQuery.dictKey = ''
+      this.listQuery.dictLabel = ''
       this.listQuery.status = null
       this.handleFilter()
     },
@@ -249,14 +246,15 @@ export default {
     // 打开添加
     handleCreate() {
       this.resetTemp()
+      this.temp.dictKey = this.listQuery.dictKey
       this.dialogFormVisible = true
       this.dialogStatus = 'create'
       this.$nextTick(() => {
-        this.$refs['dictRef'].clearValidate()
+        this.$refs['dictDataRef'].clearValidate()
       })
     },
     createData() {
-      this.$refs['dictRef'].validate((valid) => {
+      this.$refs['dictDataRef'].validate((valid) => {
         if (valid) {
           add(this.temp).then(() => {
             this.list.unshift(this.temp)
@@ -275,14 +273,15 @@ export default {
     // 打开更新
     handleUpdate(row) {
       this.temp = Object.assign({}, row) // copy obj
+      this.temp.dictKey = this.tempDictKey
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {
-        this.$refs['dictRef'].clearValidate()
+        this.$refs['dictDataRef'].clearValidate()
       })
     },
     updateData() {
-      this.$refs['dictRef'].validate((valid) => {
+      this.$refs['dictDataRef'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
           edit(tempData).then(() => {
@@ -301,8 +300,8 @@ export default {
     },
     // 数据删除
     handleDelete(item) {
-      // 此操作将删除字典键为"{}"的数据项, 是否继续?
-      this.$confirm(String(this.$t('config.delDictClickMsg', { dictKey: item.dictKey })), String(this.$t('common.title')), {
+      // 此操作将删除字典数据标签为"{dictLabel}"的数据项, 是否继续?
+      this.$confirm(String(this.$t('config.delDictDataClickMsg', { dictLabel: item.dictLabel })), String(this.$t('common.title')), {
         confirmButtonText: this.$t('common.ok'),
         cancelButtonText: this.$t('common.cancel'),
         type: 'warning'
@@ -321,9 +320,9 @@ export default {
     handleDownload() {
       this.downloadLoading = true
       import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = [this.$t('config.dictName'), this.$t('config.dictKey'), this.$t('config.dictType'),
-          this.$t('config.appRange'), this.$t('config.remark'), this.$t('config.creator'), this.$t('config.createTime')]
-        const filterVal = ['dictName', 'dictKey', 'dictType', 'appRange', 'remark', 'creator', 'createTime']
+        const tHeader = [this.$t('config.dictLabel'), this.$t('config.dictValue'), this.$t('config.isDefault'),
+          this.$t('config.remark'), this.$t('config.creator'), this.$t('config.createTime')]
+        const filterVal = ['dictLabel', 'dictValue', 'isDefault', 'remark', 'creator', 'createTime']
         let list = this.list
         if (Object.keys(this.selectionData).length !== 0) { // 有元素被选中
           list = this.selectionData
@@ -347,6 +346,13 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.selectionData = selection
+    },
+    handleClose() {
+      if (this.$route.query.noGoBack) {
+        this.$router.push({ path: '/settings/dictionary' })
+      } else {
+        this.$router.go(-1)
+      }
     }
   }
 }

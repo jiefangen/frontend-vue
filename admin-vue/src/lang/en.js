@@ -19,7 +19,8 @@ export default {
     druidMonitor: 'Druid Monitor',
     systemSettings: 'System Settings',
     paramSettings: 'Parameter',
-    dictSettings: 'Dictionary'
+    dictSettings: 'Dictionary',
+    dictData: 'Dict Data'
   },
   navbar: {
     dashboard: 'Dashboard',
@@ -229,6 +230,14 @@ export default {
     dictType: 'DictType',
     addDict: 'Add Dictionary',
     addDictSucceed: 'Successfully added dictionary',
-    delDictClickMsg: 'This operation will delete the data item whose dictionary key is "{dictKey}", continue?'
+    delDictClickMsg: 'This operation will delete the data item whose dictionary key is "{dictKey}", continue?',
+    dictLabel: 'DataLabel',
+    dictValue: 'DataValue',
+    dictStatus: 'DataStatus',
+    isDefault: 'Default',
+    dictSort: 'DataSort',
+    echoClass: 'EchoClass',
+    styleAttribute: 'Style Attribute',
+    delDictDataClickMsg: 'This operation will delete the data item whose dictionary data label is "{dictLabel}", continue?'
   }
 }

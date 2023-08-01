@@ -19,7 +19,8 @@ export default {
     druidMonitor: 'Druid监控',
     systemSettings: '系统配置',
     paramSettings: '参数设置',
-    dictSettings: '字典管理'
+    dictSettings: '字典管理',
+    dictData: '字典数据'
   },
   navbar: {
     dashboard: '首页',
@@ -229,6 +230,14 @@ export default {
     dictType: '字典类型',
     addDict: '新增字典',
     addDictSucceed: '新增字典成功',
-    delDictClickMsg: '此操作将删除字典键为"{dictKey}"的数据项, 是否继续?'
+    delDictClickMsg: '此操作将删除字典键为"{dictKey}"的数据项, 是否继续?',
+    dictLabel: '数据标签',
+    dictValue: '数据键值',
+    dictStatus: '数据状态',
+    isDefault: '是否默认',
+    dictSort: '数据排序',
+    echoClass: '回显样式',
+    styleAttribute: '样式属性',
+    delDictDataClickMsg: '此操作将删除字典数据标签为"{dictLabel}"的数据项, 是否继续?'
   }
 }

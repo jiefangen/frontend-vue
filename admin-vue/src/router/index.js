@@ -84,7 +84,7 @@ export const constantRoutes = [
     component: () => import('@/views/error/401'),
     hidden: true
   },
-  // { path: '*', redirect: '/404', hidden: true },
+  { path: '*', redirect: '/404', hidden: true },
   {
     path: '/',
     component: Layout,
@@ -109,6 +109,20 @@ export const constantRoutes = [
         component: () => import('@/views/profile/index'),
         name: 'Profile',
         meta: { title: 'profile', icon: 'user', noCache: true }
+      }
+    ]
+  },
+  // 隐藏静态跳转路由
+  {
+    path: '/settings/dictionary/data',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index/:dictKey',
+        component: () => import('@/views/settings/dictionary/data'),
+        name: 'Data',
+        meta: { title: 'dictData', activeMenu: '/settings/dictionary' }
       }
     ]
   }
