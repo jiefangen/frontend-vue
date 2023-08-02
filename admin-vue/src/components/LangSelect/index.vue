@@ -24,6 +24,10 @@ export default {
       return this.$store.getters.language
     }
   },
+  created() {
+    const lang = this.$store.getters.language
+    this.$store.dispatch('app/setLanguage', lang)
+  },
   methods: {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang

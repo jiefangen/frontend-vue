@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form :model="listQuery" ref="queryRef" :inline="true">
+      <el-form ref="queryRef" :model="listQuery" :inline="true">
         <el-form-item :label="String($t('config.dictName'))" prop="dictKey">
           <el-select v-model="listQuery.dictKey">
             <el-option
@@ -54,12 +54,18 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column prop="dictLabel" :label="String($t('config.dictLabel'))" align="center" show-overflow-tooltip />
+      <el-table-column prop="dictLabel" :label="String($t('config.dictLabel'))" align="center" show-overflow-tooltip>
+        <template v-slot="scope">
+          <el-tag :type="scope.row.echoClass" :style="scope.row.styleAttribute">
+            {{ scope.row.dictLabel }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column prop="dictValue" :label="String($t('config.dictValue'))" align="center" show-overflow-tooltip />
       <el-table-column prop="status" :label="String($t('config.dictStatus'))" align="center" width="100">
         <template v-slot="scope">
           <el-tag :type="scope.row.status | statusRenderFilter">
-            {{ scope.row.status == 1 ? $t('common.normal'):$t('common.disable') }}
+            {{ scope.row.status === 1 ? $t('common.normal'):$t('common.disable') }}
           </el-tag>
         </template>
       </el-table-column>
@@ -95,19 +101,35 @@
         <el-form-item :label="String($t('config.dictValue'))" prop="dictValue">
           <el-input v-model="temp.dictValue" :placeholder="$t('common.pleaseEnter', { text: $t('config.dictValue') })" />
         </el-form-item>
-        <el-form-item :label="String($t('config.echoClass'))" prop="echoClass">
-          <el-input v-model="temp.echoClass" :placeholder="$t('common.pleaseEnter', { text: $t('config.echoClass') })" />
-        </el-form-item>
         <el-form-item :label="String($t('config.dictStatus'))" prop="status">
           <el-select v-model="temp.status" class="filter-item">
             <el-option v-for="item in statusOptions" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
+        <el-form-item :label="String($t('config.echoClass'))" prop="echoClass">
+          <el-select v-model="temp.echoClass">
+            <el-option
+              v-for="item in echoClassOptions"
+              :key="item.value"
+              :label="item.label + '(' + item.value + ')'"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item :label="String($t('config.styleAttribute'))" prop="styleAttribute">
           <el-input v-model="temp.styleAttribute" :placeholder="$t('common.pleaseEnter', { text: $t('config.styleAttribute') })" />
         </el-form-item>
-        <el-form-item label="排序" prop="sort" :hidden="dialogStatus==='create'">
+        <el-form-item :label="String($t('common.sort'))" prop="sort" :hidden="dialogStatus==='create'">
           <el-input-number v-model="temp.sort" controls-position="right" :min="0" />
+        </el-form-item>
+        <el-form-item :label="String($t('config.isDefault'))" prop="isDefault">
+          <el-radio-group v-model="temp.isDefault">
+            <el-radio
+              v-for="item in isDefaultOptions"
+              :key="item.value"
+              :label="item.value"
+            >{{ item.label }}</el-radio>
+          </el-radio-group>
         </el-form-item>
         <el-form-item :label="String($t('config.remark'))" prop="remark">
           <el-input v-model="temp.remark" type="textarea" />
@@ -181,6 +203,23 @@ export default {
           value: 0,
           label: this.$t('common.disable')
         }
+      ],
+      isDefaultOptions: [
+        {
+          value: 'Y',
+          label: this.$t('common.yes')
+        }, {
+          value: 'N',
+          label: this.$t('common.no')
+        }
+      ],
+      echoClassOptions: [
+        { value: 'default', label: this.$t('common.default') },
+        { value: 'primary', label: this.$t('common.primary') },
+        { value: 'success', label: this.$t('common.success') },
+        { value: 'info', label: this.$t('common.info') },
+        { value: 'warning', label: this.$t('common.warning') },
+        { value: 'danger', label: this.$t('common.danger') }
       ],
       temp: {},
       tempDictKey: undefined,
@@ -294,6 +333,8 @@ export default {
               type: 'success',
               duration: 2000
             })
+            this.listQuery.dictKey = this.tempDictKey
+            this.getList()
           })
         }
       })

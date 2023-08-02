@@ -60,7 +60,14 @@ export default {
     pChoose: 'Please choose',
     enabled: 'Enabled',
     disabled: 'Disabled',
+    default: 'Default',
+    primary: 'Primary',
     success: 'Success',
+    info: 'Info',
+    warning: 'Warning',
+    danger: 'Danger',
+    yes: 'Yes',
+    no: 'No',
     empty: 'Empty',
     reset: 'Reset',
     import: 'Import',
@@ -237,7 +244,7 @@ export default {
     isDefault: 'Default',
     dictSort: 'DataSort',
     echoClass: 'EchoClass',
-    styleAttribute: 'Style Attribute',
+    styleAttribute: 'StyleAttr',
     delDictDataClickMsg: 'This operation will delete the data item whose dictionary data label is "{dictLabel}", continue?'
   }
 }
