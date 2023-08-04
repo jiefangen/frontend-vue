@@ -61,7 +61,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="dictType" :label="String($t('config.dictType'))" align="center" show-overflow-tooltip />
-      <el-table-column prop="status" :label="String($t('config.status'))" align="center" width="80">
+      <el-table-column prop="status" :label="String($t('config.status'))" align="center" width="100">
         <template v-slot="scope">
           <el-tag :type="scope.row.status | statusRenderFilter">
             {{ scope.row.status == 1 ? $t('common.normal'):$t('common.disable') }}

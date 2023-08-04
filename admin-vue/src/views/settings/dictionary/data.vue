@@ -69,12 +69,11 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="sort" :label="String($t('config.dictSort'))" align="center" width="80" />
+      <el-table-column prop="sort" :label="String($t('config.dictSort'))" align="center" width="100" />
       <el-table-column prop="isDefault" :label="String($t('config.isDefault'))" align="center" width="80" />
       <el-table-column prop="remark" :label="String($t('config.remark'))" align="center" show-overflow-tooltip />
       <el-table-column prop="creator" :label="String($t('config.creator'))" align="center" width="100" />
       <el-table-column prop="createTime" :label="String($t('config.createTime'))" align="center" width="160" />
-
       <el-table-column :label="String($t('common.operate'))" align="center" width="200" class-name="small-padding fixed-width">
         <template v-slot="scope">
           <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">

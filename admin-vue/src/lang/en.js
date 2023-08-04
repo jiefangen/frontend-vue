@@ -20,7 +20,7 @@ export default {
     systemSettings: 'System Settings',
     paramSettings: 'Parameter',
     dictSettings: 'Dictionary',
-    dictData: 'Dict Data'
+    dictData: 'Dictionary Data'
   },
   navbar: {
     dashboard: 'Dashboard',
