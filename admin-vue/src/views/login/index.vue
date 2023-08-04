@@ -56,6 +56,10 @@
         {{ $t('login.logIn') }}
       </el-button>
     </el-form>
+    <!--  底部版权说明  -->
+    <div class="el-login-footer">
+      <span>Copyright © 2022-2023 panda.bamboo.com All Rights Reserved.</span>
+    </div>
   </div>
 </template>
 
@@ -295,6 +299,19 @@ $light_gray:#eee;
     position: absolute;
     right: 0;
     bottom: 6px;
+  }
+
+  .el-login-footer {
+    height: 40px;
+    line-height: 40px;
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: Arial;
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 
   @media only screen and (max-width: 470px) {

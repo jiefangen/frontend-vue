@@ -86,7 +86,7 @@ export default {
     pleaseEnter: 'Please Enter {text}'
   },
   login: {
-    title: 'Login Form',
+    title: 'Bamboo Login Form',
     logIn: 'Login',
     username: 'Username',
     password: 'Password',

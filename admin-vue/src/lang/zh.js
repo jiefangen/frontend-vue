@@ -86,7 +86,7 @@ export default {
     pleaseEnter: '请输入{text}'
   },
   login: {
-    title: '后台管理系统登录',
+    title: 'BAMBOO后台管理系统',
     logIn: '登录',
     username: '账号',
     password: '密码',

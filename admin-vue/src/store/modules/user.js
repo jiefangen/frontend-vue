@@ -1,6 +1,7 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken, setRememberInfo, removeRememberInfo } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import defaultAvatar from '@/assets/images/png/prof-avatar.png'
 
 const state = {
   token: getToken(),
@@ -70,7 +71,8 @@ const actions = {
 
         commit('SET_ROLES', roleCodes)
         commit('SET_NAME', data.username)
-        commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
+        // https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif
+        commit('SET_AVATAR', defaultAvatar)
         commit('SET_NICKNAME', data.nickname)
         commit('SET_INTRODUCTION', 'Talk is cheap, show me the code')
         resolve(data)
