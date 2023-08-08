@@ -72,7 +72,7 @@ export default {
     disable: '停用',
     default: '默认',
     primary: '主要',
-    success: '停用',
+    success: '成功',
     info: '信息',
     warning: '警告',
     danger: '危险',

@@ -112,7 +112,7 @@
               :key="item.value"
               :label="item.label + '(' + item.value + ')'"
               :value="item.value"
-            ></el-option>
+            />
           </el-select>
         </el-form-item>
         <el-form-item :label="String($t('config.styleAttribute'))" prop="styleAttribute">
