@@ -12,8 +12,8 @@ const name = defaultSettings.title || 'Bamboo Admin' // page title
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
 // You can change the port by the following method:
-// port = 9002 npm run dev OR npm run dev --port = 9002
-const port = process.env.port || process.env.npm_config_port || 9002 // dev port
+// port = 9100 npm run dev OR npm run dev --port = 9100
+const port = process.env.port || process.env.npm_config_port || 9100 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -38,10 +38,17 @@ module.exports = {
     },
     proxy: {
       '/dev-api': {
-        target: 'http://127.0.0.1:10002',
+        target: 'http://127.0.0.1:10001',
         changeOrigin: true,
         pathRewrite: {
           '^/dev-api': '/biz-admin'
+        }
+      },
+      '/stage-api': {
+        target: 'http://centos-business.orb.local:20001/biz-admin',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/stage-api': ''
         }
       }
     }

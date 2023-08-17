@@ -5,11 +5,15 @@ const rawArgv = process.argv.slice(2)
 const args = rawArgv.join(' ')
 
 if (process.env.npm_config_preview || rawArgv.includes('--preview')) {
-  const report = rawArgv.includes('--report')
+  const buildMode = rawArgv.slice(' ')[1]
+  if (buildMode) {
+    const buildCommand = `vue-cli-service build --mode ${buildMode}`
+    run(buildCommand)
+  } else {
+    run(`vue-cli-service build ${args}`)
+  }
 
-  run(`vue-cli-service build ${args}`)
-
-  const port = 9526
+  const port = 9000
   const publicPath = config.publicPath
 
   var connect = require('connect')
@@ -23,10 +27,11 @@ if (process.env.npm_config_preview || rawArgv.includes('--preview')) {
     })
   )
 
+  const report = rawArgv.includes('--report')
   app.listen(port, function () {
-    console.log(chalk.green(`> Preview at  http://localhost:${port}${publicPath}`))
+    console.log(chalk.green(`> Preview at  http://127.0.0.1:${port}${publicPath}`))
     if (report) {
-      console.log(chalk.green(`> Report at  http://localhost:${port}${publicPath}report.html`))
+      console.log(chalk.green(`> Report at  http://127.0.0.1:${port}${publicPath}report.html`))
     }
 
   })

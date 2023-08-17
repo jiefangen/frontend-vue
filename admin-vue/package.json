@@ -5,10 +5,10 @@
   "author": "JieFangen <jiefangen@gmail.com>",
   "scripts": {
     "admin-dev": "vue-cli-service serve",
-    "admin-lint": "eslint --ext .js,.vue src",
-    "admin-build:prod": "vue-cli-service build",
+    "admin-preview": "node build/index.js --preview staging",
+    "admin-build:prod": "vue-cli-service build --mode production",
     "admin-build:stage": "vue-cli-service build --mode staging",
-    "admin-preview": "node build/index.js --preview",
+    "admin-lint": "eslint --ext .js,.vue src",
     "admin-new": "plop",
     "admin-svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
     "admin-test:unit": "jest --clearCache && vue-cli-service test:unit",
