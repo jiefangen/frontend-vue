@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-button type="success" plain @click="openNewTab">
+    <el-button type="primary" plain @click="openNewTab">
       <svg-icon icon-class="link" /> {{ $t('route.apiDoc') }}
     </el-button>
   </div>
