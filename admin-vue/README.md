@@ -26,7 +26,7 @@ npm install
 npm install --registry=https://registry.npm.taobao.org
 
 # 启动服务
-npm run dev
+npm run admin-dev
 ```
 
 浏览器访问 [http://localhost:9528](http://localhost:9528)
