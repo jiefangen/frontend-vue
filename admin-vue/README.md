@@ -61,18 +61,30 @@ npm run lint -- --fix
 
 - 登录模块
   ![](mock/diagram/login.png)
-- 首页--代办事项（可快速添加删除修改代办，拖拽以修改代办状态）
-  ![](mock/diagram/facade.png)
-- 系统管理--用户管理（除了增删查改等，还包括给用户授权等能力）
+- 我的模块--个人中心、布局设置、项目地址、退出登录
+  ![](mock/diagram/mine.png)
+- 我的管理--个人中心
+  ![](mock/diagram/perCenter.png)
+- 我的管理--布局设置
+  ![](mock/diagram/layout.png)
+- 系统管理--用户管理（编辑、授权、密码、删除）
   ![](mock/diagram/user.png)
-- 系统管理--角色管理（相应的角色授权菜单权限）
+- 系统管理--角色管理（菜单编辑、权限查看、删除）
   ![](mock/diagram/role.png)
-- 系统管理--菜单管理
+- 系统管理--菜单管理（编辑、删除）
   ![](mock/diagram/menu.png)
-- 监控管理--日志操作
-  ![](mock/diagram/log.png)
+- 系统管理--权限管理
+  ![](mock/diagram/permission.png)
+- 监控管理--在线用户、操作日志、API文档、Druid监控
+  ![](mock/diagram/online.png)
+  ![](mock/diagram/operLog.png)
+- 系统配置--参数设置（编辑、删除）
+  ![](mock/diagram/param.png)
+- 系统配置--字典管理（编辑、删除）
+  ![](mock/diagram/dictionary.png)
+  ![](mock/diagram/dicData.png)
 ## License
 
-[MIT](https://github.com/jiefangen/bamboo-vue/blob/main/LICENSE) license.
+[Apache 2.0](https://github.com/jiefangen/frontend-vue/blob/main/admin-vue/LICENSE) license.
 
-Copyright (c) 2022-present JieFangen
+Copyright (c) 2023-present JieFangen
