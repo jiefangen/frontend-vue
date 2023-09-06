@@ -8,7 +8,7 @@ BAMBOO后台管理系统--前端项目
 
 ## 相关项目
 
-- [bamboo-admin](https://github.com/jiefangen/bamboo-admin)
+- [business-admin](https://github.com/jiefangen/bamboo/tree/master/bamboo-business/business-admin)BAMBOO后台管理系统--后端服务器项目
 
 ## 项目构建
 
@@ -29,7 +29,7 @@ npm install --registry=https://registry.npm.taobao.org
 npm run admin-dev
 ```
 
-浏览器访问 [http://localhost:9528](http://localhost:9528)
+浏览器访问 [http://localhost:9100](http://localhost:9100)
 
 ## 发布
 
