@@ -8,7 +8,7 @@ BAMBOO后台管理系统--前端项目
 
 ## 相关项目
 
-- [business-admin](https://github.com/jiefangen/bamboo/tree/master/bamboo-business/business-admin)BAMBOO后台管理系统--后端服务器项目
+- [business-admin](https://github.com/jiefangen/bamboo/tree/master/bamboo-business/business-admin) 与其对接的后端服务器项目
 
 ## 项目构建
 
