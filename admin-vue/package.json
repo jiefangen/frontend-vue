@@ -6,8 +6,8 @@
   "scripts": {
     "admin-dev": "vue-cli-service serve",
     "admin-preview": "node build/index.js --preview staging",
-    "admin-build:prod": "vue-cli-service build --mode production",
     "admin-build:stage": "vue-cli-service build --mode staging",
+    "admin-build:prod": "vue-cli-service build --mode production",
     "admin-lint": "eslint --ext .js,.vue src",
     "admin-new": "plop",
     "admin-svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml",
