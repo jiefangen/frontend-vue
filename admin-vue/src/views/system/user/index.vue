@@ -153,11 +153,11 @@
         </el-form-item>
         <el-form-item :label="String($t('system.roleScope'))" prop="roleCodes">
           <div class="components-container" style="margin: 0px;">
-            <el-drag-select v-model="temp.roleCodes" style="width:360px;" multiple :placeholder="$t('common.pChoose')">
-              <el-option v-for="item in allRoles" :key="item.id" :label="item.roleName" :value="item.roleCode" />
+            <el-drag-select v-model="temp.roleCodeAndIds" style="width:360px;" multiple :placeholder="$t('common.pChoose')">
+              <el-option v-for="item in allRoles" :key="item.id" :label="item.roleName" :value="item.roleCode + `|` + item.id" />
             </el-drag-select>
             <div style="margin-top:20px; width:400px;">
-              <el-tag v-for="item of temp.roleCodes" :key="item" style="margin-right:15px;">
+              <el-tag v-for="item of temp.roleCodeAndIds" :key="item" style="margin-right:15px;">
                 {{ item }}
               </el-tag>
             </div>
@@ -212,7 +212,8 @@ export default {
         title: '',
         type: '',
         status: '',
-        roleCodes: []
+        roleCodes: [],
+        roleCodeAndIds: []
       },
       dialogFormVisible: false,
       dialogStatus: '',
@@ -233,10 +234,10 @@ export default {
       ],
       sexOptions: [
         {
-          value: '0',
+          value: '男',
           label: this.$t('system.man')
         }, {
-          value: '1',
+          value: '女',
           label: this.$t('system.woman')
         }
       ],
@@ -291,7 +292,8 @@ export default {
         nickname: '',
         createTime: '',
         roles: [],
-        roleCodes: []
+        roleCodes: [],
+        roleCodeAndIds: []
       }
     },
     handleCreate() {
@@ -384,7 +386,7 @@ export default {
       const tempData = Object.assign({}, this.temp)
       const data = {
         id: tempData.id,
-        roleCodes: tempData.roleCodes
+        roleCodeAndIds: tempData.roleCodeAndIds
       }
       updateUserRole(data).then((data) => {
         if (data) {

@@ -30,9 +30,9 @@
     <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?String($t('system.editMenu')):$t('system.addRole')">
       <el-form ref="dataRoleForm" :rules="rules" :model="role" label-width="80px" label-position="left" style="width: 400px; margin-left:50px;">
         <el-form-item :label="String($t('system.roleName'))" prop="roleName">
-          <el-input v-model="role.roleName" :disabled="dialogType==='edit'?true:false" placeholder="Role Name" />
+          <el-input v-model="role.roleName" :disabled="dialogType==='edit'" placeholder="Role Name" />
         </el-form-item>
-        <el-form-item v-show="dialogType!=='edit'?true:false" :label="String($t('system.roleCode'))">
+        <el-form-item v-show="dialogType!=='edit'" :label="String($t('system.roleCode'))">
           <el-select v-model="role.roleCode" class="filter-item">
             <el-option v-for="item in roleCodeOptions" :key="item" :label="item" :value="item" />
           </el-select>
@@ -46,7 +46,7 @@
             style="width:360px;"
           />
         </el-form-item>
-        <el-form-item v-show="dialogType==='edit'?true:false" :label="String($t('system.menu'))">
+        <el-form-item v-show="dialogType==='edit'" :label="String($t('system.menu'))">
           <el-tree
             ref="tree"
             :check-strictly="checkStrictly"
@@ -82,6 +82,7 @@ import path from 'path'
 import { deepClone } from '@/utils'
 import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/system/role'
 import { getPermission } from '@/api/system/permission'
+import { getDictData } from '@/api/common'
 import i18n from '@/lang'
 
 const defaultRole = {
@@ -123,6 +124,7 @@ export default {
     // get all routes and roles list from server
     this.getRoutes()
     this.getRoles()
+    this.getRoleCodeByDict()
   },
   methods: {
     async getRoutes() {
@@ -134,6 +136,10 @@ export default {
     async getRoles() {
       const res = await getRoles()
       this.rolesList = res.data
+    },
+    async getRoleCodeByDict() {
+      const res = await getDictData('sys_role_code', 'admin', true)
+      this.roleCodeOptions = res.data
     },
     i18n(routes) {
       const app = routes.map(route => {
