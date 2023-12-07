@@ -8,4 +8,11 @@ export function getDictData(dictKey, appRange, onlyValue) {
   })
 }
 
-export default { getDictData }
+export function rolePerRefresh() {
+  return request({
+    url: '/common/rolePer/refresh',
+    method: 'get'
+  })
+}
+
+export default { getDictData, rolePerRefresh }

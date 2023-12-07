@@ -80,8 +80,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '',
-        password: '',
+        username: 'demo',
+        password: '123456',
         rememberMe: false
       },
       loginRules: {

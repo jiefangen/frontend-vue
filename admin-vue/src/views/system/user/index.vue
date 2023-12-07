@@ -90,10 +90,18 @@
     <pagination v-show="total" :total="total" :page.sync="listQuery.pageNo" :limit.sync="listQuery.pageSize" @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
+      <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="80px" style="width: 400px; margin-left:50px;">
         <el-form-item :label="String($t('system.username'))" prop="username">
           <el-input v-model="temp.username" :disabled="dialogStatus==='update'" />
         </el-form-item>
+        <el-form-item :label="String($t('system.userType'))" prop="userType">
+          <el-select v-model="temp.userType" class="filter-item">
+            <el-option v-for="item in userTypeOptions" :key="item" :label="item" :value="item" />
+          </el-select>
+        </el-form-item>
+<!--        <el-form-item :label="String($t('system.userType'))" prop="userType">-->
+<!--          <el-input v-model="temp.userType" />-->
+<!--        </el-form-item>-->
         <el-form-item :label="String($t('system.password'))" :prop="dialogStatus==='update'?'':'password'" :hidden="dialogStatus==='update'">
           <el-input v-model="temp.password" type="password" />
         </el-form-item>
@@ -179,6 +187,7 @@
 <script>
 import { add, del, edit, getList, resetPassword, updateUserRole } from '@/api/system/user'
 import { getRoles } from '@/api/system/role'
+import { getDictData } from '@/api/common'
 import Pagination from '@/components/Pagination'
 import ElDragSelect from '@/components/DragSelect' // base on element-ui
 export default {
@@ -223,6 +232,7 @@ export default {
       },
       dialogPassVisible: false,
       passData: [],
+      userTypeOptions: ['manager', 'general'],
       statusOptions: [
         {
           value: true,
@@ -243,6 +253,7 @@ export default {
       ],
       rules: {
         username: [{ required: true, trigger: 'blur' }],
+        userType: [{ required: true, trigger: 'blur' }],
         password: [{ required: true, trigger: 'blur' }, { min: 6, max: 20, message: String(this.$t('profile.passLimitMsg')), trigger: 'blur' }]
       },
       passRules: {
@@ -256,6 +267,7 @@ export default {
   created() {
     this.getList()
     this.getRoles()
+    this.getUserTypeByDict()
   },
   methods: {
     getList() {
@@ -273,6 +285,10 @@ export default {
     async getRoles() {
       const res = await getRoles()
       this.allRoles = res.data
+    },
+    async getUserTypeByDict() {
+      const res = await getDictData('sys_user_type', 'admin', true)
+      this.userTypeOptions = res.data
     },
     handleFilter() {
       this.listQuery.pageNo = 1

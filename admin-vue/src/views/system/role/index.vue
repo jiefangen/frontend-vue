@@ -1,6 +1,9 @@
 <template>
   <div class="app-container">
     <el-button type="primary" icon="el-icon-circle-plus-outline" @click="handleAddRole">{{ $t('common.add') }}</el-button>
+    <el-button class="filter-item" style="margin-left: 14px;" type="primary" size="medium" icon="el-icon-refresh" @click="handleRefresh">
+      {{ $t('common.refresh') }}
+    </el-button>
 
     <el-table :data="rolesList" :header-cell-style="{background:'#eef1f6',color:'#606266'}" style="width:100%; margin-top:20px;" border stripe>
       <el-table-column align="center" :label="String($t('system.roleName'))" width="220">
@@ -32,10 +35,8 @@
         <el-form-item :label="String($t('system.roleName'))" prop="roleName">
           <el-input v-model="role.roleName" :disabled="dialogType==='edit'" placeholder="Role Name" />
         </el-form-item>
-        <el-form-item v-show="dialogType!=='edit'" :label="String($t('system.roleCode'))">
-          <el-select v-model="role.roleCode" class="filter-item">
-            <el-option v-for="item in roleCodeOptions" :key="item" :label="item" :value="item" />
-          </el-select>
+        <el-form-item :label="String($t('system.roleCode'))" prop="roleCode">
+          <el-input v-model="role.roleCode" :disabled="dialogType==='edit'" placeholder="Role Code" />
         </el-form-item>
         <el-form-item :label="String($t('system.roleDesc'))">
           <el-input
@@ -82,7 +83,7 @@ import path from 'path'
 import { deepClone } from '@/utils'
 import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/system/role'
 import { getPermission } from '@/api/system/permission'
-import { getDictData } from '@/api/common'
+import { getDictData, rolePerRefresh } from '@/api/common'
 import i18n from '@/lang'
 
 const defaultRole = {
@@ -111,7 +112,8 @@ export default {
       defaultCheckedKeys: [],
       roleCodeOptions: ['GENERAL', 'CUSTOMER'],
       rules: {
-        roleName: [{ required: true, message: 'rolename is required', trigger: 'change' }]
+        roleName: [{ required: true, message: 'roleName is required', trigger: 'change' }],
+        roleCode: [{ required: true, message: 'roleCode is required', trigger: 'change' }]
       }
     }
   },
@@ -124,7 +126,7 @@ export default {
     // get all routes and roles list from server
     this.getRoutes()
     this.getRoles()
-    this.getRoleCodeByDict()
+    // this.getRoleCodeByDict()
   },
   methods: {
     async getRoutes() {
@@ -319,6 +321,29 @@ export default {
         return onlyOneChild
       }
       return false
+    },
+    handleRefresh() {
+      this.$confirm(String(this.$t('system.handleRefreshMsg')), String(this.$t('common.title')), {
+        confirmButtonText: String(this.$t('common.ok')),
+        cancelButtonText: String(this.$t('common.cancel')),
+        type: 'warning'
+      }).then(() => {
+        rolePerRefresh().then(() => {
+          this.$notify({
+            title: this.$t('common.success'),
+            message: this.$t('system.refreshSucceed'),
+            type: 'success',
+            duration: 2000
+          })
+          this.$confirm(String(this.$t('system.confirmRefreshMsg')), String(this.$t('common.title')), {
+            confirmButtonText: this.$t('common.ok'),
+            cancelButtonText: this.$t('common.cancel'),
+            type: 'warning'
+          }).then(() => {
+            location.reload()
+          })
+        }).catch(err => { console.error(err) })
+      })
     }
   }
 }

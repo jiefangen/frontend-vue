@@ -69,6 +69,7 @@ export default {
     yes: 'Yes',
     no: 'No',
     empty: 'Empty',
+    refresh: 'Refresh',
     reset: 'Reset',
     import: 'Import',
     export: 'Export',
@@ -151,6 +152,9 @@ export default {
     roleDelEndMsg: ' role?',
     confirmRoleMsg: 'Role permissions updated successfully. Do you want to refresh immediately?',
     addRoleSucceed: 'Role added successfully',
+    handleRefreshMsg: 'This operation will refresh the role permission data, please operate with caution!',
+    refreshSucceed: 'Refresh succeed.',
+    confirmRefreshMsg: 'The role permissions are reset and refreshed successfully. Does the refresh take effect immediately?',
     // Menu Management Page
     menuTitle: 'Menu Title',
     menuName: 'Menu Name',

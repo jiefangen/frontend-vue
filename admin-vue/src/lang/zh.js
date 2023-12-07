@@ -61,6 +61,7 @@ export default {
     enabled: '启用',
     disabled: '禁用',
     empty: '清空',
+    refresh: '刷新',
     reset: '重置',
     import: '导入',
     export: '导出',
@@ -114,7 +115,7 @@ export default {
   system: {
     // 用户管理页面
     username: '用户名',
-    userType: '类型',
+    userType: '用户类型',
     userRank: '级别',
     password: '密码',
     nickname: '昵称',
@@ -151,6 +152,9 @@ export default {
     roleDelEndMsg: '角色吗？',
     confirmRoleMsg: '角色权限更新成功，是否刷新即刻生效？',
     addRoleSucceed: '新增角色成功',
+    handleRefreshMsg: '此操作将重置刷新角色权限数据，请谨慎操作！',
+    refreshSucceed: '刷新成功',
+    confirmRefreshMsg: '角色权限重置刷新成功，是否刷新即刻生效？',
     // 菜单管理页面
     menuTitle: '菜单标题',
     menuName: '菜单名称',
