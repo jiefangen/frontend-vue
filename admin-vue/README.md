@@ -30,6 +30,7 @@ npm run admin-dev
 ```
 
 浏览器访问 [http://localhost:9100](http://localhost:9100)
+演示地址：http://47.116.33.28/#/dashboard
 
 ## 发布
 
