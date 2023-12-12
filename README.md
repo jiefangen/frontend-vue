@@ -7,10 +7,11 @@
 #### 1、admin-vue（后台权限管理系统）
 > 基于国内优秀的开源后台集成方案[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)来进行二次开发。
 > 以bamboo框架支持的后端服务器项目[business-admin](https://github.com/jiefangen/bamboo/tree/master/bamboo-business/business-admin)来进行交互。
+
     1.登录/注销、权限验证
     2.系统管理（用户管理、角色管理、菜单管理、权限管理）
-    3.监控模块（日志操作、API文档、数据源监控）
-    4.系统配置（参数设置、字典管理）
+    3.监控管理（在线用户、日志操作、API文档、数据源监控）
+    4.系统配置（参数设置、字典管理、字典详情）
 
 ### 在线体验
 - 演示地址：http://47.116.33.28/#/dashboard

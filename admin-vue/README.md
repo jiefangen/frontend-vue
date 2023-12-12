@@ -58,7 +58,7 @@ npm run lint
 npm run lint -- --fix
 ```
 
-## Demo演示图例
+## 演示图例
 
 - 登录模块
   ![](mock/diagram/login.png)
