@@ -44,7 +44,11 @@ export const asyncRouteMap = {
   monitor_druid: () => import('@/views/monitor/druid/index'),
   // 系统设置路由组件映射
   settings_parameter: () => import('@/views/settings/parameter/index'),
-  settings_dictionary: () => import('@/views/settings/dictionary/index')
+  settings_dictionary: () => import('@/views/settings/dictionary/index'),
+
+  // 服务管理路由组件映射
+  service_account: () => import('@/views/service/account/index'),
+  service_list: () => import('@/views/service/list/index')
 }
 
 /**

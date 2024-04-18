@@ -20,7 +20,10 @@ export default {
     systemSettings: 'System Settings',
     paramSettings: 'Parameter',
     dictSettings: 'Dictionary',
-    dictData: 'Dictionary Data'
+    dictData: 'Dictionary Data',
+    serviceManage: 'Service Management',
+    authAccount: 'Auth Account',
+    serviceList: 'Service List'
   },
   navbar: {
     dashboard: 'Dashboard',
