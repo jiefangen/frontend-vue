@@ -45,10 +45,9 @@ export const asyncRouteMap = {
   // 系统设置路由组件映射
   settings_parameter: () => import('@/views/settings/parameter/index'),
   settings_dictionary: () => import('@/views/settings/dictionary/index'),
-
   // 服务管理路由组件映射
-  service_account: () => import('@/views/service/account/index'),
-  service_list: () => import('@/views/service/list/index')
+  service_account: () => import('@/views/services/account/index'),
+  service_list: () => import('@/views/services/list/index')
 }
 
 /**
@@ -168,7 +167,7 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  // mode: 'history', // require services support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
