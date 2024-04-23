@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-input v-model="listQuery.keyword" :placeholder="$t('monitor.searchLogPlaceholder')" size="medium" style="width: 200px; margin-right: 10px;" class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="listQuery.keyword" clearable :placeholder="$t('monitor.searchLogPlaceholder')" size="medium" style="width: 200px; margin-right: 10px;" class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button class="filter-item" type="primary" size="medium" icon="el-icon-search" @click="handleFilter">
         {{ $t('common.search') }}
       </el-button>

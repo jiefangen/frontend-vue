@@ -20,7 +20,10 @@ export default {
     systemSettings: '系统配置',
     paramSettings: '参数设置',
     dictSettings: '字典管理',
-    dictData: '字典数据'
+    dictData: '字典数据',
+    serviceManage: '服务管理',
+    authAccount: '认证账户',
+    serviceList: '服务列表'
   },
   navbar: {
     dashboard: '首页',
@@ -250,5 +253,28 @@ export default {
     echoClass: '回显样式',
     styleAttribute: '样式属性',
     delDictDataClickMsg: '此操作将删除字典数据标签为"{dictLabel}"的数据项, 是否继续?'
+  },
+  services: {
+    // 认证账户页面
+    username: '账户名',
+    password: '密码',
+    secretKey: '密钥',
+    credentials: '账户凭证',
+    merchantNum: '商户号',
+    accountType: '账户类型',
+    accountRank: '账户等级',
+    email: '账户邮箱',
+    status: '账户状态',
+    createTime: '创建时间',
+    searchPlaceholder: '输入账户名或商户号搜索',
+    addAccount: '添加账户',
+    editAccount: '编辑账户',
+    quickAddAccount: '快速生成账户',
+    handleQuickCreateMessage: '可快速自动生成商户账号，点击确认立即生成。',
+    quickCreateSucceed: '自动生成账户成功',
+    addMerchantAccount: '新增商户账户',
+    addAccountSucceed: '新增商户账户成功',
+    updateSucceed: '更新账户成功',
+    accountInfo: '商户信息'
   }
 }
