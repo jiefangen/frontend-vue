@@ -24,4 +24,12 @@ export function updateAccount(data) {
   })
 }
 
-export default { getAccountList, addAccount, updateAccount }
+export function getAccountDetails(data) {
+  return request({
+    url: '/services/account/details',
+    method: 'post',
+    data
+  })
+}
+
+export default { getAccountList, addAccount, updateAccount, getAccountDetails }

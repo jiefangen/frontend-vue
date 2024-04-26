@@ -113,14 +113,46 @@
       </div>
     </el-dialog>
 
-    <el-dialog title="商户信息" :visible.sync="accountDialogVisible" width="30%">
-      <h5>Hello World</h5>
+    <el-dialog :visible.sync="accountDialogVisible" width="30%">
+      <el-form ref="dataAccountForm" :model="tempInfo" label-position="left" style="margin-left:25px;">
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span class="label">{{ $t('services.accountInfo') }}</span>
+            <el-button style="float: right; padding: 3px 0" type="text" @click="copyToClipboard">
+              一键复制
+            </el-button>
+          </div>
+          <div class="text item">
+            <span class="label">{{ $t('services.merchantAccount') }}</span>
+            <span class="value">{{ tempInfo.username }}</span>
+          </div>
+          <div class="text item">
+            <span class="label">{{ $t('services.initialPassword') }}</span>
+            <span class="value">{{ tempInfo.password }}</span>
+          </div>
+          <div class="text item">
+            <span class="label">{{ $t('services.apiInvokerInfo') }}</span>
+          </div>
+          <div class="text item">
+            <span class="label">{{ $t('services.merchantNum') }}</span>
+            <span class="value" style="margin-left: 28px">{{ tempInfo.merchantNum }}</span>
+          </div>
+          <div class="text item">
+            <span class="label">{{ $t('services.apiSecretKey') }}</span>
+            <span class="value">{{ tempInfo.secretKey }}</span>
+          </div>
+          <div class="text item">
+            <span class="label">{{ $t('services.apiCredentials') }}</span>
+            <span class="value">{{ tempInfo.credentials }}</span>
+          </div>
+        </el-card>
+      </el-form>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { getAccountList, addAccount, updateAccount } from '@/api/services/authService'
+import { getAccountList, addAccount, updateAccount, getAccountDetails } from '@/api/services/authService'
 import Pagination from '@/components/Pagination'
 export default {
   name: 'Services',
@@ -157,6 +189,7 @@ export default {
         enabled: false,
         email: ''
       },
+      tempInfo: {},
       dialogFormVisible: false,
       accountDialogVisible: false,
       dialogStatus: '',
@@ -288,9 +321,56 @@ export default {
         }
       })
     },
-    handleAccountInfo() {
-      this.accountDialogVisible = true
+    handleAccountInfo(row) {
+      getAccountDetails(row).then(response => {
+        this.tempInfo = Object.assign({}, response.data)
+        this.accountDialogVisible = true
+      })
+    },
+    copyToClipboard() {
+      const el = document.createElement('textarea')
+      el.value = `${this.$t('services.merchantAccount')}: ${this.tempInfo.username}\n${this.$t('services.initialPassword')}: ${this.tempInfo.password}\n\n${this.$t('services.merchantNum')}: ${this.tempInfo.merchantNum}\n${this.$t('services.apiSecretKey')}: ${this.tempInfo.secretKey}\n${this.$t('services.apiCredentials')}: ${this.tempInfo.credentials}`
+      document.body.appendChild(el)
+      el.select()
+      document.execCommand('copy')
+      document.body.removeChild(el)
+      this.accountDialogVisible = false
+      this.$notify({
+        title: this.$t('common.success'),
+        message: this.$t('services.copyAccountSucceed'),
+        type: 'success',
+        duration: 2000
+      })
     }
   }
 }
 </script>
+
+<style>
+  .text {
+    font-size: 14px;
+  }
+  .item {
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    width: 480px;
+  }
+
+  .label {
+    font-weight: bold;
+  }
+  .value {
+    margin-left: 20px;
+  }
+</style>
