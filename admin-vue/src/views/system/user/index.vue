@@ -43,7 +43,7 @@
       </el-table-column>
       <el-table-column :label="String($t('system.sex'))" class-name="status-col" width="80" align="center">
         <template v-slot="{row}">
-          <span>{{ row.sex }}</span>
+          <span>{{ row.sex | sexFilter }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="String($t('system.phone'))" class-name="status-col" width="120" align="center">
@@ -160,7 +160,7 @@
           <el-input v-model="temp.username" disabled />
         </el-form-item>
         <el-form-item :label="String($t('system.roleScope'))" prop="roleCodes">
-          <div class="components-container" style="margin: 0px;">
+          <div class="components-container" style="margin: 0;">
             <el-drag-select v-model="temp.roleCodeAndIds" style="width:360px;" multiple :placeholder="$t('common.pChoose')">
               <el-option v-for="item in allRoles" :key="item.id" :label="item.roleName" :value="item.roleCode + `|` + item.id" />
             </el-drag-select>
@@ -200,6 +200,14 @@ export default {
         false: 'info'
       }
       return statusMap[status]
+    },
+    sexFilter(sex) {
+      const sexMap = {
+        '0': '女',
+        '1': '男',
+        '2': '未知'
+      }
+      return sexMap[sex]
     }
   },
   data() {
@@ -244,11 +252,14 @@ export default {
       ],
       sexOptions: [
         {
-          value: '男',
+          value: '1',
           label: this.$t('system.man')
         }, {
-          value: '女',
+          value: '0',
           label: this.$t('system.woman')
+        }, {
+          value: '2',
+          label: this.$t('common.unknown')
         }
       ],
       rules: {

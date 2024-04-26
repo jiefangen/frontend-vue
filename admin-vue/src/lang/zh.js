@@ -82,6 +82,7 @@ export default {
     danger: '危险',
     yes: '是',
     no: '否',
+    unknown: '未知',
     startDate: '开始日期',
     endDate: '结束日期',
     operate: '操作',
@@ -275,6 +276,12 @@ export default {
     addMerchantAccount: '新增商户账户',
     addAccountSucceed: '新增商户账户成功',
     updateSucceed: '更新账户成功',
-    accountInfo: '商户信息'
+    accountInfo: '商户信息',
+    merchantAccount: '商户账号',
+    initialPassword: '初始密码',
+    apiSecretKey: 'API密钥',
+    apiCredentials: 'API凭证',
+    apiInvokerInfo: 'API调用鉴权信息',
+    copyAccountSucceed: '商户信息复制成功'
   }
 }

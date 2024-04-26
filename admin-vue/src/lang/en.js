@@ -71,6 +71,7 @@ export default {
     danger: 'Danger',
     yes: 'Yes',
     no: 'No',
+    unknown: 'Unknown',
     empty: 'Empty',
     refresh: 'Refresh',
     reset: 'Reset',
