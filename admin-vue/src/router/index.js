@@ -23,7 +23,7 @@ import Layout from '@/layout'
     noCache: true                if set true, the page will no be cached(default is false)
     affix: true                  if set true, the tag will affix in the tags-view
     breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+    activeMenu: '/example/service'  if set path, the sidebar will highlight the path you set
   }
  */
 
@@ -47,7 +47,7 @@ export const asyncRouteMap = {
   settings_dictionary: () => import('@/views/settings/dictionary/index'),
   // 服务管理路由组件映射
   service_account: () => import('@/views/services/account/index'),
-  service_list: () => import('@/views/services/list/index')
+  service_list: () => import('@/views/services/service/index')
 }
 
 /**

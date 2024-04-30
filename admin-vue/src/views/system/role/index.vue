@@ -123,7 +123,7 @@ export default {
     }
   },
   created() {
-    // get all routes and roles list from server
+    // get all routes and roles service from server
     this.getRoutes()
     this.getRoles()
     // this.getRoleCodeByDict()

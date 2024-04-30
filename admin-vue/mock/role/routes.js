@@ -210,7 +210,7 @@ const asyncRoutes = [
       },
       {
         path: 'dnd-list',
-        component: 'views/components-demo/dnd-list',
+        component: 'views/components-demo/dnd-service',
         name: 'DndListDemo',
         meta: { title: 'dndList' }
       },
@@ -316,7 +316,7 @@ const asyncRoutes = [
   {
     path: '/example',
     component: 'layout/Layout',
-    redirect: '/example/list',
+    redirect: '/example/service',
     name: 'Example',
     meta: {
       title: 'example',
@@ -338,7 +338,7 @@ const asyncRoutes = [
       },
       {
         path: 'list',
-        component: 'views/example/list',
+        component: 'views/example/service',
         name: 'ArticleList',
         meta: { title: 'articleList', icon: 'list' }
       }

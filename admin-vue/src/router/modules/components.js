@@ -86,7 +86,7 @@ const componentsRouter = {
     },
     {
       path: 'dnd-list',
-      component: () => import('@/views/components-demo/dnd-list'),
+      component: () => import('@/views/components-demo/dnd-service'),
       name: 'DndListDemo',
       meta: { title: 'dndList' }
     },

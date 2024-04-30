@@ -191,7 +191,7 @@ export default {
         dictName: [{ required: true, trigger: 'blur' }],
         dictKey: [{ required: true, trigger: 'blur' }]
       },
-      filename: 'excel-list',
+      filename: 'excel-service',
       autoWidth: true,
       bookType: 'xlsx'
     }

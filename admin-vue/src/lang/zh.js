@@ -86,6 +86,8 @@ export default {
     startDate: '开始日期',
     endDate: '结束日期',
     operate: '操作',
+    maintaining: '维护中',
+    malfunction: '故障',
     operationSucceed: '操作成功',
     updateSucceed: '更新成功',
     pleaseEnter: '请输入{text}'
@@ -282,6 +284,23 @@ export default {
     apiSecretKey: 'API密钥',
     apiCredentials: 'API凭证',
     apiInvokerInfo: 'API调用鉴权信息',
-    copyAccountSucceed: '商户信息复制成功'
+    oneCopy: '一键复制',
+    copyAccountSucceed: '商户信息复制成功',
+    // 认证服务页面
+    appName: '应用名称',
+    appCode: '应用编码',
+    env: '运行环境',
+    host: '运行地址',
+    caption: '应用标题',
+    business: '业务标签',
+    appStatus: '应用状态',
+    scope: '应用服务范围',
+    permissionInfo: '权限信息',
+    permissionName: '权限名称',
+    permissionCode: '权限编码',
+    resources: '权限资源',
+    permissionScope: '权限范围',
+    roleScope: '角色范围',
+    searchService: '输入应用名称或编码搜索'
   }
 }

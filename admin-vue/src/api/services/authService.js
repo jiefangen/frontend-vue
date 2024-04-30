@@ -32,4 +32,20 @@ export function getAccountDetails(data) {
   })
 }
 
-export default { getAccountList, addAccount, updateAccount, getAccountDetails }
+export function getServiceList(data) {
+  return request({
+    url: '/services/service/page',
+    method: 'post',
+    data
+  })
+}
+
+export function getPermissionInfo(data) {
+  return request({
+    url: '/services/service/permission/info',
+    method: 'post',
+    data
+  })
+}
+
+export default { getAccountList, addAccount, updateAccount, getAccountDetails, getServiceList, getPermissionInfo }
