@@ -208,7 +208,7 @@ export default {
         paramKey: [{ required: true, trigger: 'blur' }],
         paramValue: [{ required: true, trigger: 'blur' }]
       },
-      filename: 'excel-list',
+      filename: 'excel-service',
       autoWidth: true,
       bookType: 'xlsx'
     }

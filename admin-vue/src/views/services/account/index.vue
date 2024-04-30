@@ -119,7 +119,7 @@
           <div slot="header" class="clearfix">
             <span class="label">{{ $t('services.accountInfo') }}</span>
             <el-button style="float: right; padding: 3px 0" type="text" @click="copyToClipboard">
-              一键复制
+              {{ $t('services.oneCopy') }}
             </el-button>
           </div>
           <div class="text item">

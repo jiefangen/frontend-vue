@@ -28,7 +28,7 @@ module.exports = [
     }
   },
 
-  // transaction list
+  // transaction service
   {
     url: '/vue-element-admin/transaction/list',
     type: 'get',

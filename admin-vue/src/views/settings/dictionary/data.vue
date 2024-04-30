@@ -235,7 +235,7 @@ export default {
         dictValue: [{ required: true, trigger: 'blur' }]
       },
       dictOptions: [],
-      filename: 'excel-list',
+      filename: 'excel-service',
       autoWidth: true,
       bookType: 'xlsx'
     }

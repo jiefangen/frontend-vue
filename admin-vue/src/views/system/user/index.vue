@@ -41,9 +41,9 @@
           <span>{{ row.nickname }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="String($t('system.sex'))" class-name="status-col" width="80" align="center">
+      <el-table-column :label="String($t('system.sex'))" class-name="status-col" width="82" align="center">
         <template v-slot="{row}">
-          <span>{{ row.sex | sexFilter }}</span>
+          <span>{{ getSexText(row.sex) }}</span>
         </template>
       </el-table-column>
       <el-table-column :label="String($t('system.phone'))" class-name="status-col" width="120" align="center">
@@ -200,14 +200,6 @@ export default {
         false: 'info'
       }
       return statusMap[status]
-    },
-    sexFilter(sex) {
-      const sexMap = {
-        '0': '女',
-        '1': '男',
-        '2': '未知'
-      }
-      return sexMap[sex]
     }
   },
   data() {
@@ -304,6 +296,18 @@ export default {
     handleFilter() {
       this.listQuery.pageNo = 1
       this.getList()
+    },
+    getSexText(sex) {
+      switch (sex) {
+        case '0':
+          return this.$t('system.woman')
+        case '1':
+          return this.$t('system.man')
+        case '2':
+          return this.$t('common.unknown')
+        default:
+          return this.$t('common.unknown')
+      }
     },
     resetTemp() {
       this.temp = {

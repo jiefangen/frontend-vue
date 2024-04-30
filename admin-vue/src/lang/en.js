@@ -86,6 +86,8 @@ export default {
     startDate: 'Start Date',
     endDate: 'End Date',
     operate: 'Operate',
+    maintaining: '维护中',
+    malfunction: '故障',
     operationSucceed: 'Successful operation',
     updateSucceed: 'Update Completed',
     pleaseEnter: 'Please Enter {text}'
