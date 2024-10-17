@@ -28,7 +28,7 @@ export default {
   navbar: {
     dashboard: 'Dashboard',
     github: 'Github',
-    logOut: 'Log Out',
+    logout: 'Log Out',
     profile: 'Profile',
     layout: 'Layout',
     theme: 'Theme',

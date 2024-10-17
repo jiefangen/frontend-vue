@@ -46,7 +46,7 @@ module.exports = {
       },
       '/stage-api': {
         // target: 'http://centos-business.orb.local:20001/biz-admin',
-        target: 'http://198.19.249.125:20001',
+        target: 'http://198.19.249.189:20001',
         changeOrigin: true,
         pathRewrite: {
           '^/stage-api': ''

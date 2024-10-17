@@ -28,7 +28,7 @@ export default {
   navbar: {
     dashboard: '首页',
     github: '项目地址',
-    logOut: '退出登录',
+    logout: '退出登录',
     profile: '个人中心',
     layout: '布局设置',
     theme: '换肤',
