@@ -7,7 +7,7 @@ import { getToken } from '@/utils/auth'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 10000 // request timeout
+  timeout: 30000 // request timeout
 })
 
 // request interceptor
@@ -53,8 +53,8 @@ service.interceptors.response.use(
         duration: 5 * 1000
       })
 
-      // 4012: Other clients logged in; 4014: Illegal token; 4018: Token expired; 5006: Logged out;
-      if (res.code === 4012 || res.code === 4014 || res.code === 4018 || res.code === 5006) {
+      // 4014: Illegal token; 4018: Token expired; 5006: Logged out; 5012: Other clients logged in;
+      if (res.code === 4014 || res.code === 4018 || res.code === 5006 || res.code === 5012) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or permission in again', 'Confirm logout', {
           confirmButtonText: 'Re-Login',

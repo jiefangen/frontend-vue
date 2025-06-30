@@ -80,9 +80,9 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '123456',
-        rememberMe: false
+        username: '',
+        password: '',
+        rememberMe: true
       },
       loginRules: {
         username: [{ required: true, trigger: 'change' }],
