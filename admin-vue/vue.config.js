@@ -41,7 +41,7 @@ module.exports = {
         target: 'http://127.0.0.1:10001',
         changeOrigin: true,
         pathRewrite: {
-          '^/dev-api': '/biz-admin'
+          '^/dev-api': ''
         }
       },
       '/stage-api': {

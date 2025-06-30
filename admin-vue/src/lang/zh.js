@@ -21,9 +21,9 @@ export default {
     paramSettings: '参数设置',
     dictSettings: '字典管理',
     dictData: '字典数据',
-    serviceManage: '服务管理',
+    servicesManage: '服务管理',
     authAccount: '认证账户',
-    serviceList: '服务列表'
+    servicesList: '服务列表'
   },
   navbar: {
     dashboard: '首页',

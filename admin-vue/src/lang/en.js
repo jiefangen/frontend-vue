@@ -21,9 +21,9 @@ export default {
     paramSettings: 'Parameter',
     dictSettings: 'Dictionary',
     dictData: 'Dictionary Data',
-    serviceManage: 'Service Management',
+    servicesManage: 'Service Management',
     authAccount: 'Auth Account',
-    serviceList: 'Service List'
+    servicesList: 'Service List'
   },
   navbar: {
     dashboard: 'Dashboard',
