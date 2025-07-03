@@ -99,9 +99,6 @@
             <el-option v-for="item in userTypeOptions" :key="item" :label="item" :value="item" />
           </el-select>
         </el-form-item>
-<!--        <el-form-item :label="String($t('system.userType'))" prop="userType">-->
-<!--          <el-input v-model="temp.userType" />-->
-<!--        </el-form-item>-->
         <el-form-item :label="String($t('system.password'))" :prop="dialogStatus==='update'?'':'password'" :hidden="dialogStatus==='update'">
           <el-input v-model="temp.password" type="password" />
         </el-form-item>
